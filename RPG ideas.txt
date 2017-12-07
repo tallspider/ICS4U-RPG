@@ -1,11 +1,26 @@
 rogue-like random generation
 turn-based minigame
-optional side quests -- refersh it every  time game starts up
+optional side quests -- refersh it every time game starts up
 login system
 
-Story ideas: 
-- stuck in space
-- save princess
+Rougue-like 
+- after you complete a room, you go to a new room (old room gets deleted)
+- rooms gets harder as you get through levels
+- main-line RPG always the same room, go through portal on the side for quests (rogue-like): you die quest is lost
 
--on a spaceship, a person landed on a foreign planet and saw a princes being taken away in chains
--he needs to collect awesome weapons from other planets to fight the evil force
+-
+
+/*
+David's space outline
+- mainline space exploration 
+- have a home base with utilities, idle resource gathering
+- drone mode - send a drone, if it dies, it dies forever (side missions)
+- fleet of up to 5 ships, controll them
+- custom ships with item slots 
+- 2 d grid explore the world, random encounters 
+- use FTL style encounter resolution
+
+
+
+
+*/
