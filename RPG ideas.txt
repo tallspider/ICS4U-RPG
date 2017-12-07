@@ -1,0 +1,11 @@
+rogue-like random generation
+turn-based minigame
+optional side quests -- refersh it every  time game starts up
+login system
+
+Story ideas: 
+- stuck in space
+- save princess
+
+-on a spaceship, a person landed on a foreign planet and saw a princes being taken away in chains
+-he needs to collect awesome weapons from other planets to fight the evil force
