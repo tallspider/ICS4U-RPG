@@ -1,0 +1,21 @@
+ICS4U Project Proposal: 
+Problem Description:
+	Many people are always bored
+Proposed Solution: 
+Create an RPG game for bored people to play
+Functionality:
+	Store player account information: levels, skills, inventory, etc.
+	Story history of completed adventures, save and load
+	Search for player, load content if username and password verified
+	Combat against monsters
+Target Market:
+	Bored people of any age
+Solution Mastery Aspects:
+	OOP: classes for players, maps, objects, etc.
+	Array of Objects: arrays on monsters, objects in each scene
+	File Input: load player, game information
+	File Output: save player information
+	Sorting: sort inventory
+	Searching: searching for information of specific player
+	Recursion: generating maps, in combat (if enemy is not dead, call method again)
+	
