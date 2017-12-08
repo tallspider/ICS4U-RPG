@@ -15,12 +15,12 @@ David's space outline
 - mainline space exploration 
 - have a home base with utilities, idle resource gathering
 - drone mode - send a drone, if it dies, it dies forever (side missions)
-- fleet of up to 5 ships, controll them
+- fleet of up to 5 ships, controll them - mainline 
 - custom ships with item slots 
 - 2 d grid explore the world, random encounters 
 - use FTL style encounter resolution
 
-
-
+- login: init to where player left off
+- no person, just ship
 
 */
