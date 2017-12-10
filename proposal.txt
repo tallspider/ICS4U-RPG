@@ -10,6 +10,7 @@ Functionality:
 	Store player account information: levels, skills, inventory, etc.
 	Retrieve, load player account information after verification through login system
 	Store updates to scenes
+	Store adventure progress
 	Retrieve scene information and load scenes
 	Randomly generate quest maps (temporary) and monsters with difficulty based on player level
 	Turn-based combat
