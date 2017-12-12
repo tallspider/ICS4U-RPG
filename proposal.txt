@@ -1,31 +1,29 @@
-ICS4U Project Proposal: Space RPG
-
+Name: Annie Gao, David Qian, Hans Long, Chongpu Zhao, George Li
+Ms.Lam 
+ICS4U1-01
+December 12,2017
+ICS4U1 Project Proposal: Space RPG
 Problem Description:
-        There have always been people with too much free time on their hands and nothing interesting to do.
-	
+        	There have always been people with too much free time on their hands and nothing interesting to do. Many games have a campaign (main storyline / quests) however when that main story is finished the game loses all value, all the hard work that went into designing and implementing the game suddenly dissipates.
 Proposed Solution:
-	Create an RPG game for bored people to play.
-	
+Create an RPG game with RogueLike aspects, including randomly generated terrain, in order to increase replayability 
 Functionality:
-	Store player account information: levels, skills, inventory, etc.
-	Retrieve, load player account information after verification through login system
-	Store updates to scenes
-	Store adventure progress
-	Retrieve scene information and load scenes
-	Randomly generate quest maps (temporary) and monsters with difficulty based on player level
-	Turn-based combat
-	
+➢	Store player account information: levels, skills, inventory, etc.
+➢	Retrieve, load player account information after verification through login system
+➢	Store updates to scenes
+➢	Retrieve scene information and load scenes
+➢	Randomly generate quest maps and NPCs with difficulty based on player level and other factors such as player progression
+➢	2D Turn-based combat
 Target Market:
-        Bored individuals of any age.
-	
+            Individuals of age 12+
 Solution Mastery Aspects:
-	OOP: classes for different types of players, maps, objects, etc.
-		Encapsulation: game object classes will have private fields
-		Polymorphism: actions that may happen to a group of game objects (e.g. consumables) will be applied to the general type
-		Inheritance: specialized game objects will extend a general type (e.g. a Berry class might extend a Food class)
-	Array of Objects: arrays of monsters, objects in each quest scene
-	File Input: load player, scene information
-	File Output: save player, game information
-	Sorting: sort inventory
-	Searching: searching for information of specific player to load
-	Recursion: generating maps, in combat (if enemy is not dead, call method again), finding paths
+➢	OOP: classes for different types of players, maps, objects, etc.
+○	Encapsulation: game object classes will have private fields
+○	Polymorphism: actions that may happen to a group of game objects (e.g. consumables) will be applied to the general type
+○	Inheritance: specialized game objects will extend a general type (e.g. a Berry class might extend a Food class)
+➢	Array of Objects: arrays of NPC, objects in each quest scene
+➢	File Input: load player, scene information
+➢	File Output: save player, game information
+➢	Sorting: sort inventory lexicography or by item type  
+➢	Searching: searching for items in inventory
+➢	Recursion: generating maps, in combat (if enemy is not dead, call method again), finding paths
