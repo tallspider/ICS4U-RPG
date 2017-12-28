@@ -88,8 +88,6 @@ public class Login{
       catch(IOException e ){
          System.out.print("Problem with using file");
       }  
-    
-   
    }
    
    public String getUsername(){
