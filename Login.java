@@ -16,9 +16,10 @@ public class Login{
          while((temp = in.readLine()) != null){
             if(temp == username){
                temp = in.readLine();
-               if(temp == password)
+               if(temp == password){
                   in.close();
-               return true;
+                  return true;
+               }
             }else{
                in.readLine();
             }
