@@ -1,0 +1,38 @@
+import java.io.*;
+
+public class Map
+{
+  	private spot[][] board;
+	private int level;
+
+  
+ 	public Map (Spot[][])
+ 	{
+	
+  				
+  
+  	  	
+ 	
+ 	
+  
+   }
+  	
+  	
+	public boolean move (Location initial, Location last)
+  	{
+		last
+  		
+  	
+  	
+  	
+  	
+  	
+  	
+  	}
+	
+	
+	
+	
+	
+	
+}
