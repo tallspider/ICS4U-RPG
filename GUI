@@ -1,0 +1,122 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+public class GUI extends Frame implements MouseListener 
+{
+	boolean menu = true;
+	boolean fleet = false;
+	boolean battle = false;
+	boolean leaderBoard = false;
+	boolean login = false;
+	boolean save = false;
+	
+
+
+
+    Label l;  
+    public void mouse(){  
+        addMouseListener(this);  
+          
+        l=new Label();  
+        l.setBounds(20,50,100,20);  
+        add(l);  
+        setSize(1000,700);  
+        setLayout(null);  
+        setVisible(true);  
+    }  
+	 
+
+
+
+/*	class Drawing extends JComponent
+   {
+      public void paint(Graphics g)
+      {
+			if (menu)
+			{
+			
+			
+			}
+			
+			else if (fleet)
+			{
+			
+			
+			
+			}
+			
+			
+			else if (battle)
+			{
+			
+			
+			
+			}
+			
+			
+			else if (leaderBoard)
+			{
+			
+			
+			}
+			
+			else if (login)
+			{
+			
+			
+			
+			}
+			
+			else if (save)
+			{
+			
+			
+			
+			}
+	 
+	 
+	 
+	 
+	 
+	 
+	 	}
+	}
+	 
+*/	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+    public void mouseClicked(MouseEvent e) 
+	 {   
+    }  
+    public void mouseEntered(MouseEvent e)
+	 {  
+    }  
+    public void mouseExited(MouseEvent e)
+	 {  
+    }  
+    public void mousePressed(MouseEvent e) 
+	 {  
+    }  
+    public void mouseReleased(MouseEvent e)
+	 {  	      
+    }  
+
+
+
+
+
+/*public static void main(String[] args) 
+{  
+    new mouse();  
+} 
+
+*/
+
+ 
+}  
