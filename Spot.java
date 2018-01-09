@@ -53,6 +53,7 @@ public class Spot{
       return false;
    }
    
+   // all walls are the same, so we only need to check if it's a wall or not
    public boolean isWall(){
       if (this.thing instanceof Wall){
          return true;
