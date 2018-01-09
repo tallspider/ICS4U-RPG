@@ -2,7 +2,7 @@
 Class Name: Fleet
 Author: Chongpu Zhao
 Date: January 8, 2018
-Purpose: Used to keep track the location of a unity in the gameboard.
+Purpose: Composition class with the Enity class. Used to keep track the location of a unity in the gameboard. 
 */
 public class Location{
    private int x;
