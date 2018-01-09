@@ -31,11 +31,17 @@ public class Location{
       return y;
    }
    public void setX(int x){
-   //Set the x-coordinate with the given integer.
+   //Set the x-coordinate to the given integer.
       this.x = x;
    }
    public void setY(int y){
-   //Set the y-coordinate with the given integer.
+   //Set the y-coordinate to the given integer.
+      this.y = y;
+   }
+   
+   public void SetXY(int x,int y){
+   //Set the x and y to the given integers.   
+      this.x = x;
       this.y = y;
    }
 }
