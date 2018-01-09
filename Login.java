@@ -71,7 +71,8 @@ public class Login{
    }
    
    private void createNewAccount(){
-   //Loads all the lines in the txt field into a string array. Add the current username and password field to the end of this array. And then cover the content in the text file by this string array.
+   //Loads all the lines in the txt field into a string array. Add the current username and password field to the end of this array.
+   //And then replace the contents in the text file by the contents in the string array.
       String [] information;
       try{
          BufferedReader check = new BufferedReader(new FileReader(THE_FILE));
