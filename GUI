@@ -10,7 +10,8 @@ public class GUI extends Frame implements MouseListener
 	boolean leaderBoard = false;
 	boolean login = false;
 	boolean save = false;
-	
+	Drawing draw = new Drawing();
+
 
 
 
@@ -35,13 +36,16 @@ public class GUI extends Frame implements MouseListener
       {
 			if (menu)
 			{
-			
+				int y = e.getY();
+         			int x = e.getX();
+		
 			
 			}
 			
 			else if (fleet)
 			{
-			
+				int y = e.getY();
+         			int x = e.getX();			
 			
 			
 			}
@@ -49,7 +53,8 @@ public class GUI extends Frame implements MouseListener
 			
 			else if (battle)
 			{
-			
+				int y = e.getY();
+         			int x = e.getX();			
 			
 			
 			}
@@ -57,20 +62,23 @@ public class GUI extends Frame implements MouseListener
 			
 			else if (leaderBoard)
 			{
-			
+				int y = e.getY();
+         			int x = e.getX();			
 			
 			}
 			
 			else if (login)
 			{
-			
+				int y = e.getY();
+         			int x = e.getX();			
 			
 			
 			}
 			
 			else if (save)
 			{
-			
+				int y = e.getY();
+         			int x = e.getX();			
 			
 			
 			}
