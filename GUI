@@ -1,130 +1,160 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+   import javax.swing.*;
+   import java.awt.*;
+   import java.awt.event.*;
 
-public class GUI extends Frame implements MouseListener 
-{
-	boolean menu = true;
-	boolean fleet = false;
-	boolean battle = false;
-	boolean leaderBoard = false;
-	boolean login = false;
-	boolean save = false;
-	Drawing draw = new Drawing();
-
-
-
-
-    Label l;  
-    public void mouse(){  
-        addMouseListener(this);  
-          
-        l=new Label();  
-        l.setBounds(20,50,100,20);  
-        add(l);  
-        setSize(1000,700);  
-        setLayout(null);  
-        setVisible(true);  
-    }  
-	 
-
-
-
-/*	class Drawing extends JComponent
+    public class GUI extends Frame implements MouseListener 
+   {
+      boolean menu = true;
+      boolean fleet = false;
+      boolean battle = false;
+      boolean leaderBoard = false;
+      boolean login = false;
+      boolean save = false;
+   
+   
+   
+   
+   
+       public static void main(String s[]) 
+      {  
+      
+         JFrame frame = new JFrame("Space RPG");  
+         JPanel panel = new JPanel();  
+         panel.setLayout(new FlowLayout());  
+         JButton b1 = new JButton("Start game");  
+         JButton b2 = new JButton("Login"); 
+         JButton b3 = new JButton("Leader Board"); 
+      
+         panel.setLayout(null);
+         b1.setBounds(450, 400, 100, 50);
+         panel.add(b1);		 
+      
+         b2.setBounds(250, 400, 100, 50);
+         panel.add(b2);		 
+      
+         b3.setBounds(650, 400, 150, 50);
+         panel.add(b3);		 
+      
+        
+        
+         
+      
+         frame.add(panel);  
+         frame.setSize(1000, 700);  
+         frame.setLocationRelativeTo(null);  
+         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+         frame.setVisible(true);  
+      }  
+      
+    
+   
+   
+   
+   /*	class Drawing extends JComponent
    {
       public void paint(Graphics g)
       {
-			if (menu)
-			{
-				int y = e.getY();
-         			int x = e.getX();
-		
-			
-			}
-			
-			else if (fleet)
-			{
-				int y = e.getY();
-         			int x = e.getX();			
-			
-			
-			}
-			
-			
-			else if (battle)
-			{
-				int y = e.getY();
-         			int x = e.getX();			
-			
-			
-			}
-			
-			
-			else if (leaderBoard)
-			{
-				int y = e.getY();
-         			int x = e.getX();			
-			
-			}
-			
-			else if (login)
-			{
-				int y = e.getY();
-         			int x = e.getX();			
-			
-			
-			}
-			
-			else if (save)
-			{
-				int y = e.getY();
-         			int x = e.getX();			
-			
-			
-			}
-	 
-	 
-	 
-	 
-	 
-	 
-	 	}
-	}
-	 
-*/	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-    public void mouseClicked(MouseEvent e) 
-	 {   
-    }  
-    public void mouseEntered(MouseEvent e)
-	 {  
-    }  
-    public void mouseExited(MouseEvent e)
-	 {  
-    }  
-    public void mousePressed(MouseEvent e) 
-	 {  
-    }  
-    public void mouseReleased(MouseEvent e)
-	 {  	      
-    }  
+   		if (menu)
+   		{
+   			int y = e.getY();
+         	int x = e.getX();
+   
+   		
+   		}
+   		
+   		else if (fleet)
+   		{
+   			int y = e.getY();
+         	int x = e.getX();
+   		
+   		
+   		
+   		}
+   		
+   		
+   		else if (battle)
+   		{
+   			int y = e.getY();
+         	int x = e.getX();
+   		
+   		
+   		
+   		}
+   		
+   		
+   		else if (leaderBoard)
+   		{
+   			int y = e.getY();
+         	int x = e.getX();
+   		
+   		
+   		}
+   		
+   		else if (login)
+   		{
+   			int y = e.getY();
+         	int x = e.getX();
+   		
+   		
+   		
+   		}
+   		
+   		else if (save)
+   		{
+   			int y = e.getY();
+         	int x = e.getX();
+   		
+   		
+   		
+   		}
+    
+    
+    
+    
+    
+    
+    	}
+   }
+    
+   */	 
+    
+    
+    
+    
+    
+    
+    
+       public void mouseClicked(MouseEvent e) 
+      {   
+      }  
+       public void mouseEntered(MouseEvent e)
+      {  
+      }  
+       public void mouseExited(MouseEvent e)
+      {  
+      }  
+       public void mousePressed(MouseEvent e) 
+      {  
+      }  
+       public void mouseReleased(MouseEvent e)
+      {  	      
+      }  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   }  
 
 
 
 
 
-/*public static void main(String[] args) 
-{  
-    new mouse();  
-} 
 
-*/
 
- 
-}  
+
+
