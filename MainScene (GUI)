@@ -21,20 +21,31 @@
          JFrame frame = new JFrame("Space RPG");  
          JPanel panel = new JPanel();  
          panel.setLayout(new FlowLayout());  
-         JButton b1 = new JButton("Start game");  
-         JButton b2 = new JButton("Login"); 
-         JButton b3 = new JButton("Leader Board"); 
+         JButton b1 = new JButton("Portal");  
+         JButton b2 = new JButton("Fleet"); 
+         JButton b3 = new JButton("Save");
+			JButton b4 = new JButton("Hangar");  
+         JButton b5 = new JButton("Leaderboard"); 
+         JButton b6 = new JButton("Quit");  
       
          panel.setLayout(null);
-         b1.setBounds(450, 400, 100, 50);
+         b1.setBounds(250, 200, 100, 50);
          panel.add(b1);		 
       
          b2.setBounds(250, 400, 100, 50);
          panel.add(b2);		 
       
-         b3.setBounds(650, 400, 150, 50);
+         b3.setBounds(250, 600, 150, 50);
          panel.add(b3);		 
       
+         b4.setBounds(650, 200, 100, 50);
+         panel.add(b4);		 
+      
+         b5.setBounds(650, 400, 100, 50);
+         panel.add(b5);		 
+      
+         b6.setBounds(650, 600, 150, 50);
+         panel.add(b6);		 
         
         
          
@@ -149,7 +160,6 @@
    
    
    }  
-
 
 
 
