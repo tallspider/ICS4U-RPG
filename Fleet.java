@@ -45,7 +45,7 @@ public class Fleet{
 		return ships[index];
 	}
 	
-	public Ship[] getFleet(){
+	public Ship[] getShips(){
 	//Return the array of the ships.
 		return ships;
 	}	
