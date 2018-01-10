@@ -4,6 +4,7 @@
 //School: A.Y.Jackson S.S.
 //Purpose: to represent the character and actions of the user in the game
 
+import java.io.*;
 public class Player{
    private String username;
    private String filename;
@@ -19,6 +20,9 @@ public class Player{
    public Player(String un){
       username = un;
       filename = un + ".txt";
+		hangar = new Hangar();
+		fleet = new Fleet();
+		
    }
    
    //Accessor method for the username of this player
@@ -96,7 +100,7 @@ public class Player{
       
       //go through each of the slots potentially containing a ship in hangar
       //if thre is a Ship, or if the Ship object is not null, then add the attackRange, the travelRange and the firingSpeed of this Ship to the total score
-      for(int eachShip = 0; eachShip < hangar.getShips().length; eachShip++){
+      for(int eachShip = 0; eachShip < Hangar.MAX_SHIPS; eachShip++){
          Ship tempShip = hangar.getShips()[eachShip];
          if(tempShip != null){
             totalScore += tempShip.getAttackRange() + tempShip.getTravelRange() + tempShip.getFiringSpeed();
@@ -105,7 +109,7 @@ public class Player{
       
       //go through each of the slots potentially containing a ship in fleet
       //if thre is a Ship, or if the Ship object is not null, then add the attackRange, the travelRange and the firingSpeed of this Ship to the total score
-      for(int eachShip = 0; eachShip < fleet.getShips().length; eachShip++){
+      for(int eachShip = 0; eachShip < Fleet.MAX_SHIPS; eachShip++){
          Ship tempShip = hangar.getShips()[eachShip];
          if(tempShip != null){
             totalScore += tempShip.getAttackRange() + tempShip.getTravelRange() + tempShip.getFiringSpeed();
@@ -116,8 +120,43 @@ public class Player{
       return totalScore;
    }
    
-   public void load(String s){
-      
+   public void load(){
+      try{
+			BufferedReader f = new BufferedReader(new FileReader(filename));
+			f.readLine();
+			score = Integer.parseInt(f.readLine());
+			numCoins = Integer.parseInt(f.readLine());
+			f.readLine();
+			
+			String s;
+			while( (s = f.readLine()) != "" && s != null){
+				int tID = Integer.parseInt(s);
+				String tname = f.readLine();
+				int tattackRange = Integer.parseInt(f.readLine());
+				int ttravelRange = Integer.parseInt(f.readLine());
+				int tfiringSpeed = Integer.parseInt(f.readLine());
+				int tupgradesLeft = Integer.parseInt(f.readLine());
+				int tAR_Upgrades = Integer.parseInt(f.readLine());
+				int tTR_Upgrade = Integer.parseInt(f.readLine());
+				int tFS_Upgrade = Integer.parseInt(f.readLine());
+				hangar.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, tAR_Upgrades, tTR_Upgrade, tFS_Upgrade, true);
+			}
+			
+			while( (s = f.readLine()) != "" && s != null){
+				int tID = Integer.parseInt(s);
+				String tname = f.readLine();
+				int tattackRange = Integer.parseInt(f.readLine());
+				int ttravelRange = Integer.parseInt(f.readLine());
+				int tfiringSpeed = Integer.parseInt(f.readLine());
+				int tupgradesLeft = Integer.parseInt(f.readLine());
+				int tAR_Upgrades = Integer.parseInt(f.readLine());
+				int tTR_Upgrade = Integer.parseInt(f.readLine());
+				int tFS_Upgrade = Integer.parseInt(f.readLine());
+				fleet.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, tAR_Upgrades, tTR_Upgrade, tFS_Upgrade, true);
+			}
+		} catch(IOException e){
+			System.out.println("File error");
+		}
    }
    
    //contains the code to be run when the player clicks the button to buy a Ship
@@ -209,8 +248,79 @@ public class Player{
 		return false;
    }
    
+	//saves player information to the corresponding file
    public void save(){
-   	
+   	try{
+			//create a PrintWriter object to write to file
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
+			
+			//first chunk of information: username, score, number of coins
+			out.println(username);
+			out.println(score);
+			out.println(numCoins);
+			
+			//separate chunks of information with a blank line
+			out.println("");
+			
+			//second chunk of information: ships in hangar
+			//for each slot in hangar:
+			for(int eachShip = 0; eachShip < Hangar.MAX_SHIPS; eachShip++){
+				
+				//create temporary Ship variable to hold the Ship whose information is being saved
+				Ship tempShip = hangar.getShips()[eachShip];
+				
+				//will not save anything if there is not a ship in this slot
+				if(tempShip != null){
+					//second chunk of information: Ship index, Ship name, attack 
+					//range, travel range, firing speed, number of upgrades left,
+					//number of each type of upgrade already applied for each Ship 
+					//stored in hangar
+					out.println(eachShip);
+					out.println(tempShip.getName());
+					out.println(tempShip.getAttackRange());
+					out.println(tempShip.getTravelRange());
+					out.println(tempShip.getFiringSpeed());
+					out.println(tempShip.getUpgradesLeft());
+					out.println(tempShip.getAR_Upgrades());
+					out.println(tempShip.getTR_Upgrade());
+					out.println(tempShip.getFS_Upgrade());
+				}
+			}
+			
+			//blank line to separate chunks of information
+			out.println("");
+			
+			//third chunk of information: ships in fleet
+			//for each slot in fleet:
+			for(int eachShip = 0; eachShip < Fleet.MAX_SHIPS; eachShip++){
+				
+				//create temporary Ship variable to hold the Ship whose information is being saved
+				Ship tempShip = fleet.getShips()[eachShip];
+				
+				//will not save anything if there is not a ship in this slot
+				if(tempShip != null){
+					//third chunk of information: Ship index, Ship name, attack 
+					//range, travel range, firing speed, number of upgrades left,
+					//number of each type of upgrade already applied for each Ship 
+					//stored in fleet
+					out.println(eachShip);
+					out.println(tempShip.getName());
+					out.println(tempShip.getAttackRange());
+					out.println(tempShip.getTravelRange());
+					out.println(tempShip.getFiringSpeed());
+					out.println(tempShip.getUpgradesLeft());
+					out.println(tempShip.getAR_Upgrades());
+					out.println(tempShip.getTR_Upgrade());
+					out.println(tempShip.getFS_Upgrade());
+				}
+			}
+			
+			//close PrintWriter and flush stream
+			out.close();
+			
+		} catch(IOException e){
+			System.out.println("File error");
+		}
    }
    
 	//contains the code to be run when the player clicks the button to switch the contents of two Ship-containing slots
