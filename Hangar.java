@@ -1,3 +1,10 @@
+/*
+Class Name: Hanger
+Author: Hans Long
+Date: January 11, 2018
+Purpose: Used to keep track the ships that in the battle part.
+*/
+
 import java.util.*;
 public class Hangar
 {
@@ -40,7 +47,7 @@ public class Hangar
    
    public boolean deleteShip(int index)
    {
-      if (index>=MIN_SHIPS && index<=(ships.length-1))
+      if (index>=MIN_SHIPS && index<=(shipnum-1))
       {
          ship[index]= null;
          for (int i = index ; i<shipnum-2;i++)
@@ -54,8 +61,9 @@ public class Hangar
       {
          return false;
       }
-   }
-   public boolean addShip(int index ,Ship ship)
+   }  //Return true if the delete index is in the exist ship list. Otherwise return false.
+  
+   public boolean addShip(int index ,Ship ship)  
    {
       ship temp;
       if(index>=MIN_SHIPS && index<(shipnum-1))
@@ -68,7 +76,7 @@ public class Hangar
          }
          ship[index+1] = temp;
          return true;
-      }
+      }  
       else if (index == shipnum-1)
       {
          temp = ship[index];
@@ -80,7 +88,7 @@ public class Hangar
       {
          return false;
       }
-   }
+   }  //Return true if the add is in the exist ship list. Otherwise return false.
    public boolean upgradeShip(int index, int index)
    {
      
