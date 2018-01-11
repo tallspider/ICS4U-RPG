@@ -33,11 +33,6 @@ Purpose: Used to keep track of entities (ships and walls)
    //********************************************************************TEMPORARY WORKAROUND **********************************************************************//
       public static int WIDTH_OF_MAP = 16;
       public static int LENGTH_OF_MAP = 16;
-      
-   // to determine result of game for checkEnd
-      public static final int NOT_END = 0;
-      public static final int USER_WINS = 1;
-      public static final int AI_WINS = 2;
    
    // the board is a 2d spot array
       Spot[][] board;
@@ -245,41 +240,11 @@ Purpose: Used to keep track of entities (ships and walls)
          return this.board;
       }
    
-       public int checkEnd(){
-       
-         boolean userHasShips = false;
-         boolean aiHasShips = false;
-       
-         for (int x = 0 ; x < board.length ; x++){
-            for (int y = 0 ; y < board[x].length ; y++){
-               if (new Location(x,y).isShip()){
-                  if(new Location(x,y).getShip().ownedByPlayer()){
-                     userHasShips = true;
-                  }
-                  else{
-                     aiHasShips = true;
-                  }
-               }
-            }
-         }
-         
-         if (userHasShips && aiHasShips){
-            return NOT_END;
-         }
-         else if (userHasShips && !aiHasShips){
-            return USER_WINS;
-         }
-         else if (!userHasShips && aiHasShips){
-            return AI_WINS;
-         }
-         System.out.println("Error: Both teams defeated");
-         return -1;
-      }
    //********************SUBJECT TO CHANGE*************************** USED TO TEST/DEBUG****************
        public void display(){
       
-         for (int x = board.length - 1; x >= 0 ; x--){
-            for (int y = 0 ; y < board[x].length; y++){
+         for (int y = LENGTH_OF_MAP ; y >= 0 ; y--){
+            for (int x = 0 ; x < WEIDTH_OF_MAP ; x++){
                if(board[x][y].isEmpty()){
                   System.out.print(".");
                }
