@@ -19,6 +19,7 @@ public class Fleet{
 		}
 	}
 	
+	public int getShipNum
 	public boolean deleteShip(int index){
 	/*Delete a ship in the given index
 	If the slot has no object, retutn false. Otherwise, return true*/
