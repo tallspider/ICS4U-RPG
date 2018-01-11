@@ -22,9 +22,32 @@ Date: January 7, 2018
 School: A.Y.Jackson S.S
 Purpose: A class used to represent the current playing of the game
 */
-
+import java.io.*;
 class Game{
-
+	private Player currentPlayer ;
+	private GameBoard gameBoard;
+	
+	public Game(Player player){
+		currentPlayer = player;
+	}
+	
+	public void saveGame(){
+		currentPlayer.save();
+	}
+	
+	public void loadGame(){
+		currentPlayer.load();
+	}
+	
+	public void startCombat(){
+		gameBoard.startCombat(currentPlayer);
+	}
+	
+	public void displayLeaderBoard(){
+		LeaderBoard lb = new LeaderBoard(currentPlayer.getUsername());
+		lb.display();
+	}
+}
 
 
 
