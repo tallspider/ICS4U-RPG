@@ -1,0 +1,114 @@
+   import javax.swing.*;
+   import java.awt.*;
+   import java.awt.event.*;
+
+    public class GUI extends Frame implements MouseListener 
+   {
+   
+   
+    
+    
+    
+    
+    
+    
+    
+    
+       public void mouseClicked(MouseEvent e) 
+      {   
+      }  
+       public void mouseEntered(MouseEvent e)
+      {  
+      }  
+       public void mouseExited(MouseEvent e)
+      {  
+      }  
+       public void mousePressed(MouseEvent e) 
+      {  
+      }  
+       public void mouseReleased(MouseEvent e)
+      {  	      
+      }  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   /*       class Drawing extends JComponent
+      {
+          public void paint(Graphics g)
+         {
+            if (menu)
+            {
+               int y = e.getY();
+               int x = e.getX();
+            
+            
+            }
+            
+            else if (fleet)
+            {
+               int y = e.getY();
+               int x = e.getX();
+            
+            
+            
+            }
+            
+            
+            else if (battle)
+            {
+               int y = e.getY();
+               int x = e.getX();
+            
+            
+            
+            }
+            
+            
+            else if (leaderBoard)
+            {
+               int y = e.getY();
+               int x = e.getX();
+            
+            
+            }
+            
+            else if (login)
+            {
+               int y = e.getY();
+               int x = e.getX();
+            
+            
+            
+            }
+            
+            else if (save)
+            {
+               int y = e.getY();
+               int x = e.getX();
+            
+            
+            
+            }
+                           
+         }
+      }
+    
+   */
+   
+   
+   
+   
+   
+   
+   
+   }  
+
+
+
