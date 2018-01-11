@@ -120,17 +120,31 @@ public class Player{
       return totalScore;
    }
    
+	//loads player information from file, initializes all the fields
    public void load(){
       try{
+			//create a BufferedReader object to read in the player information
 			BufferedReader f = new BufferedReader(new FileReader(filename));
+			
+			//skip username line
 			f.readLine();
+			//read in the score of the player, on the second line
 			score = Integer.parseInt(f.readLine());
+			//read in number of coins owned by the player
 			numCoins = Integer.parseInt(f.readLine());
+		
+			//read in and discard blank line separating chunks of information
 			f.readLine();
 			
 			String s;
+         
+         //check that there are ships to load into hangar
 			while( (s = f.readLine()) != "" && s != null){
-				int tID = Integer.parseInt(s);
+				//for each Ship in hangar:
+            //create temporary variables to hold the ID of the Ship in hangar, its
+            //name, attack range, travel range, firing speed, upgrades left, and the 
+            //numer of each type of upgrade that has already been applied on it
+            int tID = Integer.parseInt(s);
 				String tname = f.readLine();
 				int tattackRange = Integer.parseInt(f.readLine());
 				int ttravelRange = Integer.parseInt(f.readLine());
@@ -139,11 +153,19 @@ public class Player{
 				int tAR_Upgrades = Integer.parseInt(f.readLine());
 				int tTR_Upgrade = Integer.parseInt(f.readLine());
 				int tFS_Upgrade = Integer.parseInt(f.readLine());
+            
+            //create a new Ship object with the information read in to occupy the
+            //specified slot in hangar
 				hangar.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, tAR_Upgrades, tTR_Upgrade, tFS_Upgrade, true);
 			}
 			
+         //check that there are ships to load into fleet
 			while( (s = f.readLine()) != "" && s != null){
-				int tID = Integer.parseInt(s);
+				//for each Ship in fleet:
+            //create temporary variables to hold the ID of the Ship in hangar, its
+            //name, attack range, travel range, firing speed, upgrades left, and the 
+            //numer of each type of upgrade that has already been applied on it
+            int tID = Integer.parseInt(s);
 				String tname = f.readLine();
 				int tattackRange = Integer.parseInt(f.readLine());
 				int ttravelRange = Integer.parseInt(f.readLine());
@@ -154,6 +176,9 @@ public class Player{
 				int tFS_Upgrade = Integer.parseInt(f.readLine());
 				fleet.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, tAR_Upgrades, tTR_Upgrade, tFS_Upgrade, true);
 			}
+         //close the BufferedReader
+			f.close();
+         
 		} catch(IOException e){
 			System.out.println("File error");
 		}
