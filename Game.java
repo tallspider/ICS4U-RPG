@@ -47,10 +47,20 @@ class Game{
 		LeaderBoard lb = new LeaderBoard(currentPlayer.getUsername());
 		lb.display();
 	}
-}
-
-
-
-
-
+	
+	public Player getPlaye(){
+		return currentPlayer;
+	}
+	
+	public void setPlayer(Player player){
+		currentPlayer = player;
+	}
+	
+	public GameBoard getGameBoard(){
+		return gameBoard;
+	}
+	
+	public void setGameBoard(GameBoard newGB){
+		gameBoard = newGB;
+	}
 }
