@@ -4,7 +4,10 @@
 
     public class GUI extends Frame implements MouseListener 
    {
-   
+     	private int y = e.getY();
+      private int x = e.getX();
+
+
    
     
     
