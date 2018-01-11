@@ -28,22 +28,22 @@ public class Hangar
    public void setShips(Ship[] ships)
    {
       this.ships = ships;
-   }
+   }  // Change the ship list
    
    public void setShipnum(int num)
    {
       this.shipnum = num;
-   }
+   }  //Change the shipnum.
    
    public Ship[] getShips()
    {
       return this.ships;
-   }
+   }   //Return the array of the ships.
    
    public int getShipnum()
    {
       return this.shipnum;
-   }
+   }   //Return the index of the ship.
    
    public boolean deleteShip(int index)
    {
@@ -92,6 +92,6 @@ public class Hangar
    public boolean upgradeShip(int index, int index)
    {
      
-   }
+   }  // I dont understand the description
 
 }
