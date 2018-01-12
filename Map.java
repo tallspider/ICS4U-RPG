@@ -217,6 +217,7 @@ Purpose: Used to keep track of entities (ships and walls)
          Location closest;
          Location bottomRight = new Location(WIDTH_OF_MAP,0);  
       	
+         // loops through the entire board and finds the empty space nearest to the target (bottom Right)
          for (int x = 0 ; x < board.length ; x ++){
             for (int y = 0 ; y < board[x].length ; y++){
             
