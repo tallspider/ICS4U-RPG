@@ -11,8 +11,8 @@ public class Hangar
   
    private Ship[] ships = new ship[MAX_SHIPS];
    private int shipnum;
-   private static final int MAX_SHIPS = 10;
-   private static final int MIN_SHIPS = 0;
+   public static final int MAX_SHIPS = 10;
+   public static final int MIN_SHIPS = 0;
  
    public Hangar(Ship[] ships)
    {
