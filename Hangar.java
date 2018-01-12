@@ -9,10 +9,10 @@ import java.util.*;
 public class Hangar
 {
   
-   private Ship[] ships = new ship[MAX_SHIPS];
+   private Ship[] ships = new Ship[MAX_SHIPS];
    private int shipnum;
-   public static final int MAX_SHIPS = 10;
-   public static final int MIN_SHIPS = 0;
+   private static final int MAX_SHIPS = 10;
+   private static final int MIN_SHIPS = 0;
  
    public Hangar(Ship[] ships)
    {
@@ -28,70 +28,69 @@ public class Hangar
    public void setShips(Ship[] ships)
    {
       this.ships = ships;
-   }  // Change the ship list
-   
-   public void setShipnum(int num)
-   {
-      this.shipnum = num;
-   }  //Change the shipnum.
+   }
    
    public Ship[] getShips()
    {
       return this.ships;
-   }   //Return the array of the ships.
+   }
+   
+   public void setShipnum(int num)
+   {
+      this.shipnum = num;
+   }
    
    public int getShipnum()
    {
       return this.shipnum;
-   }   //Return the index of the ship.
+   }
    
    public boolean deleteShip(int index)
    {
-      if (index>=MIN_SHIPS && index<=(shipnum-1))
+      if (index>=MIN_SHIPS && index<=(ships.length-1))
       {
-         ship[index]= null;
+         ships[index]= null;
          for (int i = index ; i<shipnum-2;i++)
          {
-            ship[i]= ship[i+1];
+            ships[i]= ships[i+1];
          }
-         ship[shipnum-1]=null;
+         ships[shipnum-1]=null;
          return true;
       }
       else
       {
          return false;
       }
-   }  //Return true if the delete index is in the exist ship list. Otherwise return false.
-  
-   public boolean addShip(int index ,Ship ship)  
+   }
+   public boolean addShip(int index ,Ship ship)
    {
-      ship temp;
+      Ship temp;
       if(index>=MIN_SHIPS && index<(shipnum-1))
       {
-         temp = ship[index];
-         ship[index] = ship;
+         temp = ships[index];
+         ships[index] = ship;
          for (int i = shipnum; i>index+1; i--)
          {
-            ship[i] = ship[i-1];
+            ships[i] = ships[i-1];
          }
-         ship[index+1] = temp;
+         ships[index+1] = temp;
          return true;
-      }  
+      }
       else if (index == shipnum-1)
       {
-         temp = ship[index];
-         ship[index] = ship;
-         ship[shipnum+1] = temp;
+         temp = ships[index];
+         ships[index] = ship;
+         ships[shipnum+1] = temp;
          return true;
       }
       else
       {
          return false;
       }
-   }  //Return true if the add is in the exist ship list. Otherwise return false.
-   public boolean upgradeShip(int index, int index)
+   }
+   public boolean upgradeShip(int index, int index2)
    {
      
-   }  // I dont understand the description
+   }
 
 }
