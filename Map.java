@@ -182,8 +182,8 @@ Purpose: Used to keep track of entities (ships and walls)
          return new Map(boardCopy);  	
       }
    
-   // adds one wall to a random spot in the map
-       private void addRandomWall(){
+   // adds one entity to a random spot in the map
+       public void addRandomEntity(Entity entity){
       
       // gets the number of empty spots and generates a number from 0 to number of empty spots -1
          int numEmptySpots = numEmptySpots();
@@ -196,7 +196,7 @@ Purpose: Used to keep track of entities (ships and walls)
             for (int y = 0 ; y < board[x].length && currentLocation <= locationAdd ; y++){
                if(board[x][y].isEmpty()){
                   if(locationAdd == currentLocation){
-                     board[x][y].setWall();
+                     setEntity(new Location(x,y), entity);
                   }
                   currentLocation++;
                }  
@@ -204,9 +204,52 @@ Purpose: Used to keep track of entities (ships and walls)
          }
       }
    
+       public void addRandomWall(){
+         addRandomEntity(new Wall());
+      }
+      
+       public void addRandomShip(Ship ship){
+         addRandomEntity(ship);
+      }
+   
+       public void addShipBottomRight(Ship ship){
+      
+         Location closest;
+         Location bottomRight = new Location(WIDTH_OF_MAP,0);  
+      	
+         for (int x = 0 ; x < board.length ; x ++){
+            for (int y = 0 ; y < board[x].length ; y++){
+            
+               if (board[x][y].isEmpty()){
+                  if (closest == null){
+                     closest = new Location(x,y);
+                  }
+                  else if (bottomRight.compare(new Location(x,y)) < bottomRight.compare(closest)){
+                     closest = new Location(x,y);
+                  }
+               }
+               
+            }
+         }
+         
+         setShip(ship,closest);
+      }
    // accessors and mutators
    
    // setEntity also known as spawn, but setWall and setShip is differentiated and easier to understand 
+   
+       public void setEntity(Location location, Entity entity){
+         if (entity == null){
+            setEmpty(location);
+         }
+         else if (entity.isWall()){
+            setWall(location);
+         }
+         else if (entity.isShip()){
+            setShip((Ship)entity,location);
+         }
+      }
+      
        public void setWall(Location location){
          this.board[location.getX()][location.getY()].setWall();
       }
@@ -244,7 +287,7 @@ Purpose: Used to keep track of entities (ships and walls)
        public void display(){
       
          for (int y = LENGTH_OF_MAP ; y >= 0 ; y--){
-            for (int x = 0 ; x < WEIDTH_OF_MAP ; x++){
+            for (int x = 0 ; x < WIDTH_OF_MAP ; x++){
                if(board[x][y].isEmpty()){
                   System.out.print(".");
                }

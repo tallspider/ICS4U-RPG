@@ -5,7 +5,7 @@ Date: January 8, 2018
 Purpose: Used to keep track the ships that in the battle part.
 */
 public class Fleet{
-	final public static int MAX_SHIP = 10;
+	final	public int MAX_SHIP = 10;
 	private Ship[] ships = new Ship [MAX_SHIP];
 	
 	public boolean addShip(int index,Ship newship){
@@ -19,7 +19,7 @@ public class Fleet{
 		}
 	}
 	
-	public int getShipNum
+	public int getShipNum;
 	public boolean deleteShip(int index){
 	/*Delete a ship in the given index
 	If the slot has no object, retutn false. Otherwise, return true*/
@@ -41,11 +41,6 @@ public class Fleet{
 		}
 		return toReturn;
 	}
-	
-	public boolean isEmpty(int index){
-		return ships[index].equals(null);
-	}
-	
 	public Ship getShip(int index){
 	//Return the ship object in the array of the given index.
 		return ships[index];

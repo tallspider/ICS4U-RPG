@@ -48,6 +48,13 @@ Purpose: Cointains the map and combat
    // adds the player fleet into the map (ship by ship)
        private void addFleet(Fleet fleet){
        
+         for (int i = 0 ; i < Fleet.MAX_SHIP ; i++){
+         
+            if(!fleet.isEmpty(i)){
+               addRandomShip(fleet.getShip(i));
+            }
+         }
+       
       }
    
    // generates and adds Enemies into the map (ai) (ship by ship), the ai's ship's upgrades will be determined by the player's score

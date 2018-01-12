@@ -18,9 +18,9 @@ public class Location{
    //Another construcotr
    }
    
-   public static int compareLocations(Location a, Location b){
+   public int compare(Location other){
    //Return the distence bewtween two given location objects.
-      return (Math.abs(a.getX() - b.getX()) + Math.abs(a.getY()-b.getY()));
+      return (Math.abs(this.getX() - other.getX()) + Math.abs(this.getY()-other.getY()));
    }
    public int getX(){
    //Return the x-coordinate.

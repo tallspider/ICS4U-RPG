@@ -24,52 +24,43 @@ School: A.Y.Jackson S.S
 Purpose: Retain the information regarding every square / spot in the map
 */
 
-public class Spot{
-
-// the thing or entity that can be held withing the spot
-   Entity thing;
-
-// empty constructor
-   public Spot(){
-   }
-
-//accessors and mutators
-   public void setWall(){
-      this.thing = new Wall();
-   }
-
-   public void setEmpty(){
-      this.thing = null;
-   }
-
-   public void setShip(Ship ship){
-      this.thing = ship;
-   }
-
-   public boolean isEmpty(){
-      if (this.thing == null){
-         return true;
+    public class Spot{
+   
+   // the thing or entity that can be held withing the spot
+      Entity thing;
+   
+   // empty constructor
+       public Spot(){
       }
-      return false;
-   }
+   
+   //accessors and mutators
+       public void setWall(){
+         this.thing = new Wall();
+      }
+   
+       public void setEmpty(){
+         this.thing = null;
+      }
+   
+       public void setShip(Ship ship){
+         this.thing = ship;
+      }
+   
+       public boolean isEmpty(){
+         return thing == null;
+      }
    
    // all walls are the same, so we only need to check if it's a wall or not
-   public boolean isWall(){
-      if (this.thing instanceof Wall){
-         return true;
+       public boolean isWall(){
+         return thing.isWall();
       }
-      return false;
-   }
-
-   public boolean isShip(){
-      if (this.thing instanceof Ship){
-         return true;
+   
+       public boolean isShip(){
+         return thing.isShip();
       }
-      return false;
-   }
    
    // isShip will be used with getShip to ensure this.thing is a ship
-   public Ship getShip(){
-      return (Ship)this.thing;
-   }   
-}
+       public Ship getShip(){
+         return (Ship)this.thing;
+      }   
+   }

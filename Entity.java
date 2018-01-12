@@ -24,9 +24,17 @@ School: A.Y.Jackson S.S
 Purpose: Entity that can be placed in spot, can be a wall or a ship
 */
 
-public abstract class Entity{
-
-//constructor
-   public Entity (){
+    public abstract class Entity{
+   
+   //constructor
+       public Entity (){
+      }
+   
+       public boolean isShip(){
+         return this instanceof Ship;
+      }
+   
+       public boolean isWall(){
+         return this instanceof Wall;
+      }
    }
-}
