@@ -230,7 +230,15 @@ public class Player{
 	//calculates how much money
    public boolean upgradeShip(int id, int upgrade){
       
-      //create a boolean to hold whether the player wishes to continue with this transaction
+  		//check whether upgrades can still be done to this Ship
+		if(hangar.getShips()[id].getUpgradesLeft() < 1){
+			//output error message
+			
+			
+			return false;
+		}    
+		
+		//create a boolean to hold whether the player wishes to continue with this transaction
       boolean cont;
 		//create an int variable to hold the number of coins required for the transaction
 		int coinsRequired;
@@ -262,6 +270,10 @@ public class Player{
 			
 			//return true to signify that the transaction is complete
 			return true;
+		} else {
+			//output error message
+			
+			
 		}
 		
 		//return false to signify that the transaction did not go through
