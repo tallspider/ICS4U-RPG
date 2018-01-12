@@ -150,13 +150,10 @@ public class Player{
 				int ttravelRange = Integer.parseInt(f.readLine());
 				int tfiringSpeed = Integer.parseInt(f.readLine());
 				int tupgradesLeft = Integer.parseInt(f.readLine());
-				int tAR_Upgrades = Integer.parseInt(f.readLine());
-				int tTR_Upgrade = Integer.parseInt(f.readLine());
-				int tFS_Upgrade = Integer.parseInt(f.readLine());
-            
+				
             //create a new Ship object with the information read in to occupy the
             //specified slot in hangar
-				hangar.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, tAR_Upgrades, tTR_Upgrade, tFS_Upgrade, true);
+				hangar.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, true);
 			}
 			
          //check that there are ships to load into fleet
@@ -171,10 +168,8 @@ public class Player{
 				int ttravelRange = Integer.parseInt(f.readLine());
 				int tfiringSpeed = Integer.parseInt(f.readLine());
 				int tupgradesLeft = Integer.parseInt(f.readLine());
-				int tAR_Upgrades = Integer.parseInt(f.readLine());
-				int tTR_Upgrade = Integer.parseInt(f.readLine());
-				int tFS_Upgrade = Integer.parseInt(f.readLine());
-				fleet.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, tAR_Upgrades, tTR_Upgrade, tFS_Upgrade, true);
+				
+				fleet.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, true);
 			}
          //close the BufferedReader
 			f.close();
@@ -306,9 +301,6 @@ public class Player{
 					out.println(tempShip.getTravelRange());
 					out.println(tempShip.getFiringSpeed());
 					out.println(tempShip.getUpgradesLeft());
-					out.println(tempShip.getAR_Upgrades());
-					out.println(tempShip.getTR_Upgrade());
-					out.println(tempShip.getFS_Upgrade());
 				}
 			}
 			
@@ -334,9 +326,6 @@ public class Player{
 					out.println(tempShip.getTravelRange());
 					out.println(tempShip.getFiringSpeed());
 					out.println(tempShip.getUpgradesLeft());
-					out.println(tempShip.getAR_Upgrades());
-					out.println(tempShip.getTR_Upgrade());
-					out.println(tempShip.getFS_Upgrade());
 				}
 			}
 			
