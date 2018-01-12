@@ -1,3 +1,9 @@
+//Class name: Ship 
+//Author: Hnas Long
+//Date: Jan. 11, 2018
+//School: A.Y.Jackson S.S.
+//Purpose: a simplified version of the Ship class 
+
 import java.util.*;
 public class Ship extends Entity
 {
