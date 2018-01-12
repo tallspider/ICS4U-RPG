@@ -41,6 +41,11 @@ public class Fleet{
 		}
 		return toReturn;
 	}
+	
+	public boolean isEmpty(int index){
+		return ships[index].equals(null);
+	}
+	
 	public Ship getShip(int index){
 	//Return the ship object in the array of the given index.
 		return ships[index];
