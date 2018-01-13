@@ -18,7 +18,7 @@ public class Ship extends Entity
    private boolean ownedByPlayer; 
    private boolean movedAlready; 
    private int timesAttacked;
-   private static final int BASIC_COST = 500;
+   static final int BASIC_COST = 500;
    private int value;
       
    public Ship(String name, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , boolean ownedByPlayer)
