@@ -5,7 +5,7 @@ Date: January 8, 2018
 Purpose: Used to keep track the ships that in the battle part.
 */
 public class Fleet{
-	final static public int MAX_SHIP = 10;
+	final static public int MAX_SHIPS = 10;
 	private Ship[] ships = new Ship [MAX_SHIP];
 	
 	public boolean addShip(int index,Ship newship){
