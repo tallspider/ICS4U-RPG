@@ -145,7 +145,7 @@ public class Map{
    }
 
 // checks if the given location exists inside the map
-   private boolean isInMap(Location location){
+   public boolean isInMap(Location location){
       if (location.getX() >= 0 && location.getX() < board.length ){
          if (location.getY() >= 0 && location.getY() < board[location.getX()].length){
             return true;
