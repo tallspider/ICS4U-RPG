@@ -12,13 +12,13 @@ public class Ship extends Entity
    private int travelRange;
    private int firingSpeed;
    private int upgradesLeft;
-   static final int AR_Upgrade;
-   static final int TR_Upgrade;
-   static final int FS_Upgrade;
+   public static final int AR_Upgrade;
+   public static final int TR_Upgrade;
+   public static final int FS_Upgrade;
    private boolean ownedByPlayer; 
    private boolean movedAlready; 
    private int timesAttacked;
-   static final int BASIC_COST = 500;
+   public static final int BASIC_COST = 500;
    private int value;
       
    public Ship(String name, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , boolean ownedByPlayer)
