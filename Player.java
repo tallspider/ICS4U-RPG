@@ -217,7 +217,7 @@ public class Player{
       //checks if the player wishes to continue with the transaction
       if(sell){
          //increase the number of coins the player has by half the value of the ship they wish to sell
-         numCoins += hangar.getShips()[id].value() / 2;
+         numCoins += hangar.getShips()[id].getValue() / 2;
          //remove the mewly-sold ship from hangar
          hangar.deleteShip(id);
          //return true to signify that the transaction is complete
