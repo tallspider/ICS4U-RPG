@@ -30,12 +30,17 @@ public class MainFrame extends JFrame{
       this.add(LogInB);
       Button PSB = new Button("Registe");
       this.add(PSB);
-      LogInB.addMouseListener(new LoginListener ());
-      PSB.addMouseListener(new RegisterListenner ());
+      LogInB.addMouseListener(new LoginListener (this));
+      PSB.addMouseListener(new RegisterListenner (this));
    
    }
    
    static class LoginListener extends MouseAdapter{
+      MainFrame mf = null;
+      public LoginListener(MainFrame mf){
+         this.mf = mf;
+      }
+    
       public void mouseClicked(MouseEvent e){
          String username = loginField.getText();
          String password = passwordField.getText();
@@ -45,6 +50,11 @@ public class MainFrame extends JFrame{
    }
    
    class RegisterListenner extends MouseAdapter{
+	   MainFrame mf = null;
+   
+      public RegisterListenner(MainFrame mf){
+         this.mf = mf;
+      }
       public void mouseClicked(MouseEvent e){
          String username = loginField.getText();
          String password = passwordField.getText();
