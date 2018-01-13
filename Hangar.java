@@ -90,7 +90,7 @@ public class Hangar
    }
    public boolean upgradeShip(int index, int index2)
    {
-     
+         ships[index].upgrade(index2);
    }
    public int getShipUpgradeCost(int id, int upgrade)
    {
@@ -110,6 +110,6 @@ public class Hangar
          ret += at + "\n" + ships[at].getPrintString();
       }
       return ret;
-   }
+  }
   
 }
