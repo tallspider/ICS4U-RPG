@@ -71,4 +71,17 @@ public class Fleet{
            }
            return ret;
         }
+	
+        public int getScoreTotal()
+        {
+          int ret = 0;
+          for(int at = 0; at < ships.length; at++)
+          {
+            if(ships[at] != null)
+            {
+               ret += ships[at].getScoreTotal();
+            }
+          }
+          return ret;
+        }
 }
