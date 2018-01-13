@@ -6,7 +6,7 @@ Purpose: Used to keep track the ships that in the battle part.
 */
 public class Fleet{
 	final static public int MAX_SHIPS = 10;
-	private Ship[] ships = new Ship [MAX_SHIP];
+	private Ship[] ships = new Ship [MAX_SHIPS];
 	
 	public boolean addShip(int index,Ship newship){
 	/*add a ship to the array  with the given index
@@ -34,7 +34,7 @@ public class Fleet{
 	public boolean checkEmpty(){
 	//Return true if the array is empty. Otherwise return false.
 		boolean toReturn = true;
-		for(int i = 0; i <MAX_SHIP;i++){
+		for(int i = 0; i <MAX_SHIPS;i++){
 			if(!ships[i].equals(null)){
 				toReturn = false;
 			}
@@ -57,7 +57,7 @@ public class Fleet{
 	
 	public void emptyFleet(){
 	//Delete all the object in the fleet array.
-		for(int i = 0; i <MAX_SHIP;i++){
+		for(int i = 0; i <MAX_SHIPS;i++){
 			ships[i] = null;
 		}
 	}
