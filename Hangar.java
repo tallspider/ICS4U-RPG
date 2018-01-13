@@ -148,7 +148,7 @@ public class Hangar
    }
   
    public int getShipSellPrice(int id){
-   	return ships[id].getValue()/2;
+   	return ships[id].getSellPrice();
    }
 	
    public boolean getShipUpgradable(int id){
