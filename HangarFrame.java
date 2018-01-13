@@ -41,7 +41,7 @@ public class HangarFrame extends JFrame{
    }
    
    private void initHangarInfoPanel(){
-      hangarInfoPanel = new HangarInfoPanel();
+      hangarInfoPanel = new HangarInfoPanel(WINDOW_LENGTH - SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT);
    }
    
    public static void main(String[] args){
@@ -71,14 +71,78 @@ class ShipSideBar extends JPanel{
 
 class HangarInfoPanel extends JPanel{
    
-   public HangarInfoPanel(){
+   private HangarInfoTop hangarInfoTop;
+   private HangarInfoBot hangarInfoBot;
+   private Ship ship;
+   private int length;
+   private int height;
+   
+   public HangarInfoPanel(int len, int hei){
+      length = len;
+      height = hei;
       init();
    }
    
    public void init(){
-      setPreferredSize(new Dimension(800, 700));
+      setPreferredSize(new Dimension(length, height));
       setLayout(new BorderLayout(0, 0));
       setOpaque(true);
       setBackground(Color.red);
+      
+      initHangarInfoTop();
+      initHangarInfoBot();
+      
+      add(hangarInfoTop, BorderLayout.PAGE_START);
+      add(hangarInfoBot, BorderLayout.PAGE_END);
+   }
+   
+   public void initHangarInfoTop(){
+      hangarInfoTop = new HangarInfoTop(ship, length, height / 2);
+   }
+   
+   public void initHangarInfoBot(){
+      hangarInfoBot = new HangarInfoBot(ship, length, height / 2);
+   }
+}
+
+class HangarInfoTop extends JPanel{
+   
+   Ship ship;
+   private int length;
+   private int height;
+   
+   public HangarInfoTop(Ship s, int len, int hei){
+      ship = s;
+      length = len;
+      height = hei;
+      init();
+   }
+   
+   public void init(){
+      setPreferredSize(new Dimension(length, height));
+      setLayout(new FlowLayout());
+      setOpaque(true);
+      setBackground(Color.yellow);
+   }
+}
+
+class HangarInfoBot extends JPanel{
+   
+   Ship ship;
+   private int length;
+   private int height;
+   
+   public HangarInfoBot(Ship s, int len, int hei){
+      ship = s;
+      length = len;
+      height = hei;
+      init();
+   }
+   
+   public void init(){
+      setPreferredSize(new Dimension(length, height));
+      setLayout(new FlowLayout());
+      setOpaque(true);
+      setBackground(Color.blue);
    }
 }
