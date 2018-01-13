@@ -217,7 +217,7 @@ public class Player{
       //checks if the player wishes to continue with the transaction
       if(sell){
          //increase the number of coins the player has by half the value of the ship they wish to sell
-         numCoins += hangar.getShip(id).value() / 2;
+         numCoins += hangar.getShips()[id].value() / 2;
          //remove the mewly-sold ship from hangar
          hangar.deleteShip(id);
          //return true to signify that the transaction is complete
@@ -244,17 +244,17 @@ public class Player{
 		int coinsRequired;
 		
 		//calculate the number of coins required to upgrade the Ship based on the type of upgrade chosen
-      if(upgrade == AR_Upgrades){
+      if(upgrade == Ship.AR_Upgrade){
 		
 			//if user chooses to upgrade attack range of ship, the cost is 100 times (the current attack range of the ship plus one)
       	coinsRequired = (hangar.getShips()[id].getAttackRange() + 1) * 100;
 			
-      } else if (upgrade == TR_Upgrades){
+      } else if (upgrade == Ship.TR_Upgrade){
 		
       	//if user chooses to upgrade travel range of ship, the cost is 100 times (the current travel range of the ship plus one)
       	coinsRequired = (hangar.getShips()[id].getTravelRange() + 1) * 100;
 			
-      } else if (upgrade == FS_Upgrades){
+      } else if (upgrade == Ship.FS_Upgrade){
 		
       	//if user chooses to upgrade firing speed of ship, the cost is 100 times (the current firing speed of the ship plus one)
       	coinsRequired = (hangar.getShips()[id].getFiringSpeed() + 1) * 100;
@@ -360,11 +360,11 @@ public class Player{
 		if(hold1 == HANGAR && hold2 == HANGAR){
 		
 			//store the first Ship in a temporary Ship object
-         Ship temp = hangar.getShip(id1);
+         Ship temp = hangar.getShips()[id1];
 			//set the first Ship to be equal to the second Ship
 			//(delete the first Ship from the slot and add the second Ship into the slot)
 			hangar.deleteShip(id1);
-			hangar.addShip(id1, hangar.getShips[id2]);
+			hangar.addShip(id1, hangar.getShips()[id2]);
 			//set the second Ship to be equal to the first Ship, which is stored in the temporary Ship object
          //(set the Ship contained by the slot containing the second Ship to the Ship stored in the temporary Ship object)
 			hangar.deleteShip(id2);
@@ -377,10 +377,10 @@ public class Player{
       if(hold1 == HANGAR && hold2 == FLEET){
 			
 			//store the first Ship in a temporary Ship object
-         Ship temp = hangar.getShip(id1);
+         Ship temp = hangar.getShips()[id1];
 			//set the first Ship to be equal to the second Ship
 			hangar.deleteShip(id1);
-         hangar.addShip(id1, fleet.getShips[id2]);
+         hangar.addShip(id1, fleet.getShips()[id2]);
 			//set the second Ship to the first Ship, which is stored in the temporary Ship variable
          fleet.deleteShip(id2);
 			fleet.addShip(id2, temp);
@@ -395,7 +395,7 @@ public class Player{
          Ship temp = fleet.getShip(id1);
 			//set the first Ship to be equal to the second Ship
 			fleet.deleteShip(id1);
-         fleet.addShip(id1, hangar.getShips[id2]);
+         fleet.addShip(id1, hangar.getShips()[id2]);
 			//set the second Ship to be equal to the first Ship, which is stored in the temporary variable
    		hangar.deleteShip(id2);      
 			hangar.addShip(id2, temp);
@@ -410,7 +410,7 @@ public class Player{
 			Ship temp = fleet.getShip(id1);
 			//set the first Ship to be equal to the second Ship
    		fleet.deleteShip(id1);      
-			fleet.addShip(id1, fleet.getShips[id2]);
+			fleet.addShip(id1, fleet.getShips()[id2]);
 			//set the second Ship to be equal to the first Ship, which is stored in the temporary Ship variable
    		fleet.deleteShip(id2);      
 			fleet.addShip(id2, temp);
