@@ -250,15 +250,13 @@ public class Player{
 		if(hold1 == HANGAR && hold2 == HANGAR){
 		
 			//store the first Ship in a temporary Ship object
-         Ship temp = hangar.getShips()[id1];
+         		Ship temp = hangar.getShip(id1);
 			//set the first Ship to be equal to the second Ship
 			//(delete the first Ship from the slot and add the second Ship into the slot)
-			hangar.deleteShip(id1);
-			hangar.addShip(id1, hangar.getShips()[id2]);
+			hangar.setShip(id1, hangar.getShip(id2));
 			//set the second Ship to be equal to the first Ship, which is stored in the temporary Ship object
          //(set the Ship contained by the slot containing the second Ship to the Ship stored in the temporary Ship object)
-			hangar.deleteShip(id2);
-			hangar.addShip(id2, temp);
+			hangar.setShip(id2, temp);
    		//return true to signify that the swap was successful      
 			return true;
       }
@@ -267,13 +265,11 @@ public class Player{
       if(hold1 == HANGAR && hold2 == FLEET){
 			
 			//store the first Ship in a temporary Ship object
-         Ship temp = hangar.getShips()[id1];
+         Ship temp = hangar.getShip(id1);
 			//set the first Ship to be equal to the second Ship
-			hangar.deleteShip(id1);
-         hangar.addShip(id1, fleet.getShips()[id2]);
+	hangar.setShip(id1, fleet.getShip(id2));
 			//set the second Ship to the first Ship, which is stored in the temporary Ship variable
-         fleet.deleteShip(id2);
-			fleet.addShip(id2, temp);
+         fleet.setShip(id2, temp);
 			//return true to signify that the swap was successful
          return true;
       }
@@ -284,11 +280,9 @@ public class Player{
 			//store the first Ship in a temporary Ship object
          Ship temp = fleet.getShip(id1);
 			//set the first Ship to be equal to the second Ship
-			fleet.deleteShip(id1);
-         fleet.addShip(id1, hangar.getShips()[id2]);
+	fleet.setShip(id1, hangar.getShip(id2));
 			//set the second Ship to be equal to the first Ship, which is stored in the temporary variable
-   		hangar.deleteShip(id2);      
-			hangar.addShip(id2, temp);
+   		hangar.setShip(id2, temp);
 			//return true to signify that the swap was successful
          return true;
       }
@@ -299,11 +293,9 @@ public class Player{
 			//store the first Ship in a temporary Ship object
 			Ship temp = fleet.getShip(id1);
 			//set the first Ship to be equal to the second Ship
-   		fleet.deleteShip(id1);      
-			fleet.addShip(id1, fleet.getShips()[id2]);
+   		fleet.setShip(id1, fleet.getShip(id2));
 			//set the second Ship to be equal to the first Ship, which is stored in the temporary Ship variable
-   		fleet.deleteShip(id2);      
-			fleet.addShip(id2, temp);
+   		fleet.setShip(id2, temp);
 			//return true to signify that the swap was successful
          return true;
       }
