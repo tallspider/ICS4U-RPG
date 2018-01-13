@@ -24,6 +24,24 @@ public class Hangar
       this.ships = new Ship[MAX_SHIPS];
       this.shipnum = 0;
    }
+  
+  public void loadNext(BufferedReader f)
+	{
+     try
+	   {
+        String s;
+        while( (s = f.readLine())!= null && s.length() != 0)
+	      {
+            int ID = Integer.parseInt(s);
+            ships[ID] = new Ship();
+            ships[ID].loadNext(f);
+        }
+     } 
+     catch (IOException e)
+	   {
+        System.out.println("File error on Hangar/Fleet level");
+     }
+   }
    
    public void setShips(Ship[] ships)
    {
