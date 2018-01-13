@@ -92,5 +92,14 @@ public class Hangar
    {
      
    }
-
+   public int getShipUpgradeCost(int id, int upgrade)
+   {
+         return ships[id].getUpgradeCost(upgrade);
+   }
+  
+   public void upgrade(int id, int upgrade)
+   {
+       ships[id].upgrade(upgrade);
+   }
+  
 }
