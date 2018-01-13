@@ -193,7 +193,7 @@ public class Player{
          //checks if the player wishes to continue with the transaction
          if(buy){
             //decrease the number of coins the player owns by the amount required to buy this Ship
-            numCoins -= Ships.BASIC_COST;
+            numCoins -= Ship.BASIC_COST;
             //add the newly-acquired Ship to hangar
             hangar.addShip(id);
             //return true to signify that the transaction is complete
