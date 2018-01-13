@@ -23,12 +23,16 @@ public class Fleet{
 	}
 	
 	public int getShipNum;
-	public boolean deleteShip(int index){
+	public boolean deleteShip(int index)
+	{
 	/*Delete a ship in the given index
 	If the slot has no object, retutn false. Otherwise, return true*/
-		if(ships[index].equals(null)){
+		if(ships[index].equals(null))
+		{
 			return false;
-		}else{
+		}
+		else
+		{
 			ships[index] = null;
 			return true;
 		}
@@ -52,22 +56,27 @@ public class Fleet{
            }
         }
 	
-	public boolean checkEmpty(){
+	public boolean checkEmpty()
+	{
 	//Return true if the array is empty. Otherwise return false.
 		boolean toReturn = true;
-		for(int i = 0; i <MAX_SHIPS;i++){
-			if(!ships[i].equals(null)){
+		for(int i = 0; i <MAX_SHIPS;i++)
+		{
+			if(!ships[i].equals(null))
+			{
 				toReturn = false;
 			}
 		}
 		return toReturn;
 	}
-	public Ship getShip(int index){
+	public Ship getShip(int index)
+	{
 	//Return the ship object in the array of the given index.
 		return ships[index];
 	}
 	
-	public Ship[] getShips(){
+	public Ship[] getShips()
+	{
 	//Return the array of the ships.
 		return ships;
 	}	
