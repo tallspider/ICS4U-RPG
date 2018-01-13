@@ -61,4 +61,14 @@ public class Fleet{
 			ships[i] = null;
 		}
 	}
+	
+	public String getPrintString()
+        {
+           String ret = "";
+           for(int at = 0; at < ships.length; at++)
+           {
+              ret += at + "\n" + ships[at].getPrintString();
+           }
+           return ret;
+        }
 }
