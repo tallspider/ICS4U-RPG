@@ -14,10 +14,14 @@ public class ErrorFrame extends JFrame{
       confirm.addMouseListener(new ConfirmListener());
    }
    static class ConfirmListener extends MouseAdapter{
+      ErrorFrame ef;
+      
+      public ConfirmListener(ErrorFrame eF){
+         ef = eF;
+      }
       public void mouseClicked(MouseEvent e){
-         MainFrame.errorFrame.setVisible(false);      		
+         ef.setVisible(false); 		
          //errorFrame.repaint();
       }
    }
-   
 }
