@@ -4,6 +4,9 @@ Author: Chongpu Zhao
 Date: January 8, 2018
 Purpose: Used to keep track the ships that in the battle part.
 */
+
+
+import java.io.*;
 public class Fleet{
 	final static public int MAX_SHIPS = 10;
 	private Ship[] ships = new Ship [MAX_SHIPS];
