@@ -53,8 +53,7 @@ public class Ship extends Entity
          firingSpeed++;
       }
    }
-   
-   //NEW
+
    public int calcUpgradeCost(int upgrade)
    {
       
@@ -73,19 +72,16 @@ public class Ship extends Entity
       return -1;
    }
    
-   //NEW
    public String getPrintString()
    {
       return "\n" + name + "\n" + attackRange + "\n" + travelRange + "\n" + firingSpeed + "\n" + upgradesLeft;
    }
-   
-   //NEW
+
    public boolean isUpgradable()
    {
       return upgradesLeft > 0;
    }
-   
-   //New
+
    public int getScoreTotal()
    {
       return attackRange + travelRange + firingSpeed;
