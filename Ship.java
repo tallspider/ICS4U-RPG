@@ -24,7 +24,7 @@ public class Ship extends Entity
    public static final int BASIC_COST = 500;
    private int value;
       
-   public void loadNextShip(BufferedReader f)
+   public void loadNext(BufferedReader f)
    {
       try
       {
