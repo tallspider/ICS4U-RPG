@@ -56,7 +56,7 @@ public class Ship extends Entity
       this.name = name; 
    }
    
-   public ship()
+   public Ship()
    {
       this.name = "";
       this.attackRange = 0;
