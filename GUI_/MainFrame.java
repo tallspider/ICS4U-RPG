@@ -32,7 +32,12 @@ public class MainFrame extends JFrame{
       this.add(PSB);
       LogInB.addMouseListener(new LoginListener (this));
       PSB.addMouseListener(new RegisterListenner (this));
-   
+      this.addWindowListener(new WindowAdapter(){
+         public void windowClosing(WindowEvent e){
+            setVisible(false);
+            System.exit(-1);
+         }
+      });
    }
    
    static class LoginListener extends MouseAdapter{
