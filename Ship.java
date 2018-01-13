@@ -41,13 +41,14 @@ public class Ship extends Entity
       }
    }
    
-   public Ship(String name, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , boolean ownedByPlayer)
+   public Ship(String name, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , int value, boolean ownedByPlayer)
    {
       this.name = name;
       this.attackRange = attackRange;
       this.travelRange = travelRange;
       this.firingSpeed = firingSpeed;
       this.upgradesLeft = upgradesLeft;
+      this.value = value;
       this.ownedByPlayer = ownedByPlayer;
    }
    	
