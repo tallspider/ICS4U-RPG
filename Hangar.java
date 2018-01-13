@@ -88,14 +88,7 @@ public class Hangar
          return false;
       }
    }
-   public boolean upgradeShip(int index, int index2)
-   {
-         ships[index].upgrade(index2);
-   }
-   public int getShipUpgradeCost(int id, int upgrade)
-   {
-         return ships[id].calcUpgradeCost(upgrade);
-   }
+
   
    public void upgrade(int id, int upgrade)
    {
@@ -107,9 +100,30 @@ public class Hangar
       String ret = "";
       for(int at = 0; at < ships.length; at++)
       {
-         ret += at + "\n" + ships[at].getPrintString();
+         if(ships[at] != null)
+         {
+            ret += at + "\n" + ships[at].getPrintString();
+         }
       }
       return ret;
   }
+   
+   public void upgradeShip(int index, int index2)
+   {
+     if(ships[index] != null)
+     {
+         ships[index].upgrade(index2);
+     }
+   }
+
+   public int getShipUpgradeCost(int id, int upgrade)
+   {
+      if(ships[id] == null) 
+      {
+        return -1;
+      }
+      return ships[id].calcUpgradeCost(upgrade);
+   }
+
   
 }
