@@ -40,17 +40,17 @@ public class Ship extends Entity
    {
       if(num == AR_Upgrade)
       {
-         Player.numCoins =Player.numCoins - ((AR_Upgrade+1)*100);
+         Player.getNmCoins =Player.getNmCoins - ((AR_Upgrade+1)*100);
          attackRange = AR_Upgrade +1;  
       }
       else if(num == TR_Upgrade)
       {
-         Player.numCoins =Player.numCoins - ((TR_Upgrade+1)*100);
+         Player.getNmCoins =Player.getNmCoins - ((TR_Upgrade+1)*100);
          travelRange = TR_Upgrade +1;
       }
       else
       {
-         Player.numCoins =Player.numCoins - ((FS_Upgrade+1)*100);
+         Player.getNmCoins =Player.getNmCoins - ((FS_Upgrade+1)*100);
          firingSpeed = FS_Upgrade +1;
       }
    }
