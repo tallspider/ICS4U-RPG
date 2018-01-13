@@ -31,6 +31,24 @@ public class Fleet{
 		}
 	}
 	
+	public void loadNext(BufferedReader f)
+	{
+           try
+	   {
+              String s;
+              while( (s = f.readLine())!= null && s.length() != 0)
+	      {
+              int ID = Integer.parseInt(s);
+              ships[ID] = new Ship();
+              ships[ID].loadNext(f);
+              }
+           } 
+           catch (IOException e)
+	   {
+             System.out.println("File error on Hangar/Fleet level");
+           }
+        }
+	
 	public boolean checkEmpty(){
 	//Return true if the array is empty. Otherwise return false.
 		boolean toReturn = true;
