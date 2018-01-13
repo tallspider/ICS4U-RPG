@@ -101,6 +101,10 @@ public class Ship extends Entity
       return -1;
    }
    
+   public int getSellPrice(){
+      return value /2;
+   }
+   
    public String getPrintString()
    {
       return "\n" + name + "\n" + attackRange + "\n" + travelRange + "\n" + firingSpeed + "\n" + upgradesLeft;
