@@ -4,6 +4,7 @@
 //School: A.Y.Jackson S.S.
 //Purpose: a simplified version of the Ship class 
 
+import java.io.*;
 import java.util.*;
 public class Ship extends Entity
 {
@@ -23,6 +24,23 @@ public class Ship extends Entity
    public static final int BASIC_COST = 500;
    private int value;
       
+   public void loadNext(BufferedReader f)
+   {
+      try
+      {
+         name = f.readLine();
+         attackRange = Integer.parseInt(f.readLine());
+         travelRange = Integer.parseInt(f.readLine());
+         firingSpeed = Integer.parseInt(f.readLine());
+         upgradesLeft = Integer.parseInt(f.readLine());
+         
+      } 
+      catch (IOException e)
+      {
+         System.out.println("File error on Ship level");
+      }
+   }
+   
    public Ship(String name, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , boolean ownedByPlayer)
    {
       this.name = name;
