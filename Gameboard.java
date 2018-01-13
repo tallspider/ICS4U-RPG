@@ -97,7 +97,6 @@ class Gameboard{
          endGame(false);
       }
       System.out.println("Error: Both teams defeated");
-      return -1;
    }
    
    // end the game and reward the player with money accordingly
