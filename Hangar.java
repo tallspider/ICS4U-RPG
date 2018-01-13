@@ -108,8 +108,7 @@ public class Hangar
       }
    }
 
-   public boolean addNewShip(int index)
-   {
+   public boolean addNewShip(int index){
    	return addShip(index, new Ship("", Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_VALUE, true));
    }
   
@@ -148,13 +147,11 @@ public class Hangar
       return ships[id].calcUpgradeCost(upgrade);
    }
   
-   public int getShipSellPrice(int id)
-   {
+   public int getShipSellPrice(int id){
    	return ships[id].getValue()/2;
    }
 	
-   public boolean getShipUpgradable(int id)
-   {
+   public boolean getShipUpgradable(int id){
    	return ships[id].isUpgradable();
    }
 	
@@ -169,6 +166,14 @@ public class Hangar
          }
       }
       return ret;
+   }
+	
+   public Ship getShip(int id){
+   	return ships[id];
+   }
+
+   public int setShip(int id, Ship ship){
+   	ships[id] = ship;
    }
 
 }
