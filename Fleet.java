@@ -115,11 +115,7 @@ public class Fleet{
           return ret;
         }
 	
-	public Ship getShip(int id){
-   		return ships[id];
-   	}
-
-   	public void setShip(int id, Ship ship){
+	public void setShip(int id, Ship ship){
    		ships[id] = ship;
    	}
 }
