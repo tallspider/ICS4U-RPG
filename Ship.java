@@ -12,16 +12,16 @@ public class Ship extends Entity
    private int travelRange;
    private int firingSpeed;
    private int upgradesLeft;
-   public static final int AR_Upgrade;
-   public static final int TR_Upgrade;
-   public static final int FS_Upgrade;
+   public static final int AR_Upgrade = 1;
+   public static final int TR_Upgrade = 2;
+   public static final int FS_Upgrade = 3;
+   public static final int BASIC_STAT = 1;
+   public static final int INIT_UPGRADES = 10;
    private boolean ownedByPlayer; 
    private boolean movedAlready; 
    private int timesAttacked;
    public static final int BASIC_COST = 500;
    private int value;
-   public static final int BASIC_STAT = 1;
-   public static final int INIT_UPGRADES = 10;
       
    public Ship(String name, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , boolean ownedByPlayer)
    {
@@ -42,16 +42,45 @@ public class Ship extends Entity
    {
       if(num == AR_Upgrade)
       {
-         attackRange = AR_Upgrade +1;  
+         attackRange++;  
       }
       else if(num == TR_Upgrade)
       {
-         travelRange = TR_Upgrade +1;
+         travelRange++;
       }
       else
       {
-         firingSpeed = FS_Upgrade +1;
+         firingSpeed++;
       }
+   }
+   
+   //NEW
+   public int calcUpgradeCost(int upgrade){
+      
+      if(upgrade == AR_Upgrade){
+		
+			return (attackRange + 1) * 100;
+			
+      } else if (upgrade == TR_Upgrade){
+		
+      	return (travelRange + 1) * 100;
+			
+      } else if (upgrade == FS_Upgrade){
+		
+      	return (firingSpeed + 1) * 100;
+		}
+      
+      return -1;
+   }
+   
+   //NEW
+   public String getPrintString(){
+      return "\n" + name + "\n" + attackRange + "\n" + travelRange + "\n" + firingSpeed + "\n" + upgradesLeft;
+   }
+   
+   //NEW
+   public boolean isUpgradable(){
+      return upgradesLeft > 0;
    }
    
    public String toString()
