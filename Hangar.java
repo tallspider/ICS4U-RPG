@@ -109,7 +109,7 @@ public class Hangar
    }
 
    public boolean addNewShip(int index){
-   	return addShip(index, new Ship("", Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_VALUE, true));
+   	return addShip(index, new Ship("", Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
    }
   
    public void upgrade(int id, int upgrade)
@@ -172,7 +172,7 @@ public class Hangar
    	return ships[id];
    }
 
-   public int setShip(int id, Ship ship){
+   public void setShip(int id, Ship ship){
    	ships[id] = ship;
    }
 
