@@ -11,7 +11,8 @@
       boolean login = false;
       boolean save = false;
       ImageIcon[] boardPictures = new ImageIcon[10];   
-   
+      static final int WINDOW_WIDTH=700;
+      static final int WINDOW_LENGTH=1000;
    
    
        public static void main(String arg[]) 
@@ -50,7 +51,7 @@
          
       
          frame.add(panel);  
-         frame.setSize(1000, 700);  
+         frame.setSize(WINDOW_LENGTH, WINDOW_WIDTH);  
          frame.setLocationRelativeTo(null);  
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
          frame.setVisible(true);  
