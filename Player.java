@@ -87,37 +87,15 @@ public class Player{
    
    //Mutator method for the total score of this player
    //takes in the new score total of this player as an int
-   public int setScore(int s){
+   public void setScore(int s){
       score = s;
    }
    
    //Calculates the total score of the player
-   //returns the total score of the player calculated as the attackRange + travelRange + firingSpeed of every ship owned by the player
    public int calcScore(){
       
-      //set the initial score to 0
-      int totalScore = 0;
+      return hangar.getScoreTotal() + fleet.getScoreTotal();
       
-      //go through each of the slots potentially containing a ship in hangar
-      //if thre is a Ship, or if the Ship object is not null, then add the attackRange, the travelRange and the firingSpeed of this Ship to the total score
-      for(int eachShip = 0; eachShip < Hangar.MAX_SHIPS; eachShip++){
-         Ship tempShip = hangar.getShips()[eachShip];
-         if(tempShip != null){
-            totalScore += tempShip.getAttackRange() + tempShip.getTravelRange() + tempShip.getFiringSpeed();
-         }
-      }
-      
-      //go through each of the slots potentially containing a ship in fleet
-      //if thre is a Ship, or if the Ship object is not null, then add the attackRange, the travelRange and the firingSpeed of this Ship to the total score
-      for(int eachShip = 0; eachShip < Fleet.MAX_SHIPS; eachShip++){
-         Ship tempShip = hangar.getShips()[eachShip];
-         if(tempShip != null){
-            totalScore += tempShip.getAttackRange() + tempShip.getTravelRange() + tempShip.getFiringSpeed();
-         }
-      }
-      
-      //return the total score calculated
-      return totalScore;
    }
    
 	//loads player information from file, initializes all the fields
@@ -138,39 +116,10 @@ public class Player{
 			
 			String s;
          
-         //check that there are ships to load into hangar
-			while( (s = f.readLine()) != "" && s != null){
-				//for each Ship in hangar:
-            //create temporary variables to hold the ID of the Ship in hangar, its
-            //name, attack range, travel range, firing speed, upgrades left, and the 
-            //numer of each type of upgrade that has already been applied on it
-            int tID = Integer.parseInt(s);
-				String tname = f.readLine();
-				int tattackRange = Integer.parseInt(f.readLine());
-				int ttravelRange = Integer.parseInt(f.readLine());
-				int tfiringSpeed = Integer.parseInt(f.readLine());
-				int tupgradesLeft = Integer.parseInt(f.readLine());
-				
-            //create a new Ship object with the information read in to occupy the
-            //specified slot in hangar
-				hangar.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, true);
-			}
+         hangar.loadNext(f);
 			
-         //check that there are ships to load into fleet
-			while( (s = f.readLine()) != "" && s != null){
-				//for each Ship in fleet:
-            //create temporary variables to hold the ID of the Ship in hangar, its
-            //name, attack range, travel range, firing speed, upgrades left, and the 
-            //numer of each type of upgrade that has already been applied on it
-            int tID = Integer.parseInt(s);
-				String tname = f.readLine();
-				int tattackRange = Integer.parseInt(f.readLine());
-				int ttravelRange = Integer.parseInt(f.readLine());
-				int tfiringSpeed = Integer.parseInt(f.readLine());
-				int tupgradesLeft = Integer.parseInt(f.readLine());
-				
-				fleet.getShips()[tID] = new Ship(tname, tattackRange, ttravelRange, tfiringSpeed, tupgradesLeft, true);
-			}
+         fleet.loadNext(f);
+         
          //close the BufferedReader
 			f.close();
          
@@ -195,9 +144,7 @@ public class Player{
             //decrease the number of coins the player owns by the amount required to buy this Ship
             numCoins -= Ship.BASIC_COST;
             //add the newly-acquired Ship to hangar
-            hangar.addShip(id);
-            //return true to signify that the transaction is complete
-            return true;
+            return hangar.addNewShip(id);
          } 
       }
       //return false to signify that the transaction did not go through
@@ -217,8 +164,8 @@ public class Player{
       //checks if the player wishes to continue with the transaction
       if(sell){
          //increase the number of coins the player has by half the value of the ship they wish to sell
-         numCoins += hangar.getShips()[id].getValue() / 2;
-         //remove the mewly-sold ship from hangar
+         numCoins += hangar.getShipSellPrice(id);
+         //remove the newly-sold ship from hangar
          hangar.deleteShip(id);
          //return true to signify that the transaction is complete
          return true;
@@ -227,49 +174,32 @@ public class Player{
       return false;
    }
    
-	//calculates how much money
-   public boolean upgradeShip(int id, int upgrade){
+	public boolean upgradeShip(int id, int upgrade){
       
   		//check whether upgrades can still be done to this Ship
-		if(hangar.getShips()[id].getUpgradesLeft() < 1){
+		if(!hangar.getShipUpgradable(id)){
 			//output error message
 			
 			
 			return false;
 		}    
 		
-		//create a boolean to hold whether the player wishes to continue with this transaction
-      boolean cont;
-		//create an int variable to hold the number of coins required for the transaction
-		int coinsRequired;
-		
-		//calculate the number of coins required to upgrade the Ship based on the type of upgrade chosen
-      if(upgrade == Ship.AR_Upgrade){
-		
-			//if user chooses to upgrade attack range of ship, the cost is 100 times (the current attack range of the ship plus one)
-      	coinsRequired = (hangar.getShips()[id].getAttackRange() + 1) * 100;
-			
-      } else if (upgrade == Ship.TR_Upgrade){
-		
-      	//if user chooses to upgrade travel range of ship, the cost is 100 times (the current travel range of the ship plus one)
-      	coinsRequired = (hangar.getShips()[id].getTravelRange() + 1) * 100;
-			
-      } else if (upgrade == Ship.FS_Upgrade){
-		
-      	//if user chooses to upgrade firing speed of ship, the cost is 100 times (the current firing speed of the ship plus one)
-      	coinsRequired = (hangar.getShips()[id].getFiringSpeed() + 1) * 100;
-		}
 		
 		//if the player does have enough money
-		if(numCoins >= coinsRequired){
+		if(numCoins >= hangar.getShipSellPrice(id)){
 			//confirm with player that they wish to proceed with the transaction
-			
+		   boolean cont;
+      
 			
 			//upgrade the ship through hangar
-			hangar.upgradeShip(id, upgrade);
+			if(cont){
+            hangar.upgradeShip(id, upgrade);
+            return true;
+         }else{
+         
+         }
 			
-			//return true to signify that the transaction is complete
-			return true;
+			
 		} else {
 			//output error message
 			
@@ -294,52 +224,12 @@ public class Player{
 			//separate chunks of information with a blank line
 			out.println("");
 			
-			//second chunk of information: ships in hangar
-			//for each slot in hangar:
-			for(int eachShip = 0; eachShip < Hangar.MAX_SHIPS; eachShip++){
-				
-				//create temporary Ship variable to hold the Ship whose information is being saved
-				Ship tempShip = hangar.getShips()[eachShip];
-				
-				//will not save anything if there is not a ship in this slot
-				if(tempShip != null){
-					//second chunk of information: Ship index, Ship name, attack 
-					//range, travel range, firing speed, number of upgrades left,
-					//number of each type of upgrade already applied for each Ship 
-					//stored in hangar
-					out.println(eachShip);
-					out.println(tempShip.getName());
-					out.println(tempShip.getAttackRange());
-					out.println(tempShip.getTravelRange());
-					out.println(tempShip.getFiringSpeed());
-					out.println(tempShip.getUpgradesLeft());
-				}
-			}
+			out.println(hangar.getPrintString());
 			
 			//blank line to separate chunks of information
 			out.println("");
 			
-			//third chunk of information: ships in fleet
-			//for each slot in fleet:
-			for(int eachShip = 0; eachShip < Fleet.MAX_SHIPS; eachShip++){
-				
-				//create temporary Ship variable to hold the Ship whose information is being saved
-				Ship tempShip = fleet.getShips()[eachShip];
-				
-				//will not save anything if there is not a ship in this slot
-				if(tempShip != null){
-					//third chunk of information: Ship index, Ship name, attack 
-					//range, travel range, firing speed, number of upgrades left,
-					//number of each type of upgrade already applied for each Ship 
-					//stored in fleet
-					out.println(eachShip);
-					out.println(tempShip.getName());
-					out.println(tempShip.getAttackRange());
-					out.println(tempShip.getTravelRange());
-					out.println(tempShip.getFiringSpeed());
-					out.println(tempShip.getUpgradesLeft());
-				}
-			}
+			out.println(fleet.getPrintString());
 			
 			//close PrintWriter and flush stream
 			out.close();
