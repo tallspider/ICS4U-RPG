@@ -55,6 +55,16 @@ public class Ship extends Entity
    {
       this.name = name; 
    }
+   
+   public ship()
+   {
+      this.name = "";
+      this.attackRange = 0;
+      this.travelRange = 0;
+      this.firingSpeed = 0;
+      this.upgradesLeft = 10;
+      this.ownedByPlayer = false;
+   }
       
    public void upgrade(int num)
    {
