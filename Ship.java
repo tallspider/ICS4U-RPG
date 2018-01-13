@@ -55,32 +55,40 @@ public class Ship extends Entity
    }
    
    //NEW
-   public int calcUpgradeCost(int upgrade){
+   public int calcUpgradeCost(int upgrade)
+   {
       
-      if(upgrade == AR_Upgrade){
-		
-			return (attackRange + 1) * 100;
-			
-      } else if (upgrade == TR_Upgrade){
-		
-      	return (travelRange + 1) * 100;
-			
-      } else if (upgrade == FS_Upgrade){
-		
+      if(upgrade == AR_Upgrade)
+      {
+	return (attackRange + 1) * 100;		
+      } 
+      else if (upgrade == TR_Upgrade)
+      {
+      	return (travelRange + 1) * 100;		
+      } 
+      else if (upgrade == FS_Upgrade)
+      {	
       	return (firingSpeed + 1) * 100;
-		}
-      
+      }
       return -1;
    }
    
    //NEW
-   public String getPrintString(){
+   public String getPrintString()
+   {
       return "\n" + name + "\n" + attackRange + "\n" + travelRange + "\n" + firingSpeed + "\n" + upgradesLeft;
    }
    
    //NEW
-   public boolean isUpgradable(){
+   public boolean isUpgradable()
+   {
       return upgradesLeft > 0;
+   }
+   
+   //New
+   public int getScoreTotal()
+   {
+      return attackRange + travelRange + firingSpeed;
    }
    
    public String toString()
