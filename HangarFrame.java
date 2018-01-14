@@ -46,18 +46,12 @@ public class HangarFrame extends JFrame{
    }
    
    private void initShipSideBar(){
-      shipSideBar = new ShipSideBar(player, SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT);
+      shipSideBar = new ShipSideBar(this, player, SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT);
       
-      for(int at = 0; at < Hangar.MAX_SHIPS; at++){
-         if(hangar.getShip(at) != null)
-            shipSideBar.addButton(hangar.getShip(at).getName());
-         else
-            shipSideBar.addButton("Ship " + (at + 1));
-      }
    }
    
    private void initHangarInfoPanel(){
-      hangarInfoPanel = new HangarInfoPanel(player, currentShipID, imageFile, WINDOW_LENGTH - SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT, PAGE_SPLIT_HEIGHT);
+      hangarInfoPanel = new HangarInfoPanel(this, player, currentShipID, imageFile, WINDOW_LENGTH - SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT, PAGE_SPLIT_HEIGHT);
    }
    
    public static void main(String[] args){
@@ -74,12 +68,16 @@ public class HangarFrame extends JFrame{
 
 class ShipSideBar extends JPanel{
    
+   private HangarFrame hangarFrame;
    private Player player;
    private int length;
    private int height;
    private int numButtons;
    
-   public ShipSideBar(Player p, int len, int hei){
+   private Hangar hangar;
+   
+   public ShipSideBar(HangarFrame hf, Player p, int len, int hei){
+      hangarFrame = hf;
       player = p;
       numButtons = Hangar.MAX_SHIPS;
       init();
@@ -88,19 +86,32 @@ class ShipSideBar extends JPanel{
    public void init(){
       setLayout(new GridLayout(numButtons, 0));
       setPreferredSize(new Dimension(length, height));
+      
+      hangar = player.getHangar();
+      
+      for(int at = 0; at < Hangar.MAX_SHIPS; at++){
+         
+         JButton button;
+         if(hangar.getShip(at) != null)
+            button = new JButton(hangar.getShip(at).getName());
+         else
+            button = new JButton("Empty Ship " + (at + 1));
+         
+         button.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               hangarFrame.updateShipInfoPanel(at);
+            }
+         });
+         
+         add(button);
+      }
    }
-   
-   public void addButton(String text){
-      JButton button = new JButton(text);
-      button.setAlignmentX(Component.CENTER_ALIGNMENT);
-      add(button);
-   }
-   
    
 }
 
 class HangarInfoPanel extends JPanel{
    
+   private HangarFrame hangarFrame;
    private HangarInfoTop hangarInfoTop;
    private HangarInfoBot hangarInfoBot;
    
@@ -111,7 +122,8 @@ class HangarInfoPanel extends JPanel{
    private int height;
    private int pageSplitHeight;
    
-   public HangarInfoPanel(Player p, int sID, String imgf, int len, int hei, int psh){
+   public HangarInfoPanel(HangarFrame hf, Player p, int sID, String imgf, int len, int hei, int psh){
+      hangarFrame = hf;
       shipID = sID;
       imageFile = imgf;
       player = p;
@@ -139,7 +151,7 @@ class HangarInfoPanel extends JPanel{
    }
    
    public void initHangarInfoBot(){
-      hangarInfoBot = new HangarInfoBot(player, shipID, length, pageSplitHeight);
+      hangarInfoBot = new HangarInfoBot(hangarFrame, player, shipID, length, pageSplitHeight);
    }
 }
 
@@ -193,6 +205,7 @@ class HangarInfoTop extends JPanel{
 
 class HangarInfoBot extends JPanel{
    
+   private HangarFrame hangarFrame;
    private Player player;
    private int shipID;
    private int length;
@@ -201,7 +214,8 @@ class HangarInfoBot extends JPanel{
    private HangarInfoBotMid hangarInfoBotMid;
    private HangarInfoBotRight hangarInfoBotRight;
    
-   public HangarInfoBot(Player p, int sID, int len, int hei){
+   public HangarInfoBot(HangarFrame hf, Player p, int sID, int len, int hei){
+      hangarFrame = hf;
       player = p;
       shipID = sID;
       length = len;
@@ -225,7 +239,7 @@ class HangarInfoBot extends JPanel{
    }
    
    private void initHangarInfoBotRight(){
-      hangarInfoBotRight = new HangarInfoBotRight(player, shipID, length / 3, height);
+      hangarInfoBotRight = new HangarInfoBotRight(hangarFrame, player, shipID, length / 3, height);
    }
 }
 
@@ -451,6 +465,7 @@ class HangarInfoBotMid extends JPanel{
 
 class HangarInfoBotRight extends JPanel{
    
+   private HangarFrame hangarFrame;
    private Player player;
    private int shipID;
    private int length;
@@ -459,7 +474,8 @@ class HangarInfoBotRight extends JPanel{
    private Hangar hangar;
    private Ship ship;
    
-   public HangarInfoBotRight(Player p, int sID, int len, int hei){
+   public HangarInfoBotRight(HangarFrame hf, Player p, int sID, int len, int hei){
+      hangarFrame = hf;
       player = p;
       shipID = sID;
       length = len;
@@ -490,6 +506,8 @@ class HangarInfoBotRight extends JPanel{
             //set mainScene to visible, this to not visible
          }
       });
+      
+      
       
       add(sellButton);
       add(backButton);
