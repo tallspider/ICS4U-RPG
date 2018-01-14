@@ -179,6 +179,14 @@ public class Ship extends Entity
       return this.upgradesLeft;
    } 
    
+   public String getImageFile(){
+   	return imageFile;
+   }
+   
+   public void setImageFile(String s){
+   	imageFile = s;
+   }
+   
    public void setOwnedByPlayer(boolean ownedByPlayer)
    {
       this.ownedByPlayer = ownedByPlayer;
