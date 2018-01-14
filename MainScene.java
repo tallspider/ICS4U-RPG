@@ -67,18 +67,18 @@
       // TODO Auto-generated method stub
          if(e.getSource()==b1)
          {
-      
+              Portal=true;    
       
          }
          else if(e.getSource()==b2)
          {
-         
+            Fleet=true;         
          
          }
          
          if(e.getSource()==b3)
          {
-      
+            Save=true;      
       
          }
          else if(e.getSource()==b4)
@@ -90,12 +90,12 @@
                   
          if(e.getSource()==b5)
          {
-      
+            Leaderboard=true;      
       
          }
          else if(e.getSource()==b6)
          {
-         
+            Quit=true;         
          
          }
                   
