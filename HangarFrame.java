@@ -28,8 +28,7 @@ public class HangarFrame extends JFrame{
    
    public void setVisible(Component c, boolean b){
       lastPage = c;
-      this.setVisible(b);
-      initHangarInfoPanel();
+      init();
    }
    
    public void init(){
