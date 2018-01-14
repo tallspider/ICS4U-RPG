@@ -6,6 +6,7 @@ import java.awt.event.*;
 
 public class HangarFrame extends JFrame{
    
+   private Component lastPage;
    private Player player;
    private int currentShipID;
    private String imageFile;
@@ -21,9 +22,11 @@ public class HangarFrame extends JFrame{
    public static final int SHIP_SIDEBAR_LENGTH = WINDOW_LENGTH / 5;
    public static final int PAGE_SPLIT_HEIGHT = WINDOW_HEIGHT / 2 + 50;
    
-   public HangarFrame(Player p, String ims){
+   public HangarFrame(Component c, Player p, String ims){
+      lastPage = c;
       player = p;
       imageFile = ims;
+      currentShipID = 0;
       init();
    }
    
@@ -51,11 +54,11 @@ public class HangarFrame extends JFrame{
    }
    
    private void initHangarInfoPanel(){
-      hangarInfoPanel = new HangarInfoPanel(this, player, currentShipID, imageFile, WINDOW_LENGTH - SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT, PAGE_SPLIT_HEIGHT);
+      hangarInfoPanel = new HangarInfoPanel(this, lastPage, player, currentShipID, imageFile, WINDOW_LENGTH - SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT, PAGE_SPLIT_HEIGHT);
    }
    
    public static void main(String[] args){
-      HangarFrame hg = new HangarFrame(new Player("Annie"), "img.jpg");
+      HangarFrame hg = new HangarFrame(new JFrame(), new Player("Annie"), "img.jpg");
    }
    
    public void updateShipInfoPanel(int id){
@@ -97,11 +100,12 @@ class ShipSideBar extends JPanel{
          else
             button = new JButton("Empty Ship " + (at + 1));
          
-         button.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-               hangarFrame.updateShipInfoPanel(at);
-            }
-         });
+         button.addActionListener(
+            new ActionListener(){
+               public void actionPerformed(ActionEvent e){
+                  hangarFrame.updateShipInfoPanel(at);
+               }
+            });
          
          add(button);
       }
@@ -112,6 +116,7 @@ class ShipSideBar extends JPanel{
 class HangarInfoPanel extends JPanel{
    
    private HangarFrame hangarFrame;
+   private Component lastPage;
    private HangarInfoTop hangarInfoTop;
    private HangarInfoBot hangarInfoBot;
    
@@ -122,8 +127,9 @@ class HangarInfoPanel extends JPanel{
    private int height;
    private int pageSplitHeight;
    
-   public HangarInfoPanel(HangarFrame hf, Player p, int sID, String imgf, int len, int hei, int psh){
+   public HangarInfoPanel(HangarFrame hf, Component c, Player p, int sID, String imgf, int len, int hei, int psh){
       hangarFrame = hf;
+      lastPage = c;
       shipID = sID;
       imageFile = imgf;
       player = p;
@@ -151,7 +157,7 @@ class HangarInfoPanel extends JPanel{
    }
    
    public void initHangarInfoBot(){
-      hangarInfoBot = new HangarInfoBot(hangarFrame, player, shipID, length, pageSplitHeight);
+      hangarInfoBot = new HangarInfoBot(hangarFrame, lastPage, player, shipID, length, pageSplitHeight);
    }
 }
 
@@ -206,6 +212,7 @@ class HangarInfoTop extends JPanel{
 class HangarInfoBot extends JPanel{
    
    private HangarFrame hangarFrame;
+   private Component lastPage;
    private Player player;
    private int shipID;
    private int length;
@@ -214,8 +221,9 @@ class HangarInfoBot extends JPanel{
    private HangarInfoBotMid hangarInfoBotMid;
    private HangarInfoBotRight hangarInfoBotRight;
    
-   public HangarInfoBot(HangarFrame hf, Player p, int sID, int len, int hei){
+   public HangarInfoBot(HangarFrame hf, Component c, Player p, int sID, int len, int hei){
       hangarFrame = hf;
+      lastPage = c;
       player = p;
       shipID = sID;
       length = len;
@@ -231,7 +239,7 @@ class HangarInfoBot extends JPanel{
    }
    
    private void initHangarInfoBotLeft(){
-      hangarInfoBotLeft = new HangarInfoBotLeft(player, length / 3, height);
+      hangarInfoBotLeft = new HangarInfoBotLeft(player, shipID, length / 3, height);
    }
    
    private void initHangarInfoBotMid(){
@@ -239,7 +247,7 @@ class HangarInfoBot extends JPanel{
    }
    
    private void initHangarInfoBotRight(){
-      hangarInfoBotRight = new HangarInfoBotRight(hangarFrame, player, shipID, length / 3, height);
+      hangarInfoBotRight = new HangarInfoBotRight(hangarFrame, lastPage, player, shipID, length / 3, height);
    }
 }
 
@@ -263,6 +271,8 @@ class HangarInfoTopLeft extends JPanel{
       hangar = player.getHangar();
       ship = hangar.getShip(shipID);
       
+      if(ship == null) ship = new Ship("", Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, false);
+      
       init();
    }
    
@@ -275,7 +285,11 @@ class HangarInfoTopLeft extends JPanel{
       addLine("Travel range: " + ship.getTravelRange());
       addLine("Attack range: " + ship.getAttackRange());
       addLine("Firing speed: " + ship.getFiringSpeed());
-      addLine("Sell for: " + ship.getSellPrice());
+      
+      if(ship.getOwnedByPlayer())
+         addLine("Sell for: " + ship.getSellPrice());
+      else
+         addLine("Cost: " + Ship.BASIC_COST);
    }
    
    public void addLine(String s){
@@ -302,6 +316,9 @@ class HangarInfoTopMid extends JPanel{
       hangar = player.getHangar();
       ship = hangar.getShip(shipID);
       
+      if(ship == null) 
+         ship = new Ship("", Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, false);
+      
       init();
    }
    
@@ -311,18 +328,24 @@ class HangarInfoTopMid extends JPanel{
       setOpaque(true);
       setBackground(Color.gray);
       
-      JTextField entry = new JTextField(10); 
-      JButton button = new JButton("Change Ship Name");
+      JTextField entry;
+      JButton button;
       
-      button.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e){
-            System.out.println("Change Ship Name button clicked");
-            ship.setName(entry.getText());
-         }
-      });
+      if(ship.getOwnedByPlayer()){
+         entry = new JTextField(10); 
+         button = new JButton("Change Ship Name");
       
-      add(entry);
-      add(button);
+         button.addActionListener(
+            new ActionListener(){
+               public void actionPerformed(ActionEvent e){
+                  System.out.println("Change Ship Name button clicked");
+                  ship.setName(entry.getText());
+               }
+            });
+      
+         add(entry);
+         add(button);
+      }
       
    }
 }
@@ -365,11 +388,16 @@ class HangarInfoTopRight extends JPanel{
 class HangarInfoBotLeft extends JPanel{
    
    private Player player;
+   private int shipID;
    private int length;
    private int height;
    
-   public HangarInfoBotLeft(Player p, int len, int hei){
+   private Hangar hangar;
+   private Ship ship;
+   
+   public HangarInfoBotLeft(Player p, int sID, int len, int hei){
       player = p;
+      shipID = sID;
       length = len;
       height = hei;
       init();
@@ -381,10 +409,15 @@ class HangarInfoBotLeft extends JPanel{
       setOpaque(true);
       setBackground(Color.orange);
       
-      addLine("\tUpgrade: ");
-      addLine("Travel Range: ");
-      addLine("Attack Range: ");
-      addLine("Firing Speed: ");
+      hangar = player.getHangar();
+      ship = hangar.getShip(shipID);
+      
+      if(ship != null){
+         addLine("\tUpgrade: ");
+         addLine("Travel Range: ");
+         addLine("Attack Range: ");
+         addLine("Firing Speed: ");
+      }
       addLine("Player Money: " + player.getNumCoins());
    }
    
@@ -421,36 +454,46 @@ class HangarInfoBotMid extends JPanel{
       setOpaque(true);
       setBackground(Color.white);
       
-      add(new JLabel("Cost: "));
+      JLabel trLabel, arLabel, fsLabel;
+      JButton trButton, arButton, fsButton;
       
-      JLabel trLabel = new JLabel(ship.calcUpgradeCost(Ship.TR_Upgrade)+ "");
-      JButton trButton = new JButton("Upgrade");
-      trButton.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e){
-            player.upgradeShip(shipID, Ship.TR_Upgrade);
-         }
-      });
+      if(ship != null){
+         add(new JLabel("Cost: "));
       
-      JLabel arLabel = new JLabel(ship.calcUpgradeCost(Ship.AR_Upgrade)+ "");
-      JButton arButton = new JButton("Upgrade");
-      arButton.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e){
-            player.upgradeShip(shipID, Ship.AR_Upgrade);
-         }
-      });
+         trLabel = new JLabel(ship.calcUpgradeCost(Ship.TR_Upgrade)+ "");
+         trButton = new JButton("Upgrade");
+         trButton.addActionListener(
+            new ActionListener(){
+               public void actionPerformed(ActionEvent e){
+                  player.upgradeShip(shipID, Ship.TR_Upgrade);
+               }
+            });
       
-      JLabel fsLabel = new JLabel(ship.calcUpgradeCost(Ship.FS_Upgrade)+ "");
-      JButton fsButton = new JButton("Upgrade");
-      fsButton.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e){
-            player.upgradeShip(shipID, Ship.FS_Upgrade);
-         }
-      });
+         arLabel = new JLabel(ship.calcUpgradeCost(Ship.AR_Upgrade)+ "");
+         arButton = new JButton("Upgrade");
+         arButton.addActionListener(
+            new ActionListener(){
+               public void actionPerformed(ActionEvent e){
+                  player.upgradeShip(shipID, Ship.AR_Upgrade);
+               }
+            });
       
-      addLineButton(trLabel, trButton);
-      addLineButton(arLabel, arButton);
-      addLineButton(fsLabel, fsButton);
-      add(new JLabel("Money After Sell: " + (player.getNumCoins() - ship.getSellPrice())));
+         fsLabel = new JLabel(ship.calcUpgradeCost(Ship.FS_Upgrade)+ "");
+         fsButton = new JButton("Upgrade");
+         fsButton.addActionListener(
+            new ActionListener(){
+               public void actionPerformed(ActionEvent e){
+                  player.upgradeShip(shipID, Ship.FS_Upgrade);
+               }
+            });
+      
+         addLineButton(trLabel, trButton);
+         addLineButton(arLabel, arButton);
+         addLineButton(fsLabel, fsButton);
+         add(new JLabel("Money After Sell: " + (player.getNumCoins() - ship.getSellPrice())));
+      } else {
+         add(new JLabel("Money After Pay: " + (player.getNumCoins() - Ship.BASIC_COST)));
+      }
    }
    
    private void addLineButton(JLabel label, JButton button){
@@ -466,6 +509,7 @@ class HangarInfoBotMid extends JPanel{
 class HangarInfoBotRight extends JPanel{
    
    private HangarFrame hangarFrame;
+   private Component lastPage;
    private Player player;
    private int shipID;
    private int length;
@@ -474,8 +518,9 @@ class HangarInfoBotRight extends JPanel{
    private Hangar hangar;
    private Ship ship;
    
-   public HangarInfoBotRight(HangarFrame hf, Player p, int sID, int len, int hei){
+   public HangarInfoBotRight(HangarFrame hf, Component c, Player p, int sID, int len, int hei){
       hangarFrame = hf;
+      lastPage = c;
       player = p;
       shipID = sID;
       length = len;
@@ -493,23 +538,37 @@ class HangarInfoBotRight extends JPanel{
       setOpaque(true);
       setBackground(Color.yellow);
       
-      JButton sellButton = new JButton("Sell");
-      sellButton.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e){
-            player.sellShip(shipID);
-         }
-      });
+      JButton sellButton, buyButton, backButton;
       
-      JButton backButton = new JButton("Back");
-      backButton.addActionListener(new ActionListener(){
-         public void actionPerformed(ActionEvent e){
-            //set mainScene to visible, this to not visible
-         }
-      });
+      if(ship != null){
+         sellButton = new JButton("Sell");
+         sellButton.addActionListener(
+            new ActionListener(){
+               public void actionPerformed(ActionEvent e){
+                  player.sellShip(shipID);
+               }
+            });
+         add(sellButton);
+      } else {
+         buyButton = new JButton("Buy");
+         buyButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               player.buyShip(shipID);
+            }
+         });
+         add(sellButton);
+      }
+      
+      backButton = new JButton("Back");
+      backButton.addActionListener(
+         new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               lastPage.setVisible(true);
+               hangarFrame.setVisible(false);
+            }
+         });
       
       
-      
-      add(sellButton);
       add(backButton);
    }
 }
