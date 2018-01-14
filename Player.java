@@ -18,13 +18,13 @@ public class Player{
    
    //Constructor of the Player class
    //takes in the username of this user as a String   
-   public Player(String un, HangarFrame hf){
+   public Player(String un){
       username = un;
-      hangarFrame = hf;
       filename = un + ".txt";
-		hangar = new Hangar();
-		fleet = new Fleet();
-		
+      hangar = new Hangar();
+      fleet = new Fleet();
+      load();
+      hangarFrame = new HangarFrame(this);
    }
    
    //Accessor method for the username of this player
