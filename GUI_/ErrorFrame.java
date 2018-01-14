@@ -2,11 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class ErrorFrame extends JFrame{
+   publi static JLabel error = new JLabel("Error");
    public ErrorFrame() {
       this.setLayout(new FlowLayout());
       this.setBounds(600,600,150,100);
       this.setVisible(false);
-      JLabel error = new JLabel("Error");
+     // JLabel error = new JLabel("Error");
    		//	error.setFont(new Font("Serif",Font.BOLD,20));
       this.add(error);
       Button confirm = new Button("Confirm");
