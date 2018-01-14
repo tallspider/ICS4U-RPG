@@ -64,7 +64,7 @@
       
       public void actionPerformed(ActionEvent e) 
       {
-      // TODO Auto-generated method stub
+   
          if(e.getSource()==b1)
          {
               Portal=true;    
