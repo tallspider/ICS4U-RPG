@@ -13,6 +13,7 @@ public class Ship extends Entity
    private int travelRange;
    private int firingSpeed;
    private int upgradesLeft;
+   private String imageFile;
    public static final int AR_Upgrade = 1;
    public static final int TR_Upgrade = 2;
    public static final int FS_Upgrade = 3;
@@ -29,6 +30,7 @@ public class Ship extends Entity
       try
       {
          name = f.readLine();
+	 imageFile = f.readLine();
          attackRange = Integer.parseInt(f.readLine());
          travelRange = Integer.parseInt(f.readLine());
          firingSpeed = Integer.parseInt(f.readLine());
@@ -41,9 +43,10 @@ public class Ship extends Entity
       }
    }
    
-   public Ship(String name, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , int value, boolean ownedByPlayer)
+   public Ship(String name, String imageFile, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , int value, boolean ownedByPlayer)
    {
       this.name = name;
+      this.imageFile = imageFile;
       this.attackRange = attackRange;
       this.travelRange = travelRange;
       this.firingSpeed = firingSpeed;
@@ -60,6 +63,7 @@ public class Ship extends Entity
    public Ship()
    {
       this.name = "";
+      this.imageFile == null;
       this.attackRange = 0;
       this.travelRange = 0;
       this.firingSpeed = 0;
