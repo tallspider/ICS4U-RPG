@@ -68,6 +68,10 @@ public class HangarFrame extends JFrame{
       initHangarInfoPanel();
       //add(BorderLayout.LINE_END, hangarInfoPanel);
    }
+   
+   public boolean askQuestion(String ques, String title){
+      return JOptionPane.showConfirmDialog(null, ques, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION;
+   }
 }
 
 class ShipSideBar extends JPanel{
@@ -94,7 +98,7 @@ class ShipSideBar extends JPanel{
       hangar = player.getHangar();
       
       for(int at = 0; at < Hangar.MAX_SHIPS; at++){
-         
+         final int AT = at;
          JButton button;
          if(hangar.getShip(at) != null)
             button = new JButton(hangar.getShip(at).getName());
@@ -104,7 +108,7 @@ class ShipSideBar extends JPanel{
          button.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
-                  hangarFrame.updateShipInfoPanel(at);
+                  hangarFrame.updateShipInfoPanel(AT);
                }
             });
          
@@ -557,7 +561,7 @@ class HangarInfoBotRight extends JPanel{
                player.buyShip(shipID);
             }
          });
-         add(sellButton);
+         add(buyButton);
       }
       
       backButton = new JButton("Back");
@@ -572,4 +576,5 @@ class HangarInfoBotRight extends JPanel{
       
       add(backButton);
    }
+   
 }
