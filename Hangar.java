@@ -108,9 +108,9 @@ public class Hangar
       }
    }
 
-   public boolean addNewShip(int index)
+   public boolean addNewShip(int index, String imgf)
    {
-   	return addShip(index, new Ship("", Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
+   	return addShip(index, new Ship("", imgf, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
    }
   
    public void upgrade(int id, int upgrade)
