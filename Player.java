@@ -9,8 +9,8 @@ public class Player{
    private String username;
    private String filename;
    private Hangar hangar;
-   private HangarFrame hangarFrame;
    private Fleet fleet;
+   private HangarFrame hangarFrame;
    private int score;
    private int numCoins;
    static final int HANGAR = 0;
@@ -22,7 +22,7 @@ public class Player{
       username = un;
       filename = un + ".txt";
       hangar = new Hangar();
-      fleet = new Fleet();
+		fleet = new Fleet();
       load();
       hangarFrame = new HangarFrame(this);
    }
@@ -140,7 +140,7 @@ public class Player{
       //checks if the player has enough money to buy this Ship
       if(numCoins > Ship.BASIC_COST){
          //confirm with player
-         
+         buy = hangarFrame.askQuestion("Are you sure you would like to buy this ship?", "Sure?");
          //checks if the player wishes to continue with the transaction
          if(buy){
             //decrease the number of coins the player owns by the amount required to buy this Ship
@@ -161,7 +161,7 @@ public class Player{
       boolean sell;
       
       //confirm with player
-      
+      sell = hangarFrame.askQuestion("Are you sure you would like to sell this ship?", "Sure?");
       
       //checks if the player wishes to continue with the transaction
       if(sell){
@@ -191,8 +191,8 @@ public class Player{
 		if(numCoins >= hangar.getShipSellPrice(id)){
 			//confirm with player that they wish to proceed with the transaction
 		   boolean cont;
-      
-			
+         cont = hangarFrame.askQuestion("Are you sure you would like to upgrade this ship?", "Sure?");
+         
 			//upgrade the ship through hangar
 			if(cont){
             hangar.upgradeShip(id, upgrade);
@@ -252,7 +252,7 @@ public class Player{
 		if(hold1 == HANGAR && hold2 == HANGAR){
 		
 			//store the first Ship in a temporary Ship object
-         		Ship temp = hangar.getShip(id1);
+         Ship temp = hangar.getShip(id1);
 			//set the first Ship to be equal to the second Ship
 			//(delete the first Ship from the slot and add the second Ship into the slot)
 			hangar.setShip(id1, hangar.getShip(id2));
@@ -269,7 +269,7 @@ public class Player{
 			//store the first Ship in a temporary Ship object
          Ship temp = hangar.getShip(id1);
 			//set the first Ship to be equal to the second Ship
-	hangar.setShip(id1, fleet.getShip(id2));
+	      hangar.setShip(id1, fleet.getShip(id2));
 			//set the second Ship to the first Ship, which is stored in the temporary Ship variable
          fleet.setShip(id2, temp);
 			//return true to signify that the swap was successful
@@ -282,7 +282,7 @@ public class Player{
 			//store the first Ship in a temporary Ship object
          Ship temp = fleet.getShip(id1);
 			//set the first Ship to be equal to the second Ship
-	fleet.setShip(id1, hangar.getShip(id2));
+	      fleet.setShip(id1, hangar.getShip(id2));
 			//set the second Ship to be equal to the first Ship, which is stored in the temporary variable
    		hangar.setShip(id2, temp);
 			//return true to signify that the swap was successful
