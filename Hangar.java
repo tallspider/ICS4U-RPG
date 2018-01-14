@@ -1,5 +1,5 @@
 /*
-Class Name: Hangar
+Class Name: Hanger
 Author: Hans Long
 Date: January 11, 2018
 Purpose: Used to keep track the ships that in the battle part.
@@ -12,6 +12,8 @@ public class Hangar
   
    private Ship[] ships = new Ship[MAX_SHIPS];
    private int shipnum;
+   private String[] imageFiles;
+   public static final String IMAGE_FILE_FILE = "images.txt";
    public static final int MAX_SHIPS = 10;
    public static final int MIN_SHIPS = 0;
  
@@ -19,13 +21,31 @@ public class Hangar
    {
       this.ships = ships;
       this.shipnum = ships.length;
+      loadImageFiles();
    }
    public Hangar()
    {
       this.ships = new Ship[MAX_SHIPS];
       this.shipnum = 0;
+      loadImageFiles();
    }
-  
+   
+   public void loadImageFiles(){
+      try{
+         BufferedReader f = new BufferedReader(new FileReader(IMAGE_FILE_FILE));
+         for(int at = 0; at < MAX_SHIPS; at++){
+            imageFiles[at] = f.readLine();
+            f.close();
+         }
+      } catch(IOException e){
+         System.out.println("Error loading image files into hangar");
+      }
+   }
+   
+   public String getImageFile(int id){
+      return imageFiles[id];
+   }
+   
    public void loadNext(BufferedReader f)
    {
      try
