@@ -1,22 +1,4 @@
-/*
-Note to self:
-
--class headers indicating:
-o class name
-o author
-o date
-
-o school
-o purpose
--method headers including:
-o description of each parameters and return values
-o purpose
--sufficient and appropriate comments describing
-o code that is difficult to understand
-o constant, type and variable declarations
-*/
-
-/*
+   /*
 Class Name: Map
 Author: David Qian 
 Date: January 7, 2018
@@ -27,28 +9,17 @@ import java.util.Random;
 
 public class Map{
 
-//********************************************************************TEMPORARY WORKAROUND **********************************************************************//
 // the minimun ammount of empty spots a map is allowed to have (maxinum number of enemies + maxinum number of fleet ships)
-   public static int MINIMUM_EMPTY_SPOTS = 15;
-//********************************************************************TEMPORARY WORKAROUND **********************************************************************//
+   public static int MINIMUM_EMPTY_SPOTS = Fleet.MAX_SHIPS + Gameboard.MAX_AI_SHIPS;
+
    public static int WIDTH_OF_MAP = 16;
    public static int LENGTH_OF_MAP = 16;
 
 // the board is a 2d spot array
    Spot[][] board;
 
-   public Map(){
-      board = new Spot[WIDTH_OF_MAP][LENGTH_OF_MAP];
-      
-      for (int x = 0 ; x < board.length ; x ++){
-         for (int y = 0 ; y < board[x].length ; y++){
-            board[x][y] = new Spot();
-         }
-      }
-   }
-
 // generates a map based on player score
-   public Map(int score){
+   public Map(){
     
       board = new Spot[WIDTH_OF_MAP][LENGTH_OF_MAP];
       
@@ -212,7 +183,7 @@ public class Map{
       addRandomEntity(ship);
    }
 
-// loops through the entire board and finds the empty space nearest to the target (bottom Right)
+// loops through the entire board and finds the empty space nearest to the target (bottom Right)(used for adding in player fleet)
    public void addShipBottomRight(Ship ship){
    
       Location closest = new Location();
