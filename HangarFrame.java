@@ -22,12 +22,17 @@ public class HangarFrame extends JFrame{
    public static final int SHIP_SIDEBAR_LENGTH = WINDOW_LENGTH / 5;
    public static final int PAGE_SPLIT_HEIGHT = WINDOW_HEIGHT / 2 + 50;
    
-   public HangarFrame(Component c, Player p, String ims){
-      lastPage = c;
+   public HangarFrame(Player p, String ims){
       player = p;
       imageFile = ims;
       currentShipID = 0;
       init();
+   }
+   
+   public void setVisible(Component c, boolean b){
+      lastPage = c;
+      this.setVisible(b);
+      initHangarInfoPanel();
    }
    
    public void init(){
@@ -58,7 +63,7 @@ public class HangarFrame extends JFrame{
    }
    
    public static void main(String[] args){
-      HangarFrame hg = new HangarFrame(new JFrame(), new Player("Annie"), "img.jpg");
+      HangarFrame hg = new HangarFrame(new Player("Annie"), "img.jpg");
    }
    
    public void updateShipInfoPanel(int id){
