@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.JComponent;
 public class LeaderBoardFrame extends JFrame{
 
    private JLabel wayOfSort = new JLabel("rank/nScore\nPlayer");
@@ -23,6 +24,7 @@ public class LeaderBoardFrame extends JFrame{
       this.add(wayOfSort);
       this.setResizable(false);
       this.setBounds(500,500,400,num*50+100);
+      this.setVisible(true);
       
       rank = new JLabel[num];     
       for (int i = 0;i<=num;i++){
@@ -30,8 +32,10 @@ public class LeaderBoardFrame extends JFrame{
          this.add(rank[i]);
       }
       
-      this.add(change1);
-      change1.add(new SortScoreListener(this));
+      Button change = new Button("Switch to sort by name");
+      this.add(change);
+      change.addMouseListener(new SortScoreListener(this));
+      
       this.addWindowListener(
          new WindowAdapter(){
             public void windowClosing(WindowEvent e){
@@ -39,14 +43,17 @@ public class LeaderBoardFrame extends JFrame{
                System.exit(-1);
             }
          });
-      this.setVisible(true);
    }
    
-    class SortScoreListener extends MouseAdapter{
-      LeaderBoardFrame lbf;
+   class SortScoreListener extends MouseAdapter{  
+      LeaderBoardFrame lbf = null;
+      
       public SortScoreListener(LeaderBoardFrame lbf){
          this.lbf = lbf;
-         lbf.removeAll();
+      }
+      
+      public void mouseClicked(MouseEvent e){
+       lbf.removeAll();
          wayOfSort.setText("rank/nPlayer\nScore");
          
          for(int i =0; i<=num;i++){
@@ -54,9 +61,11 @@ public class LeaderBoardFrame extends JFrame{
             lbf.add(rank[i]);
          }
          
-         lbf.add(change2);
-         change2.add(new SortNameListener(lbf));
+         Button change = new Button("Switch to sort by name");
+         lbf.add(change);
+         change.addMouseListener(new SortScoreListener(lbf));
          lbf.addWindowListener(
+         
             new WindowAdapter(){
                public void windowClosing(WindowEvent e){
                   setVisible(false);
@@ -64,16 +73,18 @@ public class LeaderBoardFrame extends JFrame{
                }
             });
          lbf.repaint();
+      
       }
-   
      
    }  
    
    class SortNameListener extends MouseAdapter{
-      LeaderBoardFrame lbf;
+      LeaderBoardFrame lbf = null;
       
       public SortNameListener(LeaderBoardFrame lbf){
          this.lbf = lbf;
+      }
+      public void mouseClicked(MouseEvent e){
          lbf.removeAll();
          wayOfSort.setText("rank/nScore\nPlayer");
          
@@ -82,8 +93,10 @@ public class LeaderBoardFrame extends JFrame{
             lbf.add(rank[i]);
          }
          
-         lbf.add(change1);
-         change2.add(new SortNameListener(lbf));
+         Button change = new Button("Switch to sort by name"); 
+         lbf.add(change);
+         change.addMouseListener(new SortNameListener(lbf));
+         
          lbf.addWindowListener(
             new WindowAdapter(){
                public void windowClosing(WindowEvent e){
