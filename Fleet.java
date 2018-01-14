@@ -22,7 +22,16 @@ public class Fleet{
 		}
 	}
 	
-	public int getShipNum;
+	public int getShipNum(){
+	      int sum =0;
+	      for(int i = 0; i <MAX_SHIPS;i++){
+		 if(!ships[i].equals(null)){
+		    sum++;
+		 }      
+	      }
+	      return sum;   
+	   }
+	
 	public boolean deleteShip(int index)
 	{
 	/*Delete a ship in the given index
