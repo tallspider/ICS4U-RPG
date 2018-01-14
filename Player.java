@@ -9,6 +9,7 @@ public class Player{
    private String username;
    private String filename;
    private Hangar hangar;
+   private HangarFrame hangarFrame;
    private Fleet fleet;
    private int score;
    private int numCoins;
@@ -17,8 +18,9 @@ public class Player{
    
    //Constructor of the Player class
    //takes in the username of this user as a String   
-   public Player(String un){
+   public Player(String un, HangarFrame hf){
       username = un;
+      hangarFrame = hf;
       filename = un + ".txt";
 		hangar = new Hangar();
 		fleet = new Fleet();
