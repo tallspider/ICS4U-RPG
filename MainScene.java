@@ -5,14 +5,16 @@
     public class MainScene extends Frame
    {
       boolean menu = true;
-      boolean fleet = false;
-      boolean battle = false;
-      boolean leaderBoard = false;
-      boolean login = false;
-      boolean save = false;
+      boolean Portal = false;
+      boolean Fleet = false;
+      boolean Save = false;
+      boolean Hangar = false;
+      boolean Leaderboard = false;
+      boolean Quit = false;
       ImageIcon[] boardPictures = new ImageIcon[10];   
       static final int WINDOW_WIDTH=700;
       static final int WINDOW_LENGTH=1000;
+      private HangarFrame hangarFrame;
    
    
        public static void main(String arg[]) 
@@ -55,17 +57,50 @@
          frame.setLocationRelativeTo(null);  
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
          frame.setVisible(true);  
-      	
-      	
-      
-      
-      	
-      	
-      	
-      	
+    	
       	
       }  
       
+      
+      public void actionPerformed(ActionEvent e) 
+      {
+      // TODO Auto-generated method stub
+         if(e.getSource()==b1)
+         {
+      
+      
+         }
+         else if(e.getSource()==b2)
+         {
+         
+         
+         }
+         
+         if(e.getSource()==b3)
+         {
+      
+      
+         }
+         else if(e.getSource()==b4)
+         {
+            Hangar=true;
+            hangarFrame.setVisible (Component lastPage, boolean Hangar);
+         
+         }
+                  
+         if(e.getSource()==b5)
+         {
+      
+      
+         }
+         else if(e.getSource()==b6)
+         {
+         
+         
+         }
+                  
+         
+      }
     
    
    
