@@ -8,10 +8,10 @@ public class HangarFrame extends JFrame{
    
    private Hangar hangar;
    private Player player;
-   private ShipSideBar shipSideBar;
-   private HangarInfoPanel hangarInfoPanel;
    private int currentShipID;
    private ImageIcon image;
+   private ShipSideBar shipSideBar;
+   private HangarInfoPanel hangarInfoPanel;
    private String imageFile;
    public static final int WINDOW_HEIGHT = MainScene.WINDOW_WIDTH;
    public static final int WINDOW_LENGTH = MainScene.WINDOW_LENGTH;
@@ -54,7 +54,7 @@ public class HangarFrame extends JFrame{
    }
    
    private void initHangarInfoPanel(){
-      hangarInfoPanel = new HangarInfoPanel(hangar.getShip(currentShipID), image, player, WINDOW_LENGTH - SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT, PAGE_SPLIT_HEIGHT);
+      hangarInfoPanel = new HangarInfoPanel(player, hangar.getShip(currentShipID), image, WINDOW_LENGTH - SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT, PAGE_SPLIT_HEIGHT);
    }
    
    public static void main(String[] args){
@@ -93,14 +93,14 @@ class HangarInfoPanel extends JPanel{
    
    private HangarInfoTop hangarInfoTop;
    private HangarInfoBot hangarInfoBot;
+   private Player player;
    private Ship ship;
    private ImageIcon image;
-   private Player player;
    private int length;
    private int height;
    private int pageSplitHeight;
    
-   public HangarInfoPanel(Ship s, ImageIcon img, Player p, int len, int hei, int psh){
+   public HangarInfoPanel(Player p, Ship s, ImageIcon img, int len, int hei, int psh){
       ship = s;
       image = img;
       player = p;
@@ -208,7 +208,7 @@ class HangarInfoBot extends JPanel{
    }
    
    private void initHangarInfoBotMid(){
-      hangarInfoBotMid = new HangarInfoBotMid(player, length / 3, height);
+      hangarInfoBotMid = new HangarInfoBotMid(player, ship, length / 3, height);
    }
    
    private void initHangarInfoBotRight(){
@@ -312,17 +312,29 @@ class HangarInfoBotLeft extends JPanel{
       setLayout(new FlowLayout());
       setOpaque(true);
       setBackground(Color.orange);
+      
+      addLine("\tUpdate: ");
+      addLine("Travel Range: ");
+      addLine("Attack Range: ");
+      addLine("Firing Speed: ");
+      addLine("Player Money: " + player.getNumCoins());
+   }
+   
+   private void addLine(String s){
+      add(new JLabel(s));
    }
 }
 
 class HangarInfoBotMid extends JPanel{
    
    private Player player;
+   private Ship ship;
    private int length;
    private int height;
    
-   public HangarInfoBotMid(Player p, int len, int hei){
+   public HangarInfoBotMid(Player p, Ship s, int len, int hei){
       player = p;
+      ship = s;
       length = len;
       height = hei;
       init();
@@ -333,6 +345,22 @@ class HangarInfoBotMid extends JPanel{
       setLayout(new FlowLayout());
       setOpaque(true);
       setBackground(Color.white);
+      
+      add(new JLabel("Cost: "));
+      addLineButton(ship.calcUpgradeCost(Ship.TR_Upgrade)+ "");
+      addLineButton(ship.calcUpgradeCost(Ship.AR_Upgrade)+ "");
+      addLineButton(ship.calcUpgradeCost(Ship.FS_Upgrade)+ "");
+      add(new JLabel("Money After Sell: " + (player.getNumCoins() - ship.getSellPrice())));
+   }
+   
+   private void addLineButton(String s){
+      JPanel temp = new JPanel();
+      temp.setPreferredSize(new Dimension(length, height / 5));
+      JLabel label = new JLabel(s);
+      label.setPreferredSize(new Dimension(length / 2, height / 5));
+      temp.add(label);
+      temp.add(new JButton("Update"));
+      add(temp);
    }
 }
 
@@ -349,8 +377,11 @@ class HangarInfoBotRight extends JPanel{
    
    public void init(){
       setPreferredSize(new Dimension(length, height));
-      setLayout(new FlowLayout());
+      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
       setOpaque(true);
       setBackground(Color.yellow);
+      
+      add(new JButton("Sell"));
+      add(new JButton("Back"));
    }
 }
