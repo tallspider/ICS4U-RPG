@@ -108,7 +108,8 @@ public class Hangar
       }
    }
 
-   public boolean addNewShip(int index){
+   public boolean addNewShip(int index)
+   {
    	return addShip(index, new Ship("", Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
    }
   
@@ -168,11 +169,13 @@ public class Hangar
       return ret;
    }
 	
-   public Ship getShip(int id){
+   public Ship getShip(int id)
+   {
    	return ships[id];
    }
 
-   public void setShip(int id, Ship ship){
+   public void setShip(int id, Ship ship)
+   {
    	ships[id] = ship;
    }
 
