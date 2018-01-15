@@ -14,7 +14,7 @@ public class Wall extends Entity{
    public Wall(){
    }
    
-   public String getImageFile(){
+   public static String getImageFile(){
       return imageFile;
    }
 }
