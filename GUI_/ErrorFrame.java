@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 public class ErrorFrame extends JFrame{
-   publi static JLabel error = new JLabel("Error");
+   public static JLabel error = new JLabel("Error");
    public ErrorFrame() {
       this.setLayout(new FlowLayout());
       this.setBounds(600,600,150,100);
