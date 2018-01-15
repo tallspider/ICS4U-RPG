@@ -34,7 +34,6 @@ public class HangarFrame extends JFrame{
    public void init(){
       setSize(WINDOW_LENGTH, WINDOW_HEIGHT);
       setLocationRelativeTo(null);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setLayout(new BorderLayout(0, 0));
       
       hangar = player.getHangar();
