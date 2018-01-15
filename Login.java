@@ -50,7 +50,7 @@ public class Login{
       }      
    }
    
-   private boolean checkRegisterDetails(){
+   public boolean checkRegisterDetails(){
    //Check if the current username field matchs any username which already in the text file. If so return false , otherwise return true.
       try{
          BufferedReader in = new BufferedReader(new FileReader(THE_FILE));
@@ -70,7 +70,7 @@ public class Login{
       return true;   
    }
    
-   private void createNewAccount(){
+   public void createNewAccount(){
    //Loads all the lines in the txt field into a string array. Add the current username and password field to the end of this array.
    //And then replace the contents in the text file by the contents in the string array.
       String [] information;
