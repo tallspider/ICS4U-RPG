@@ -1,6 +1,7 @@
 //Class Name: Hanger
 //Author: Hans Long
 //Date: January 11, 2018
+//School: A.Y.Jackson S.S.
 //Purpose: Used to keep track the ships that in the battle part.
 
 import java.io.*;
@@ -13,7 +14,7 @@ public class Hangar
    public static final int MAX_SHIPS = 10;
    public static final int MIN_SHIPS = 0;
  
-   public Hangar(Ship[] ships)  //Constructor of Hangar class
+   public Hangar(Ship[] ships)  //Constructor of Hangar class，takes in the ship array as the field  of the Hangar
    {
       this.ships = ships;
       this.shipnum = ships.length;
@@ -24,7 +25,7 @@ public class Hangar
       this.shipnum = 0;
    }
    
-   public void loadNext(BufferedReader f)  // Loading the ship information from txt file
+   public void loadNext(BufferedReader f)  // Loading the ship information from txt file, takes in the object of BufferedReader
    {
      try
      {
@@ -93,10 +94,10 @@ public class Hangar
    	return addShip(index, new Ship("", imgf, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
    }
   
-   public void upgrade(int id, int upgrade)  //Upgrade the ship in the Hangar
+/*   public void upgrade(int id, int upgrade)  //Upgrade the ship in the Hangar
    {
        ships[id].upgrade(upgrade);
-   }
+   } */
   
   public String getPrintString()  //Return the string which contains the Serial number of the ship information
   {
@@ -111,15 +112,17 @@ public class Hangar
       return ret;
   }
    
-   public void upgradeShip(int index, int index2)  // Upgrade the choosen ship by given the ship index and the wanted upgrade type
+   public void upgradeShip(int index, int upgrade)  // Upgrade the choosen ship by given the ship index and the wanted upgrade type
+   //Given the index of ship and the upgrade type of the ship by int 
    {
      if(ships[index] != null)
      {
-         ships[index].upgrade(index2);
+         ships[index].upgrade(upgrade);
      }
    }
 
    public int getShipUpgradeCost(int id, int upgrade)  //Return the cost after upgrade the choosen ship by given the ship index and the wanted upgrade type
+   //Given the index of ship and the upgrade type of the ship by int 
    {
       if(ships[id] == null) 
       {
@@ -129,11 +132,13 @@ public class Hangar
    }
   
    public int getShipSellPrice(int id)   //Return the sell price of the specific ship
+   // Given the index of the ship which is an int
    {  
    	return ships[id].getSellPrice();
    }
 	
    public boolean getShipUpgradable(int id)  //Indicate if the ship can be upgrade or not
+   // Given the index of the ship which is an int
    {
    	return ships[id].isUpgradable();
    }
@@ -152,11 +157,13 @@ public class Hangar
    }
 	
    public Ship getShip(int id)   //Accessor method for the ship list of this Hangar
+   // Given the index of the ship which is an int
    {
    	return ships[id];
    }
 
    public void setShip(int id, Ship ship)    //Mutator method for the ship list of this Hangar
+   // Given the index of the ship which is an int and a ship object
    {
    	ships[id] = ship;
    }
