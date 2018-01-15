@@ -81,6 +81,7 @@ public class Hangar
       if (index>=MIN_SHIPS && index<=(ships.length-1))
       {
          ships[index]= null;
+	 // set the specific ship null and adjust the num of ships in the array
 	 shipnum--;
          return true;
       }
@@ -98,6 +99,7 @@ public class Hangar
       {
          ships[index] = ship;
 	 shipnum++;
+	 // add the specific ship and adjust the num of ships in the array
          return true;
       }
       else
@@ -110,7 +112,8 @@ public class Hangar
    //Add one new ship by given the wanted index and imageFile of the ship in the list  
    //Given the index of the ship which is an int and ship's image which is string
    {
-   	return addShip(index, new Ship("", imgf, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
+   	return addShip(index, new Ship("", imgf, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, 
+				       Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
    }
   
 /*   public void upgrade(int id, int upgrade)  //Upgrade the ship in the Hangar
@@ -128,13 +131,14 @@ public class Hangar
          {
             ret += at + "\n" + ships[at].getPrintString();
          }
+	 //print the ship indormation with the serial number
       }
       return ret;
   }
    
    public void upgradeShip(int index, int upgrade) 
    // Upgrade the choosen ship by given the ship index and the wanted upgrade type
-   //Given the index of ship and the upgrade type of the ship by int 
+   // Given the index of ship and the upgrade type of the ship by int 
    {
      if(ships[index] != null)
      {
@@ -149,6 +153,7 @@ public class Hangar
       if(ships[id] == null) 
       {
         return -1;
+	//return -1 if the given index is the correct
       }
       return ships[id].calcUpgradeCost(upgrade);
    }
@@ -176,6 +181,7 @@ public class Hangar
          if(ships[at] != null)
          {
             ret += ships[at].getScoreTotal();
+            //add the scores of ecah specific ships
          }
       }
       return ret;
