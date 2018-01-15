@@ -25,7 +25,7 @@ Purpose: A class used to represent the current playing of the game
 import java.io.*;
 class Game{
 	private Player currentPlayer ;
-	private GameBoard gameBoard;
+	private Gameboard gameBoard;
 	
 	public Game(Player player){
 		currentPlayer = player;
@@ -56,11 +56,11 @@ class Game{
 		currentPlayer = player;
 	}
 	
-	public GameBoard getGameBoard(){
+	public Gameboard getGameBoard(){
 		return gameBoard;
 	}
 	
-	public void setGameBoard(GameBoard newGB){
+	public void setGameBoard(Gameboard newGB){
 		gameBoard = newGB;
 	}
 }
