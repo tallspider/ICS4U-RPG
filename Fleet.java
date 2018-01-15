@@ -1,9 +1,8 @@
-/*
-Class Name: Fleet
-Author: Chongpu Zhao
-Date: January 8, 2018
-Purpose: Used to keep track the ships that in the battle part.
-*/
+//Class name: Player
+//Author: 
+//Date: Jan. 8, 2018
+//School: A.Y.Jackson S.S.
+//Purpose: To represent the player's actions of the combat fleet in the game
 
 
 import java.io.*;
