@@ -441,6 +441,7 @@ class BotInfoPanel extends JPanel{
       init();
    }
    
+   //initializes the object (the bottom half of the info panel)
    public void init(){
       frame = upPanel.getFrame();
       length = upPanel.getLength();
@@ -456,10 +457,12 @@ class BotInfoPanel extends JPanel{
       else displayShip();
    }
    
+   //displaying the empty message on the panel, if ship 2 is empty
    public void displayEmpty(){
       addLine("Choose a Ship");
    }
    
+   //dislaying the selected slot on the panel
    public void displayShip(){
       if(ship == null){
          addLine("Empty Spot");
@@ -502,6 +505,7 @@ class BotInfoPanel extends JPanel{
       }
    }
    
+   //utiloty method for adding a line of text onto the panel
    public void addLine(String s){
       add(new JLabel(s));
    }
