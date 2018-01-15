@@ -31,7 +31,7 @@ public class Fleet
 	{
 	/*add a ship to the array  with the given index
 	If ships[index] already has a object, return false. Otherwise return true.*/
-		if(!(ships[index].equals(null)))
+		if(!(ships[index]== null))
 		{
 			return false;
 			//return false if the ship under the specic index is not null
