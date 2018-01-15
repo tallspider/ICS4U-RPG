@@ -116,9 +116,11 @@ public class Ship extends Entity
       	return (travelRange + 1) * 100;		
       } 
       else if (upgrade == FS_Upgrade)
+      //update the cost of firingSpeed
       {	
       	return (firingSpeed + 1) * 100;
       }
+      //return a negative intager if the update is not success
       return -1;
    }
    
