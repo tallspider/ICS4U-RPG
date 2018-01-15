@@ -80,7 +80,7 @@ public class Ship extends Entity
       
    public void upgrade(int num)  
    // Upgrade the ship by given the wanted upgrade type as a int
-   //Given upgrade type as a int
+   // Given upgrade type as a int
    {
       if(num == AR_Upgrade)
       {
