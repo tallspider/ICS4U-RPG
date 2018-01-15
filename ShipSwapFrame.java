@@ -264,6 +264,9 @@ class InfoContainerPanel extends JPanel{
    }
    
    public void init(){
+      setPreferredSize(new Dimension(length, height));
+      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+      
       initTopInfoPanel();
       initBotInfoPanel();
       
@@ -316,15 +319,51 @@ class TopInfoPanel extends JPanel{
       shipID = frame.getShip1ID();
       ship = frame.getShip1();
       
+      setPreferredSize(new Dimension(length, height));
+      setLayout(new BorderLayout(0, 0));
       
+      if(shipID == -1) displayEmpty();
+      else displayShip();
    }
    
    public void displayEmpty(){
-   
+      addLine("Choose a Ship");
    }
    
    public void displayShip(){
-      
+      if(ship == null){
+         addLine("Empty Spot");
+      } else {
+         JPanel textPanel = new JPanel();
+         textPanel.setPreferredSize(new Dimension(length / 2, height));
+         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+         textPanel.add(new JLabel(ship.getName()));
+         
+         if(shipHold == Player.HANGAR)
+            textPanel.add(new JLabel("In Hangar"));
+         else
+            textPanel.add(new JLabel("In Fleet"));
+         
+         textPanel.add(new JLabel("At Position: " + (shipID + 1)));
+         textPanel.add(new JLabel("Attack Range: " + ship.getAttackRange()));
+         textPanel.add(new JLabel("Travel Range: " + ship.getTravelRange()));
+         textPanel.add(new JLabel("Firing Speed: " + ship.getFiringSpeed()));
+         textPanel.add(new JLabel("Value: " + ship.getValue()));
+         
+         JPanel picPanel = new JPanel();
+         picPanel.setPreferredSize(new Dimension(length / 2, height));
+         picPanel.setLayout(new BorderLayout(0, 0));
+         JLabel picture = new JLabel(new ImageIcon(ship.getImageFile()));
+         picture.setPreferredSize(new Dimension(length / 2, height / 2));
+         picPanel.add(picture, BorderLayout.PAGE_START);
+         
+         add(textPanel, BorderLayout.LINE_START);
+         
+      }
+   }
+   
+   public void addLine(String s){
+      add(new JLabel(s));
    }
 }
 
@@ -351,14 +390,61 @@ class BotInfoPanel extends JPanel{
       shipID = frame.getShip2ID();
       ship = frame.getShip2();
       
+      setPreferredSize(new Dimension(length, height));
+      setLayout(new BorderLayout(0, 0));
       
+      if(shipID == -1) displayEmpty();
+      else displayShip();
    }
    
    public void displayEmpty(){
-   
+      addLine("Choose a Ship");
    }
    
    public void displayShip(){
-      
+      if(ship == null){
+         addLine("Empty Spot");
+      } else {
+         JPanel textPanel = new JPanel();
+         textPanel.setPreferredSize(new Dimension(length / 2, height));
+         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+         textPanel.add(new JLabel(ship.getName()));
+         
+         if(shipHold == Player.HANGAR)
+            textPanel.add(new JLabel("In Hangar"));
+         else
+            textPanel.add(new JLabel("In Fleet"));
+         
+         textPanel.add(new JLabel("At Position: " + (shipID + 1)));
+         textPanel.add(new JLabel("Attack Range: " + ship.getAttackRange()));
+         textPanel.add(new JLabel("Travel Range: " + ship.getTravelRange()));
+         textPanel.add(new JLabel("Firing Speed: " + ship.getFiringSpeed()));
+         textPanel.add(new JLabel("Value: " + ship.getValue()));
+         
+         JPanel picPanel = new JPanel();
+         picPanel.setPreferredSize(new Dimension(length / 2, height));
+         picPanel.setLayout(new BorderLayout(0, 0));
+         JLabel picture = new JLabel(new ImageIcon(ship.getImageFile()));
+         picture.setPreferredSize(new Dimension(length / 2, height / 2));
+         picPanel.add(picture, BorderLayout.PAGE_START);
+         
+         JButton swapButton = new JButton("Swap");
+         swapButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               if(frame.getShip1ID() != -1 && frame.getShip2ID() != -1){
+                  frame.getPlayer().swapShip(frame.getShip1Hold(), frame.getShip1ID(), frame.getShip2Hold(), frame.getShip2ID());
+                  frame.init();
+               }
+            }
+         });
+         
+         add(textPanel, BorderLayout.LINE_START);
+         
+      }
    }
+   
+   public void addLine(String s){
+      add(new JLabel(s));
+   }
+
 }
