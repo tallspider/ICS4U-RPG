@@ -17,7 +17,9 @@ public class Player{
    public static final int HANGAR = 0;
    public static final int FLEET = 1;
    public static final String IMAGE_FILE_FILE = "images.txt";
-   public static final String NO_PIC = "nopic.txt";
+   public static final String NO_PIC = "nopic.jpg";
+   public static final String AI_SHIP_IMAGE = "aishipimage.jpg";
+   public static final String WALL_IMAGE = "wall.jpg";
    
    
    //Constructor of the Player class
