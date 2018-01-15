@@ -183,6 +183,7 @@ class Gameboard{
     // no ship is currently selected therefor selectLocation will to be to select ship
       shipLocation = selectLocation();
       gui.updateInfoArea(map,shipLocation);
+      gui.updatePlayArea(map);
       while(shipLocation != null){
          
          // only lets user act on a ship, if theres a ship where the user selected, and it belongs to the player
