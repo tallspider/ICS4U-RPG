@@ -70,7 +70,7 @@ public class Login{
       return true;   
    }
    
-   public void createNewAccount(){
+  public void createNewAccount(){
    //Loads all the lines in the txt field into a string array. Add the current username and password field to the end of this array.
    //And then replace the contents in the text file by the contents in the string array.
       String [] information;
@@ -81,19 +81,21 @@ public class Login{
             count++;
          }
          check.close();
-         information = new String [count+2];
+         information = new String [count+1];
          count = 0;
          BufferedReader read = new BufferedReader(new FileReader(THE_FILE));
          String temp;
          while((temp = read.readLine()) != null){
             information[count] = temp;
-         } 
-         information[count+1] = username;
-         information[count+2] = password;
+    			count++;    
+		   } 
+         information[count] = username;
+         information[count+1] = password;
          read.close();
          BufferedWriter out = new BufferedWriter(new FileWriter(THE_FILE));
-         for(int i = 0;i<=count+2;i++){
-            out.write(information[count]);
+         for(int i = 0;i<=count+1;i++){
+			
+            out.write(information[i]);
             out.newLine();
          }  
          out.close();  
