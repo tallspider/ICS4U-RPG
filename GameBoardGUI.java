@@ -251,6 +251,26 @@ Purpose: input / output GUI for gameboard (combat)
          return null;
       }
    
+   // asks user for what action he/she wants to do for the ship
+       public int getAction(){
+       
+         String[] options = new String[] {"Cancel", "Attack", "Move"};
+       
+         return JOptionPane.showOptionDialog(null, "Please select action for the ship", "Ship Action", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[2]);
+         
+      }
+   
+       public void displayVictory(int reward){
+         JOptionPane.showMessageDialog(null, "You have won! Victory!", "Victory", JOptionPane.PLAIN_MESSAGE);
+         JOptionPane.showMessageDialog(null, "You are rewarded " + reward + " coins", "Victory", JOptionPane.PLAIN_MESSAGE);
+      }
+   
+       public void displayDefeat(int reward){
+         JOptionPane.showMessageDialog(null, "You have lost! Defeat!", "Defeat", JOptionPane.PLAIN_MESSAGE);
+         JOptionPane.showMessageDialog(null, "You are rewarded " + reward + " coins", "Defeat", JOptionPane.PLAIN_MESSAGE);
+      
+      }
+   
     //gets where the mouse clicked and outputs it to stream
        public void mouseClicked(MouseEvent e) {  
       

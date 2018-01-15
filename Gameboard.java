@@ -25,8 +25,8 @@ Purpose: Cointains the map and combat
       private static final int MOVE = 2;
    
    // ammount of coins rewarded after a player finishes a game (depending on if the player won or not)
-      private static final int WIN_REWARD = 500;
-      private static final int LOSE_REWARD = 50;
+      public static final int WIN_REWARD = 500;
+      public static final int LOSE_REWARD = 50;
    
    // the maxinum and mininum of ai ships generated
       public static final int MAX_AI_SHIPS = 10;
@@ -151,10 +151,14 @@ Purpose: Cointains the map and combat
       }
    
    // displays that the player has won
-       private void displayVictory(){}
+       private void displayVictory(){
+         gui.displayVictory(WIN_REWARD); 
+      }
    
    // displays that the player has lost
-       private void displayDeafeat(){}
+       private void displayDeafeat(){
+         gui.displayDefeat(LOSE_REWARD); 
+      }
    
    // get the user to select his/her ship during his/her turn, returns location of selected ship
        private Location selectLocation(){
@@ -177,7 +181,7 @@ Purpose: Cointains the map and combat
    
    // gets the usert select his/her action during his/her turn, returns int, each interger represents a different action
        private int selectAction(){
-         return 0; //************************TEMP WORKAROUND*******************************************
+         return gui.getAction();
       }
    
    // allows the user to play duing hes / her turn, allows user to select and act on the ships
