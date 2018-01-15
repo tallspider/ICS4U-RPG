@@ -49,16 +49,12 @@ public class HangarFrame extends JFrame{
    }
    
    private void initShipSideBar(){
-      shipSideBar = new ShipSideBar(this, player, SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT);
+      shipSideBar = new ShipSideBar(this);
       
    }
    
    private void initHangarInfoPanel(){
-      hangarInfoPanel = new HangarInfoPanel(this, lastPage, player, currentShipID, hangar.getImageFile(currentShipID), WINDOW_LENGTH - SHIP_SIDEBAR_LENGTH, WINDOW_HEIGHT, PAGE_SPLIT_HEIGHT);
-   }
-   
-   public static void main(String[] args){
-      HangarFrame hg = new HangarFrame(new Player("Annie"));
+      hangarInfoPanel = new HangarInfoPanel(this);
    }
    
    public void updateShipInfoPanel(int id){
@@ -70,6 +66,18 @@ public class HangarFrame extends JFrame{
    
    public boolean askQuestion(String ques, String title){
       return JOptionPane.showConfirmDialog(null, ques, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION;
+   }
+   
+   public Component getLastPage(){
+      return lastPage;
+   }
+   
+   public Player getPlayer(){
+      return player;
+   }
+   
+   public int getCurrentShipID(){
+      return currentShipID;
    }
 }
 
@@ -83,10 +91,8 @@ class ShipSideBar extends JPanel{
    
    private Hangar hangar;
    
-   public ShipSideBar(HangarFrame hf, Player p, int len, int hei){
+   public ShipSideBar(HangarFrame hf){
       hangarFrame = hf;
-      player = p;
-      numButtons = Hangar.MAX_SHIPS;
       init();
    }
    
@@ -94,7 +100,11 @@ class ShipSideBar extends JPanel{
       setLayout(new GridLayout(numButtons, 0));
       setPreferredSize(new Dimension(length, height));
       
+      player = hangarFrame.getPlayer();
       hangar = player.getHangar();
+      length = HangarFrame.SHIP_SIDEBAR_LENGTH;
+      height = HangarFrame.WINDOW_HEIGHT;
+      numButtons = Hangar.MAX_SHIPS;
       
       for(int at = 0; at < Hangar.MAX_SHIPS; at++){
          final int AT = at;
@@ -125,21 +135,23 @@ class HangarInfoPanel extends JPanel{
    private HangarInfoBot hangarInfoBot;
    
    private Player player;
+   private Hangar hangar;
    private int shipID;
    private String imageFile;
    private int length;
    private int height;
    private int pageSplitHeight;
    
-   public HangarInfoPanel(HangarFrame hf, Component c, Player p, int sID, String imgf, int len, int hei, int psh){
+   public HangarInfoPanel(HangarFrame hf){
       hangarFrame = hf;
-      lastPage = c;
-      shipID = sID;
-      imageFile = imgf;
-      player = p;
-      length = len;
-      height = hei;
-      pageSplitHeight = psh;
+      lastPage = hf.getLastPage();
+      player = hf.getPlayer();
+      hangar = player.getHangar();
+      shipID = hf.getCurrentShipID();
+      imageFile = hangar.getShip(shipID).getImageFile();
+      length = HangarFrame.WINDOW_LENGTH - HangarFrame.SHIP_SIDEBAR_LENGTH;
+      height = HangarFrame.WINDOW_HEIGHT;
+      pageSplitHeight = HangarFrame.PAGE_SPLIT_HEIGHT;
       init();
    }
    
