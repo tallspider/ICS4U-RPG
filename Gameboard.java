@@ -238,7 +238,7 @@ class Gameboard{
    
    // shows the user all the possible places the ship can move
    private void displayPossibleMovement(boolean[][] validMap){
-   
+      gui.displayPossibleMove(map, validMap);
    }
    
    // returns all the valid moves for a certain ship
@@ -329,7 +329,7 @@ class Gameboard{
    
    // shows the user all possible palces the ship can attack
    private void displayPossibleAttack(boolean[][] validMap){
-   
+      gui.displayPossibleAttack(map, validMap);
    }
    
    // returns all the valid attacks for a certain ship (valid if spot is empty, ship has free attacks (firing speed > times attacked), and if the ship is in range)
