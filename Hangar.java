@@ -27,7 +27,7 @@ public class Hangar
    }
    
    public void loadNext(BufferedReader f)  // Loading the ship information from txt file, takes in the object of BufferedReader
-   //Given the 
+   //Given the BufferedReader object
    {
      try
      {
@@ -97,6 +97,7 @@ public class Hangar
    }
 
    public boolean addNewShip(int index, String imgf)  // Add one new ship by given the wanted index and imageFile of the ship in the list  
+   //Given the index of the ship which is an int and ship's image which is string
    {
    	return addShip(index, new Ship("", imgf, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
    }
