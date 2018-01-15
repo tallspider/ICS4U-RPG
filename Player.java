@@ -17,6 +17,8 @@ public class Player{
    public static final int HANGAR = 0;
    public static final int FLEET = 1;
    public static final String IMAGE_FILE_FILE = "images.txt";
+   public static final String NO_PIC = "nopic.txt";
+   
    
    //Constructor of the Player class
    //takes in the username of this user as a String   
