@@ -119,6 +119,19 @@ public class Fleet
 		return ships[index];
 	}
 	
+        public void setShipnum(int num)   
+        //Mutator method for the num of ship in the ship list of this Hangar
+        //Given the num of the ship in the array which is an int
+        {
+            this.shipnum = num;
+        }
+   
+        public int getShipnum()  
+        //Accessor method for the num of ship in the ship list of this Hangar
+        {
+            return this.shipnum;
+        }
+	
 	public Ship[] getShips()  
 	//Return the array of the ships.
 	{
