@@ -96,18 +96,19 @@ public class Fleet{
 		return ships;
 	}	
 	
-	public boolean isEmpty(int index){
+	public boolean isEmpty(int index)   //Indicate if the ship by the given index is Empty
+	{
 		return ships[index].equals(null);
 	}
 	
-	public void emptyFleet(){
-	//Delete all the object in the fleet array.
+	public void emptyFleet()   //Delete all the object in the fleet array.
+	{
 		for(int i = 0; i <MAX_SHIPS;i++){
 			ships[i] = null;
 		}
 	}
 	
-	public String getPrintString()
+	public String getPrintString()  //Return the string which contains the Serial number of the ship information
         {
            String ret = "";
            for(int at = 0; at < ships.length; at++)
@@ -117,7 +118,7 @@ public class Fleet{
            return ret;
         }
 	
-        public int getScoreTotal()
+        public int getScoreTotal()  //Indicate the total score earned by the ships
         {
           int ret = 0;
           for(int at = 0; at < ships.length; at++)
@@ -130,7 +131,8 @@ public class Fleet{
           return ret;
         }
 	
-	public void setShip(int id, Ship ship){
+	public void setShip(int id, Ship ship)   //Mutator method for the num of ship in the ship list of this Fleet
+	{
    		ships[id] = ship;
    	}
 }
