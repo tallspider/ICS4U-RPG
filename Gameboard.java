@@ -7,6 +7,7 @@ Purpose: Cointains the map and combat
 */
 
 import java.util.Random;
+import java.io.*;
 
 class Gameboard{
     
@@ -15,6 +16,8 @@ class Gameboard{
       	
    // the player cointains the player information and is used to spawn in the ships from player's fleet, as well as player's score to determine the difficulty of the map
    private Player player;
+      
+   private GameBoardGUI gui; 
       
    // to determine the player's command when acting on a ship
    private static final int CANCEL = 0;
@@ -32,6 +35,8 @@ class Gameboard{
   // ammount of delay between ai doing things (so user can see what the ai did)
    private static final int DELAY_BETWEEN_AI_ACTIONS = 250;
 
+// to get input from the gui
+   public PipedInputStream input;
    
    // adds the player fleet into the map (ship by ship)
    private void addFleet(Fleet fleet){
@@ -74,6 +79,8 @@ class Gameboard{
       map = new Map();
       addEnemies(new Random().nextInt(MAX_AI_SHIPS - MIN_AI_SHIPS + 1)+ MIN_AI_SHIPS,player.getScore());
       addFleet(player.getFleet());
+      gui = new GameBoardGUI();
+      input = new PipedInputStream(gui.output);
       
       boolean gameEnd = false;
    
@@ -147,7 +154,17 @@ class Gameboard{
    
    // get the user to select his/her ship during his/her turn, returns location of selected ship
    private Location selectLocation(){
-      return new Location(0,0); //************************TEMP WORKAROUND*******************************************
+   
+      int x,y;
+      x = input.read();
+      y = input.read();
+   
+   // -1,-1 is to end turn
+      if(x == -1 && y == -1){
+         return null;
+      }
+   
+      return new Location(x,y); 
    }
    
    // gets the usert select his/her action during his/her turn, returns int, each interger represents a different action
@@ -158,13 +175,14 @@ class Gameboard{
    // allows the user to play duing hes / her turn, allows user to select and act on the ships
    private void play(){
    
-      Location shipLocation = selectLocation();
+      Location shipLocation;
       int shipAction;
       boolean[][] validMap;
       
     // this loop if to let user select ships ends turn when the location is null
     // no ship is currently selected therefor selectLocation will to be to select ship
       shipLocation = selectLocation();
+      gui.updateInfoArea(map,shipLocation);
       while(shipLocation != null){
          
          // only lets user act on a ship, if theres a ship where the user selected, and it belongs to the player
@@ -191,7 +209,7 @@ class Gameboard{
                   }
                   
                   // visuals must be updated once player does an action, just like with ai
-                  updateVisuals();
+                  gui.updatePlayArea(map);
                   
                   shipAction = selectAction();
                }
@@ -199,6 +217,8 @@ class Gameboard{
             }
          }
          shipLocation = selectLocation();
+         // gives information regarding the location selected, regardless of what it is
+         gui.updateInfoArea(map,shipLocation);
       }
       // end of player turn  
    }
@@ -217,7 +237,9 @@ class Gameboard{
    }
    
    // shows the user all the possible places the ship can move
-   private void displayPossibleMovement(boolean[][] validMap){}
+   private void displayPossibleMovement(boolean[][] validMap){
+   
+   }
    
    // returns all the valid moves for a certain ship
    private boolean[][] allValidMoves(Location shipLocation){
@@ -306,7 +328,9 @@ class Gameboard{
    }
    
    // shows the user all possible palces the ship can attack
-   private void displayPossibleAttack(boolean[][] validMap){}
+   private void displayPossibleAttack(boolean[][] validMap){
+   
+   }
    
    // returns all the valid attacks for a certain ship (valid if spot is empty, ship has free attacks (firing speed > times attacked), and if the ship is in range)
    private boolean[][] allValidAttack(Location shipLocation){
@@ -367,7 +391,7 @@ class Gameboard{
    
       validMap = allValidAttack(shipLocation);
       aiAttack(shipLocation, validMap);
-      updateVisuals();
+      gui.updatePlayArea(map);
       try{
          Thread.sleep(DELAY_BETWEEN_AI_ACTIONS);
       }
@@ -375,7 +399,7 @@ class Gameboard{
       
       validMap = allValidMoves(shipLocation);
       aiMove (shipLocation, validMap);
-      updateVisuals();
+      gui.updatePlayArea(map);
       try{
          Thread.sleep(DELAY_BETWEEN_AI_ACTIONS);
       }
@@ -383,7 +407,7 @@ class Gameboard{
       
       validMap = allValidAttack(shipLocation);
       aiAttack(shipLocation, validMap);
-      updateVisuals();
+      gui.updatePlayArea(map);
       try{
          Thread.sleep(DELAY_BETWEEN_AI_ACTIONS);
       }
@@ -502,9 +526,6 @@ class Gameboard{
    
    }
    
-   // updates the visuals, so that changes in the map will be reflected via output to the player
-   public void updateVisuals(){
-   }
 }
 
 
