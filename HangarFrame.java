@@ -32,6 +32,7 @@ public class HangarFrame extends JFrame{
    }
    
    public void init(){
+      removeAll();
       setSize(WINDOW_LENGTH, WINDOW_HEIGHT);
       setLocationRelativeTo(null);
       setLayout(new BorderLayout(0, 0));
