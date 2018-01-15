@@ -69,7 +69,6 @@ public class LeaderBoardFrame extends JFrame{
             new WindowAdapter(){
                public void windowClosing(WindowEvent e){
                   setVisible(false);
-                  System.exit(-1);
                }
             });
          lbf.repaint();
@@ -101,7 +100,6 @@ public class LeaderBoardFrame extends JFrame{
             new WindowAdapter(){
                public void windowClosing(WindowEvent e){
                   setVisible(false);
-                  System.exit(-1);
                }
             });
       }
