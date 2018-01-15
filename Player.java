@@ -131,7 +131,7 @@ public class Player{
 		}
    }
    
-   public String getNewImageFile{
+   public String getNewImageFile(){
       try{
          BufferedReader f = new BufferedReader(new FileReader(IMAGE_FILE_FILE));
          String ret = f.readLine();
