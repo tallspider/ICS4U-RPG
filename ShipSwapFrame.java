@@ -1,4 +1,9 @@
-//swapping ships frame
+//Class name: ShipSwapFrame
+//Author: Annie Gao
+//Date: Jan. 12, 2018
+//School: A.Y.Jackson S.S.
+//Purpose: the graphical interface that allows user to switch the locations of two 
+//ships in either hangar or fleet
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,12 +33,16 @@ public class ShipSwapFrame extends JFrame{
    public static final int WINDOW_HEIGHT = MainScene.WINDOW_WIDTH;
    public static final int WINDOW_LENGTH = MainScene.WINDOW_LENGTH;
    
+   //constructor of this class
+   //takes in the object representing the current player, and the page to which they may go back
    public ShipSwapFrame(Player p, Component c){
       player = p;
       lastPage = c;
       init();
    }
    
+   //initializes the object
+   //initializes each of the 3 parts: hangar ship list, fleet ship list and info panel
    public void init(){
       setPreferredSize(new Dimension(WINDOW_LENGTH, WINDOW_HEIGHT));
       setLocationRelativeTo(null);
@@ -58,42 +67,52 @@ public class ShipSwapFrame extends JFrame{
       add(infoContainerPanel, BorderLayout.LINE_END);
    }
    
+   //creates the hangar ship list section
    private void initHangarShipsPanel(){
       hangarShipsPanel = new HangarShipsPanel(this);
    }
    
+   //creates the fleet ship list section
    private void initFleetShipsPanel(){
       fleetShipsPanel = new FleetShipsPanel(this);
    }
    
+   //creates the info panel section
    private void initInfoContainerPanel(){
       infoContainerPanel = new InfoContainerPanel(this); 
    }
    
+   //accessor for the ID of the first ship selected
    public int getShip1ID(){
       return ship1ID;
    }
    
+   //accessor for the id of the second ship selected
    public int getShip2ID(){
       return ship2ID;
    }
    
+   //accessor for the int denoting the storage of the first ship selected
    public int getShip1Hold(){
       return ship1Hold;
    }
    
+   //accessor for the int denoting the storage of the second ship selected
    public int getShip2Hold(){
       return ship2Hold;
    }
    
+   //accessor for the first ship
    public Ship getShip1(){
       return ship1;
    }
    
+   //accessor for the second ship
    public Ship getShip2(){
       return ship2;
    }
    
+   //mutator for setting all the details of the first ship
    public void setShip1All(int hold, int id){
       ship1Hold = hold;
       ship1ID = id;
@@ -107,6 +126,7 @@ public class ShipSwapFrame extends JFrame{
       add(infoContainerPanel, BorderLayout.LINE_END);
    }
    
+   //mutator for setting all the details of the second ship
    public void setShip2All(int hold, int id){
       ship2Hold = hold;
       ship2ID = id;
@@ -120,35 +140,43 @@ public class ShipSwapFrame extends JFrame{
       add(infoContainerPanel, BorderLayout.LINE_END);
    }
    
+   //method that marks the first ship slot as empty
    public void emptyShip1(){
       setShip1All(-1, -1);
    }
    
+   //method that marks the second ship slot as empty
    public void emptyShip2(){
       setShip2All(-1, -1);
    }
    
+   //displays a message to inform user of error
    public void showErrorMessage(String q, String t){
       JOptionPane.showMessageDialog(null, q, t, JOptionPane.ERROR_MESSAGE);
    }
    
+   //accessor for the object representing the current player
    public Player getPlayer(){
       return player;
    }
    
+   //accessor for the page to go Back to
    public Component getLastPage(){
       return lastPage;
    }
    
+   //accessor for the Hangar object
    public Hangar getHangar(){
       return hangar;
    }
    
+   //accessor for the Fleet object
    public Fleet getFleet(){
       return fleet;
    }
 }
 
+//class that represents the panel containing all the ships from hangar
 class HangarShipsPanel extends JPanel{
    private int length;
    private int height;
@@ -158,11 +186,16 @@ class HangarShipsPanel extends JPanel{
    
    private Hangar hangar;
    
+   //constructor for the class
    public HangarShipsPanel(ShipSwapFrame f){
       frame = f;
       init();
    }
    
+   //initializes the object (the panel containing all the ships from hangar)
+   //makes a button for each ship
+   //when a button is clicked, try to set either Ship 1 or Ship 2 to the selected ship
+   //error message if both spots are full
    public void init(){
       
       player = frame.getPlayer();
@@ -185,10 +218,14 @@ class HangarShipsPanel extends JPanel{
          
          button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-               if(frame.getShip1ID() == -1){
+               if(frame.getShip1ID() == -1 && (frame.getShip2ID() != AT || frame.getShipHold2() == Player.FLEET)){
                   frame.setShip1All(Player.HANGAR, AT);
-               } else if(frame.getShip2ID() == -1){
+               } else if(frame.getShip2ID() == -1 && (frame.getShip1ID() != AT || frame.getShipHold1() == Player.FLEET)){
                   frame.setShip2All(Player.HANGAR, AT);
+               } else if(frame.getShip1ID() == AT){
+                  
+               } else if(frame.getShip2ID() == AT){
+               
                } else {
                   frame.showErrorMessage("You may only choose 2 ships to swap. Click on a ship again to deselect", "Too many!");
                }
