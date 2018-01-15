@@ -68,7 +68,7 @@ public class Fleet
 		if(ships[index] == null)
 		{
 			return false;
-			//return false if the ship under the specic index is null
+			//return false if the ship under the specific index is null
 		}
 		else
 		{
@@ -105,7 +105,7 @@ public class Fleet
 		boolean toReturn = true;
 		for(int i = 0; i <MAX_SHIPS;i++)
 		{
-			if(!ships[i].equals(null))
+			if(!(ships[i] == null))
 			{
 				toReturn = false;
 			}
@@ -157,7 +157,7 @@ public class Fleet
 	//Return the string which contains the Serial number of the ship information
         {
            String ret = "";
-           for(int at = 0; at < ships.length; at++)
+           for(int at = 0; at < MAX_SHIPS; at++)
            {
               ret += at + "\n" + ships[at].getPrintString();
            }
@@ -168,7 +168,7 @@ public class Fleet
 	//Indicate the total score earned by the ships
         {
           int ret = 0;
-          for(int at = 0; at < ships.length; at++)
+          for(int at = 0; at < MAX_SHIPS; at++)
           {
             if(ships[at] != null)
             {
