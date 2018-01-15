@@ -128,6 +128,7 @@ public class Ship extends Entity
    //A method for the sell price of this ship
    {
       return value /2;
+      //The selling price of the ship is the hlaf of the ship
    }
    
    public String getPrintString()  
