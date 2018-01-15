@@ -26,7 +26,7 @@ public class FleetFrame extends JFrame{
       buttons = new Button[shipNum+1];
       for(int i = 0;i<=shipNum;i++){
          buttons[i] = new Button(ships[i].getName());
-         buttons[i].addMouseListener(new ShipListener(button[i]));
+         buttons[i].addMouseListener(new ShipListener(button[i], mainscene,this));
       }
       
       
@@ -39,15 +39,17 @@ public class FleetFrame extends JFrame{
    
    
    private class ShipListener extends MouseAdapter{
+      private FleetFrame ff = null;
       private Ship ship = null;
       private MainScene mainscene = null;
-      public void ShipListener(Ship ship,MainScene mainscene){
+      public void ShipListener(Ship ship,MainScene mainscene,FleetFrame ff){
+         this.ff = ff;
          this.mainscene = mainscene;
          this.ship = ship;
       }
       
       public void mouseClicked(MouseEvent e){
-         new infoFrame(ship);
+         new InfoFrame(ship,ff);
       }
    }
    
