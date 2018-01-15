@@ -63,7 +63,7 @@ public class Ship extends Entity
    public Ship()
    {
       this.name = "";
-      this.imageFile == null;
+      this.imageFile = null;
       this.attackRange = 0;
       this.travelRange = 0;
       this.firingSpeed = 0;
