@@ -2,7 +2,7 @@
    import java.awt.*;
    import java.awt.event.*;
 
-    public class MainScene extends Frame
+    public class MainScene extends JFrame
    {
       boolean menu = true;
       boolean Portal = false;
@@ -15,17 +15,17 @@
       static final int WINDOW_WIDTH=700;
       static final int WINDOW_LENGTH=1000;
       private HangarFrame hangarFrame;
-
+		Game game;
    
    
        public void Menu (ActionEvent e) 
       {  
 
-         ImageIcon img = new ImageIcon("image/img1.png"); 
+         ImageIcon img = new ImageIcon("img1.jpg"); 
          JLabel backimg = new JLabel(img); //background 
-         JFrame.backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
-         JFrame.getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
-         ((JPanel)JFrame.getContentPane()).setOpaque(false); //make invisible  
+         backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
+         getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
+         ((JPanel)this.getContentPane()).setOpaque(false); //make invisible  
       
       
       
@@ -84,7 +84,7 @@
          if(e.getSource()==b3)
          {
             Save=true;   
-            Game.save();
+            game.saveGame();
       
          }
          else if(e.getSource()==b4)
@@ -112,6 +112,5 @@
    
    
    }  
-
 
 
