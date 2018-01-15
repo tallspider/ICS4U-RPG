@@ -13,8 +13,9 @@ public class Player{
    private HangarFrame hangarFrame;
    private int score;
    private int numCoins;
-   static final int HANGAR = 0;
-   static final int FLEET = 1;
+   public static final int HANGAR = 0;
+   public static final int FLEET = 1;
+   public static final String IMAGE_FILE_FILE = "images.txt";
    
    //Constructor of the Player class
    //takes in the username of this user as a String   
@@ -130,6 +131,46 @@ public class Player{
 		}
    }
    
+   public String getNewImageFile{
+      try{
+         BufferedReader f = new BufferedReader(new FileReader(IMAGE_FILE_FILE));
+         String ret = f.readLine();
+         
+         ArrayList<String> left = new ArrayList<String>();
+         String s;
+         while( (s = f.readLine()) != null) left.add(s);
+         
+         f.close();
+         
+         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(IMAGE_FILE_FILE)));
+         for(int i = 0; i < left.size; i++) out.println(left.get(i));
+         out.close();
+         
+         return ret;
+         
+      } catch(IOException e){
+         System.out.println("Image File Error");
+      }
+   }
+   
+   public void addImageToFile(String imgf){
+      try{
+         BufferedReader f = new BufferedReader(new FileReader(IMAGE_FILE_FILE));
+         ArrayList<String> imageFiles = new ArrayList<String>();
+         String s;
+         while( (s = f.readLine()) != null) imageFiles.add(s);
+         f.close();
+         
+         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(IMAGE_FILE_FILE)));
+         for(int i = 0; i < imageFiles.size(); i++) out.println(imageFiles.get(i));
+         out.println(imgf);
+         out.close();
+         
+      } catch(IOException e){
+         System.out.println("Error writing to image file");
+      }
+   }
+   
    //contains the code to be run when the player clicks the button to buy a Ship
    //takes in the id of the Ship-containing slot in hangar that the player wishes to purchase a Ship into
    public boolean buyShip(int id){
@@ -146,7 +187,7 @@ public class Player{
             //decrease the number of coins the player owns by the amount required to buy this Ship
             numCoins -= Ship.BASIC_COST;
             //add the newly-acquired Ship to hangar
-            return hangar.addNewShip(id);
+            return hangar.addNewShip(id, getNewImageFile());
          } 
       }
       //return false to signify that the transaction did not go through
@@ -168,6 +209,7 @@ public class Player{
          //increase the number of coins the player has by half the value of the ship they wish to sell
          numCoins += hangar.getShipSellPrice(id);
          //remove the newly-sold ship from hangar
+         addImageToFile(hangar.getShip(id).getImageFile());
          hangar.deleteShip(id);
          //return true to signify that the transaction is complete
          return true;
