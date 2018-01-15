@@ -6,7 +6,7 @@ public class LoginFrame extends JFrame{
 	 	private static TextField loginField = new TextField(10);
 		private static TextField passwordField = new TextField(10);  		  	
 	 	private static Login user; 
-		private static ErrorFrame errorFrame = new ErrorFrame();//make it private and do a accessor later
+	//	private static ErrorFrame errorFrame = new ErrorFrame();//make it private and do a accessor later
 
    public LoginFrame(){
       super("RPG");
@@ -41,7 +41,7 @@ public class LoginFrame extends JFrame{
       });
    }
    
-   static class LoginListener extends MouseAdapter{
+   private class LoginListener extends MouseAdapter{
       LoginFrame mf = null;
       public LoginListener(LoginFrame mf){
          this.mf = mf;
@@ -51,25 +51,25 @@ public class LoginFrame extends JFrame{
          String username = loginField.getText();
          String password = passwordField.getText();
          user = new Login(username,password);
-         errorFrame.setVisible(true);
+         //errorFrame.setVisible(true);
          if(user.checkSuccessful()){
-            //mf.setVisible(false);
-            
+            new MainScene();            
          }else{
-            mf.setVisible(false);
+				ErrorFrame.error.setText("Wrong username / password");
+            new ErrorFrame();
          }
       }    	
    }
    
-   class RegisterListenner extends MouseAdapter{
+  	private class RegisterListenner extends MouseAdapter{
       LoginFrame mf = null;
    
-      public RegisterListenner(LoginFrame mf){
-         this.mf = mf;
+      public RegisterListenner(LoginFrame mF){
+         this.mf = mF;
       }
       public void mouseClicked(MouseEvent e){
-         String username = loginField.getText();
-         String password = passwordField.getText();
+			mf.setVisible(false);
+			new RegisterFrame(mf);
       }
    }
 }
