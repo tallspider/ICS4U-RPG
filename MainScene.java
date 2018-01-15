@@ -18,14 +18,14 @@
 
    
    
-       public static void main(String arg[]) 
+       public void Menu (ActionEvent e) 
       {  
-         MainScene mainScene = new MainScene();
+
          ImageIcon img = new ImageIcon("image/img1.png"); 
          JLabel backimg = new JLabel(img); //background 
-         mainScene.backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
-         mainScene.getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
-         ((JPanel)mainScene.getContentPane()).setOpaque(false); //make invisible  
+         JFrame.backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
+         JFrame.getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
+         ((JPanel)JFrame.getContentPane()).setOpaque(false); //make invisible  
       
       
       
@@ -69,14 +69,7 @@
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
          frame.setVisible(true);  
          
-    	
-      	
-      }  
-      
-      
-      public void actionPerformed(ActionEvent e) 
-      {
-   
+
          if(e.getSource()==b1)
          {
               Portal=true;    
@@ -112,15 +105,12 @@
          }
                   
          
-      }
+   }
     
    
    
    
    }  
-
-
-
 
 
 
