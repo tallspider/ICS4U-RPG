@@ -25,7 +25,7 @@ public class Ship extends Entity
    public static final int BASIC_COST = 500;
    private int value;
       
-   public void loadNext(BufferedReader f)
+   public void loadNext(BufferedReader f)  // Loading the ship information from txt file
    {
       try
       {
@@ -43,6 +43,7 @@ public class Ship extends Entity
       }
    }
    
+   //Constructor of Ship class
    public Ship(String name, String imageFile, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , int value, boolean ownedByPlayer)
    {
       this.name = name;
@@ -55,12 +56,12 @@ public class Ship extends Entity
       this.ownedByPlayer = ownedByPlayer;
    }
    	
-   public Ship(String name)
+   public Ship(String name)  //Constructor of Ship class
    {
       this.name = name; 
    }
    
-   public Ship()
+   public Ship()  //Constructor of Ship class
    {
       this.name = "";
       this.imageFile = null;
@@ -71,7 +72,7 @@ public class Ship extends Entity
       this.ownedByPlayer = false;
    }
       
-   public void upgrade(int num)
+   public void upgrade(int num)  //Upgrade the ship by the given indicate number
    {
       if(num == AR_Upgrade)
       {
@@ -87,7 +88,7 @@ public class Ship extends Entity
       }
    }
 
-   public int calcUpgradeCost(int upgrade)
+   public int calcUpgradeCost(int upgrade)  //Return the cost after upgrade the choosen ship by given the ship index and the wanted upgrade type
    {
       
       if(upgrade == AR_Upgrade)
@@ -105,124 +106,127 @@ public class Ship extends Entity
       return -1;
    }
    
-   public int getSellPrice(){
+   public int getSellPrice()  //Return the sell price of the specific ship
+   {
       return value /2;
    }
    
-   public String getPrintString()
+   public String getPrintString()  //Return the string which contains the Serial number of the ship information
    {
       return "\n" + name + "\n" + attackRange + "\n" + travelRange + "\n" + firingSpeed + "\n" + upgradesLeft;
    }
 
-   public boolean isUpgradable()
+   public boolean isUpgradable()   //Indicate if the ship can be upgrade or not
    {
       return upgradesLeft > 0;
    }
 
-   public int getScoreTotal()
+   public int getScoreTotal()  //Indicate the score earned by the ship
    {
       return attackRange + travelRange + firingSpeed;
    }
    
-   public String toString()
+   public String toString()  //Return the string contains the ship information
    {
      return "Name: "+name+"/nAttackRange: "+attackRange+ "/nTravelRange: "+travelRange+"/nFiringSpeed: "+firingSpeed+"/nUpgradesLeft: "+upgradesLeft+"/nOwnedByPlayer: "+ownedByPlayer+"/nMovedAlready: "+movedAlready+"/nTimesAttacked: "+timesAttacked+"/nValue: "+value;
    }
    
-   public void setName(String name)
+   public void setName(String name)  //Mutator method for the name of this Ship
    {
       this.name = name;
    }
    
-   public String getName()
+   public String getName()  //Accessor method for the name of this Ship
    {
       return this.name;
    }
    
-   public void setAttackRange(int attackRange)
+   public void setAttackRange(int attackRange)  //Mutator method for the attackRange of this Ship
    {
       this.attackRange = attackRange;
    }
    
-   public int getAttackRange()
+   public int getAttackRange()  //Accessor method for the attackRange of this Ship
    {
       return this.attackRange;
    }  
    
-   public void setTravelRange(int travelRange)
+   public void setTravelRange(int travelRange)  //Mutator method for the travelRange of this Ship
    {
       this.travelRange = travelRange;
    }
    
-   public int getTravelRange()
+   public int getTravelRange()  //Accessor method for the travelRange of this Ship
    {
       return this.travelRange;
    } 
    
-   public void setFiringSpeed(int firingSpeed)
+   public void setFiringSpeed(int firingSpeed)  //Mutator method for the firingSpeed of this Ship
    {
       this.firingSpeed = firingSpeed;
    }
    
-   public int getFiringSpeed()
+   public int getFiringSpeed()  //Accessor method for the firingSpeed of this Ship
    {
       return this.firingSpeed;
    } 
    
-   public void setUpgradesLeft(int upgradesLeft)
+   public void setUpgradesLeft(int upgradesLeft)  //Mutator method for the upgradesLeft of this Ship
    {
       this.upgradesLeft = upgradesLeft;
    }
    
-   public int getUpgradesLeft()
+   public int getUpgradesLeft()  //Accessor method for the upgradesLeft of this Ship
    {
       return this.upgradesLeft;
    } 
    
-   public String getImageFile(){
+   public void setImageFile(String s)  //Mutator method for the imageFile of this Ship
+   {
+   	imageFile = s;
+   }   
+   
+   public String getImageFile()  //Accessor method for the imageFile of this Ship
+   {  
    	return imageFile;
    }
    
-   public void setImageFile(String s){
-   	imageFile = s;
-   }
-   
-   public void setOwnedByPlayer(boolean ownedByPlayer)
+   public void setOwnedByPlayer(boolean ownedByPlayer)  //Mutator method for the ownedByPlayer of this Ship
    {
       this.ownedByPlayer = ownedByPlayer;
    }
    
-   public boolean getOwnedByPlayer()
+   public boolean getOwnedByPlayer()  //Accessor method for the ownedByPlayer of this Ship
    {
       return this.ownedByPlayer;
    } 
    
-   public void setMovedAlready(boolean movedAlready)
+   public void setMovedAlready(boolean movedAlready)  //Mutator method for the movedAlready of this Ship
    {
       this.movedAlready = movedAlready;
    }
    
-   public boolean getMovedAlready()
+   public boolean getMovedAlready()  //Accessor method for the movedAlready of this Ship
    {
       return this.movedAlready;
    } 
    
-   public void setTimesAttacked(int timesAttacked)
+   public void setTimesAttacked(int timesAttacked)  //Mutator method for the timesAttacked of this Ship
    {
       this.timesAttacked = timesAttacked;
    }
    
-   public int getTimesAttacked()
+   public int getTimesAttacked()  //Accessor method for the timesAttacked of this Ship
    {
       return this.timesAttacked;
    } 
    
-   public void setValue(int value)
+   public void setValue(int value)  //Mutator method for the value of this Ship
    {
       this.value = value;
    }
    
-   public int getValue()
+   public int getValue()  //Accessor method for the value of this Ship
    {
       return this.value;
    }  
