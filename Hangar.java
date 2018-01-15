@@ -14,19 +14,22 @@ public class Hangar
    public static final int MAX_SHIPS = 10;
    public static final int MIN_SHIPS = 0;
  
-   public Hangar(Ship[] ships)  //Constructor of Hangar class，takes in the ship array as the field  of the Hangar
+   public Hangar(Ship[] ships)  
+   //Constructor of Hangar class，takes in the ship array as the field  of the Hangar
    //Given the ship array
    {
       this.ships = ships;
       this.shipnum = ships.length;
    }
-   public Hangar()  //Constructor of Hangar class
+   public Hangar()  
+   //Constructor of Hangar class
    {
       this.ships = new Ship[MAX_SHIPS];
       this.shipnum = 0;
    }
    
-   public void loadNext(BufferedReader f)  // Loading the ship information from txt file, takes in the object of BufferedReader
+   public void loadNext(BufferedReader f)  
+   // Loading the ship information from txt file, takes in the object of BufferedReader
    //Given the BufferedReader object
    {
      try
@@ -45,29 +48,34 @@ public class Hangar
      }
    }
    
-   public void setShips(Ship[] ships)  //Mutator method for the ship list of this Hangar
+   public void setShips(Ship[] ships)  
+   //Mutator method for the ship list of this Hangar
    //Given the ship array
    {
       this.ships = ships;
    }
    
-   public Ship[] getShips()  //Accessor method for the ship list of this Hangar
+   public Ship[] getShips()  
+   //Accessor method for the ship list of this Hangar
    {
       return this.ships;
    }
    
-   public void setShipnum(int num)   //Mutator method for the num of ship in the ship list of this Hangar
+   public void setShipnum(int num)   
+   //Mutator method for the num of ship in the ship list of this Hangar
    //Given the num of the ship in the array which is an int
    {
       this.shipnum = num;
    }
    
-   public int getShipnum()  //Accessor method for the num of ship in the ship list of this Hangar
+   public int getShipnum()  
+   //Accessor method for the num of ship in the ship list of this Hangar
    {
       return this.shipnum;
    }
    
-   public boolean deleteShip(int index)  // Delete the chosen ship by given the index of the ship in the list 
+   public boolean deleteShip(int index)  
+   //Delete the chosen ship by given the index of the ship in the list 
    //Given the index of the ship which is an int
    {
       if (index>=MIN_SHIPS && index<=(ships.length-1))
@@ -81,7 +89,9 @@ public class Hangar
          return false;
       }
    }
-   public boolean addShip(int index ,Ship ship) // Add the another ship by given the wanted index of the ship in the list 
+	
+   public boolean addShip(int index ,Ship ship) 
+   // Add the another ship by given the wanted index of the ship in the list 
    //Given the index of the ship which is an int, and a ship object
    {
       if(index>=MIN_SHIPS && index<MAX_SHIPS && ships[index] == null)
@@ -96,7 +106,8 @@ public class Hangar
       }
    }
 
-   public boolean addNewShip(int index, String imgf)  // Add one new ship by given the wanted index and imageFile of the ship in the list  
+   public boolean addNewShip(int index, String imgf)  
+   //Add one new ship by given the wanted index and imageFile of the ship in the list  
    //Given the index of the ship which is an int and ship's image which is string
    {
    	return addShip(index, new Ship("", imgf, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
@@ -107,7 +118,8 @@ public class Hangar
        ships[id].upgrade(upgrade);
    } */
   
-  public String getPrintString()  //Return the string which contains the Serial number of the ship information
+  public String getPrintString()  
+  //Return the string which contains the Serial number of the ship information
   {
       String ret = "";
       for(int at = 0; at < ships.length; at++)
@@ -120,7 +132,8 @@ public class Hangar
       return ret;
   }
    
-   public void upgradeShip(int index, int upgrade)  // Upgrade the choosen ship by given the ship index and the wanted upgrade type
+   public void upgradeShip(int index, int upgrade) 
+   // Upgrade the choosen ship by given the ship index and the wanted upgrade type
    //Given the index of ship and the upgrade type of the ship by int 
    {
      if(ships[index] != null)
@@ -129,7 +142,8 @@ public class Hangar
      }
    }
 
-   public int getShipUpgradeCost(int id, int upgrade)  //Return the cost after upgrade the choosen ship by given the ship index and the wanted upgrade type
+   public int getShipUpgradeCost(int id, int upgrade)  
+   //Return the cost after upgrade the choosen ship by given the ship index and the wanted upgrade type
    //Given the index of ship and the upgrade type of the ship by int 
    {
       if(ships[id] == null) 
@@ -139,19 +153,22 @@ public class Hangar
       return ships[id].calcUpgradeCost(upgrade);
    }
   
-   public int getShipSellPrice(int id)   //Return the sell price of the specific ship
+   public int getShipSellPrice(int id)   
+   //Return the sell price of the specific ship
    // Given the index of the ship which is an int
    {  
    	return ships[id].getSellPrice();
    }
 	
-   public boolean getShipUpgradable(int id)  //Indicate if the ship can be upgrade or not
+   public boolean getShipUpgradable(int id) 
+   //Indicate if the ship can be upgrade or not
    // Given the index of the ship which is an int
    {
    	return ships[id].isUpgradable();
    }
 	
-   public int getScoreTotal()  //Indicate the total score earned by the ships
+   public int getScoreTotal()  
+   //Indicate the total score earned by the ships
    {
       int ret = 0;
       for(int at = 0; at < ships.length; at++)
@@ -164,13 +181,15 @@ public class Hangar
       return ret;
    }
 	
-   public Ship getShip(int id)   //Accessor method for the ship list of this Hangar
+   public Ship getShip(int id)   
+   // Accessor method for the ship list of this Hangar
    // Given the index of the ship which is an int
    {
    	return ships[id];
    }
 
-   public void setShip(int id, Ship ship)    //Mutator method for the ship list of this Hangar
+   public void setShip(int id, Ship ship)    
+   // Mutator method for the ship list of this Hangar
    // Given the index of the ship which is an int and a ship object
    {
    	ships[id] = ship;
