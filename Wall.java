@@ -8,7 +8,7 @@ Purpose: A wall that is a entity that is used in movement calculation (obstructs
 
 public class Wall extends Entity{
 
-   public final static String imageFile = "wall.png";
+   public final static String imageFile = Player.WALL_IMAGE;
 
 //constructor
    public Wall(){
