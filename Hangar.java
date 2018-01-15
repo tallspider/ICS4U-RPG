@@ -66,11 +66,6 @@ public class Hangar
       if (index>=MIN_SHIPS && index<=(ships.length-1))
       {
          ships[index]= null;
-         for (int i = index ; i<shipnum-2;i++)
-         {
-            ships[i]= ships[i+1];
-         }
-         ships[shipnum-1]=null;
 	 shipnum--;
          return true;
       }
@@ -81,24 +76,9 @@ public class Hangar
    }
    public boolean addShip(int index ,Ship ship) // Add the another ship by given the wanted index of the ship in the list 
    {
-      Ship temp;
-      if(index>=MIN_SHIPS && index<(shipnum-1))
+      if(index>=MIN_SHIPS && index<MAX_SHIPS && ships[index] == null)
       {
-         temp = ships[index];
          ships[index] = ship;
-         for (int i = shipnum; i>index+1; i--)
-         {
-            ships[i] = ships[i-1];
-         }
-         ships[index+1] = temp;
-	 shipnum++;
-         return true;
-      }
-      else if (index == shipnum-1)
-      {
-         temp = ships[index];
-         ships[index] = ship;
-         ships[shipnum+1] = temp;
 	 shipnum++;
          return true;
       }
