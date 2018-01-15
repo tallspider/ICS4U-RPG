@@ -44,8 +44,9 @@ class Game{
 	}
 	
 	public void displayLeaderBoard(){
-		LeaderBoard lb = new LeaderBoard(currentPlayer.getUsername());
-		lb.display();
+		/*LeaderBoard lb = new LeaderBoard(currentPlayer.getUsername());
+		lb.display();*/
+      		LeaderBoardFrame lbf = new LeaderBoardFrame(currentPlayer.getUsername());
 	}
 	
 	public Player getPlaye(){
