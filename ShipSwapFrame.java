@@ -218,9 +218,9 @@ class HangarShipsPanel extends JPanel{
          
          button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-               if(frame.getShip1ID() == -1 && (frame.getShip2ID() != AT || frame.getShipHold2() == Player.FLEET)){
+               if(frame.getShip1ID() == -1 && (frame.getShip2ID() != AT || frame.getShip2Hold() == Player.FLEET)){
                   frame.setShip1All(Player.HANGAR, AT);
-               } else if(frame.getShip2ID() == -1 && (frame.getShip1ID() != AT || frame.getShipHold1() == Player.FLEET)){
+               } else if(frame.getShip2ID() == -1 && (frame.getShip1ID() != AT || frame.getShip1Hold() == Player.FLEET)){
                   frame.setShip2All(Player.HANGAR, AT);
                } else if(frame.getShip1ID() == AT){
                   frame.emptyShip1();
@@ -274,9 +274,9 @@ class FleetShipsPanel extends JPanel{
          
          button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-               if(frame.getShip1ID() == -1 && (frame.getShip2ID() != AT || frame.getShipHold2() == Player.HANGAR)){
+               if(frame.getShip1ID() == -1 && (frame.getShip2ID() != AT || frame.getShip2Hold() == Player.HANGAR)){
                   frame.setShip1All(Player.FLEET, AT);
-               } else if(frame.getShip2ID() == -1 && (frame.getShip1ID() != AT || frame.getShipHold1() == Player.HANGAR)){
+               } else if(frame.getShip2ID() == -1 && (frame.getShip1ID() != AT || frame.getShip1Hold() == Player.HANGAR)){
                   frame.setShip2All(Player.FLEET, AT);
                } else if(frame.getShip1ID() == AT){
                   frame.emptyShip1();
