@@ -99,6 +99,7 @@ public class Hangar
          temp = ships[index];
          ships[index] = ship;
          ships[shipnum+1] = temp;
+	 shipnum++;
          return true;
       }
       else
