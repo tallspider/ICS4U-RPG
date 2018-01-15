@@ -61,7 +61,7 @@ class Gameboard{
          attackRange = 1  + averageStat + rand.nextInt(2);
          travelRange = 1  + averageStat + rand.nextInt(2);
          firingSpeed = 1  + averageStat + rand.nextInt(2);
-         map.addRandomShip(new Ship("AI SHIP", attackRange, travelRange, firingSpeed, 0, 0 , false));
+         map.addRandomShip(new Ship("AI SHIP", Player.AI_SHIP_IMAGE, attackRange, travelRange, firingSpeed, 0, 0 , false));
       }
        
        
