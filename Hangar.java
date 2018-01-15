@@ -98,7 +98,7 @@ public class Hangar
        ships[id].upgrade(upgrade);
    }
   
-  public String getPrintString()  //Return the string which contains the Serial number of the ship
+  public String getPrintString()  //Return the string which contains the Serial number of the ship information
   {
       String ret = "";
       for(int at = 0; at < ships.length; at++)
