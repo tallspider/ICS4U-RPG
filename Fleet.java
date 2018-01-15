@@ -8,11 +8,12 @@
 import java.io.*;
 public class Fleet
 {
-	final static public int MAX_SHIPS = 5;
+	public static final int MAX_SHIPS = 5;
+	public static final int MIN_SHIPS = 0;
 	private Ship[] ships = new Ship [MAX_SHIPS];
+	private int shipnum;
 	
-	public Fleet(Ship[] ships)  
-		
+   public Fleet(Ship[] ships) 	
    //Constructor of Fleet class takes in the ship array as the field  of the Fleet
    //Given the ship array
    {
@@ -30,13 +31,16 @@ public class Fleet
 	{
 	/*add a ship to the array  with the given index
 	If ships[index] already has a object, return false. Otherwise return true.*/
-		if(!ships[index].equals(null))
+		if(!(ships[index].equals(null)))
 		{
 			return false;
+			//return false if the ship under the specic index is not null
 		}
 		else
 		{
 			ships[index] = newship;
+			shipnum++;
+			//add the newship in the specific index
 			return true;
 		}
 	}
@@ -44,15 +48,16 @@ public class Fleet
 	public int getShipNum()  
 	//Accessor method for the num of ship in the ship list of this Fleet
 	{
-	      int sum =0;
+	   /*   int sum =0;
 	      for(int i = 0; i <MAX_SHIPS;i++)
 	      {
 		 if(!ships[i].equals(null))
 		 {
 		    sum++;
+		    // get the number of the ships in the array
 		 }      
-	      }
-	      return sum;   
+	      }  */
+	      return shipnum;   
 	   }
 	
 	public boolean deleteShip(int index)  
@@ -63,11 +68,14 @@ public class Fleet
 		if(ships[index] == null)
 		{
 			return false;
+			//return false if the ship under the specic index is null
 		}
 		else
 		{
 			ships[index] = null;
+			shipnum--;
 			return true;
+                        //delete the specific ship and update nuw of the ship
 		}
 	}
 	
