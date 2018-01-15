@@ -20,12 +20,12 @@
    
        public static void main(String arg[]) 
       {  
-      
+         MainScene mainScene = new MainScene();
          ImageIcon img = new ImageIcon("image/img1.png"); 
          JLabel backimg = new JLabel(img); //background 
-         this.backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
-         this.getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
-         ((JPanel)this.getContentPane()).setOpaque(false); //make invisible  
+         mainScene.backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
+         mainScene.getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
+         ((JPanel)mainScene.getContentPane()).setOpaque(false); //make invisible  
       
       
       
