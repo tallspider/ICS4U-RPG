@@ -96,7 +96,7 @@
          else if(e.getSource()==b4)
          {
             Hangar=true;
-            hangarFrame.setVisible (Component lastPage, boolean Hangar);
+            hangarFrame.setVisible (this, Hangar);
          
          }
                   
