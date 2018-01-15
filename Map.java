@@ -257,7 +257,7 @@ public class Map{
 //********************SUBJECT TO CHANGE*************************** USED TO TEST/DEBUG****************
    public void display(){
    
-      for (int y = LENGTH_OF_MAP ; y >= 0 ; y--){
+      for (int y = LENGTH_OF_MAP - 1; y >= 0 ; y--){
          for (int x = 0 ; x < WIDTH_OF_MAP ; x++){
             if(board[x][y].isEmpty()){
                System.out.print(".");

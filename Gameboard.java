@@ -68,8 +68,6 @@ Purpose: Cointains the map and combat
             firingSpeed = 1  + averageStat + rand.nextInt(2);
             map.addRandomShip(new Ship("AI SHIP", Player.AI_SHIP_IMAGE, attackRange, travelRange, firingSpeed, 0, 0 , false));
          }
-       
-       
       }	
        
    // starts and initializes the combat gameplay, initializes the map, and adds the player and ai fleets, loop thorught play and aiplay to allower the user and ai to play, checks endgame after every turn
