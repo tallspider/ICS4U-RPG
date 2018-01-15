@@ -8,14 +8,27 @@
 import java.io.*;
 public class Fleet
 {
-	final static public int MAX_SHIPS = 10;
+	final static public int MAX_SHIPS = 5;
 	private Ship[] ships = new Ship [MAX_SHIPS];
+	
+	public Fleet(Ship[] ships)  //Constructor of Fleet class，takes in the ship array as the field  of the Fleet
+   //Given the ship array
+   {
+      this.ships = ships;
+      this.shipnum = ships.length;
+   }
+	
+   public Fleet()  //Constructor of Hangar class
+   {
+      this.ships = new Ship[MAX_SHIPS];
+      this.shipnum = 0;
+   }
 	
 	public boolean addShip(int index,Ship newship)
 	{
 	/*add a ship to the array  with the given index
 	If ships[index] already has a object, return false. Otherwise return true.*/
-		if(!ships[index].equals(null))
+		if(!ships[index] == null)
 		{
 			return false;
 		}
@@ -31,7 +44,7 @@ public class Fleet
 	      int sum =0;
 	      for(int i = 0; i <MAX_SHIPS;i++)
 	      {
-		 if(!ships[i].equals(null))
+		 if(!ships[i]== bull)
 		 {
 		    sum++;
 		 }      
@@ -43,7 +56,7 @@ public class Fleet
         //Given the index of the ship which is an int
 	//If the slot has no object, retutn false. Otherwise, return true
 	{
-		if(ships[index].equals(null))
+		if(ships[index] == null)
 		{
 			return false;
 		}
@@ -78,7 +91,7 @@ public class Fleet
 		boolean toReturn = true;
 		for(int i = 0; i <MAX_SHIPS;i++)
 		{
-			if(!ships[i].equals(null))
+			if(!ships[i]== null)
 			{
 				toReturn = false;
 			}
@@ -99,7 +112,7 @@ public class Fleet
 	public boolean isEmpty(int index)   //Indicate if the ship by the given index is Empty
 	//Given the index of the ship which is an int
 	{
-		return ships[index].equals(null);
+		return ships[index] == null;
 	}
 	
 	public void emptyFleet()   //Delete all the object in the fleet array.
