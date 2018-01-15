@@ -15,10 +15,21 @@
       static final int WINDOW_WIDTH=700;
       static final int WINDOW_LENGTH=1000;
       private HangarFrame hangarFrame;
+
    
    
        public static void main(String arg[]) 
       {  
+      
+         ImageIcon img = new ImageIcon("image/img1.png"); 
+         JLabel backimg = new JLabel(img); //background 
+         this.backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
+         this.getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
+         ((JPanel)this.getContentPane()).setOpaque(false); //make invisible  
+      
+      
+      
+      
       
          JFrame frame = new JFrame("Space RPG");  
          JPanel panel = new JPanel();  
@@ -57,6 +68,7 @@
          frame.setLocationRelativeTo(null);  
          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
          frame.setVisible(true);  
+         
     	
       	
       }  
