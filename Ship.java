@@ -32,7 +32,7 @@ public class Ship extends Entity
       try
       {
          name = f.readLine();
-	      imageFile = f.readLine();
+	 imageFile = f.readLine();
          attackRange = Integer.parseInt(f.readLine());
          travelRange = Integer.parseInt(f.readLine());
          firingSpeed = Integer.parseInt(f.readLine());
@@ -84,14 +84,18 @@ public class Ship extends Entity
    {
       if(num == AR_Upgrade)
       {
+      //add the attackRange
          attackRange++;  
+	 
       }
       else if(num == TR_Upgrade)
       {
+      //add the travelRange
          travelRange++;
       }
       else
       {
+      //add the firingSpeed
          firingSpeed++;
       }
    }
@@ -103,10 +107,12 @@ public class Ship extends Entity
       
       if(upgrade == AR_Upgrade)
       {
+      //update the cost of attackRange
 	return (attackRange + 1) * 100;		
       } 
       else if (upgrade == TR_Upgrade)
       {
+      //update the cost of travelRange
       	return (travelRange + 1) * 100;		
       } 
       else if (upgrade == FS_Upgrade)
