@@ -6,7 +6,8 @@
 
 
 import java.io.*;
-public class Fleet{
+public class Fleet
+{
 	final static public int MAX_SHIPS = 10;
 	private Ship[] ships = new Ship [MAX_SHIPS];
 	
@@ -38,10 +39,10 @@ public class Fleet{
 	      return sum;   
 	   }
 	
-	public boolean deleteShip(int index)  
+	public boolean deleteShip(int index)  // Delete the chosen ship by given the index of the ship in the list 
+        //Given the index of the ship which is an int
+	//If the slot has no object, retutn false. Otherwise, return true
 	{
-	/*Delete a ship in the given index
-	If the slot has no object, retutn false. Otherwise, return true*/
 		if(ships[index].equals(null))
 		{
 			return false;
@@ -54,6 +55,7 @@ public class Fleet{
 	}
 	
 	public void loadNext(BufferedReader f)  // Loading the ship information from txt file
+	//Given the BufferedReader object
 	{
            try
 	   {
@@ -71,9 +73,8 @@ public class Fleet{
            }
         }
 	
-	public boolean checkEmpty()
+	public boolean checkEmpty()  //Return true if the array is empty. Otherwise return false.
 	{
-	//Return true if the array is empty. Otherwise return false.
 		boolean toReturn = true;
 		for(int i = 0; i <MAX_SHIPS;i++)
 		{
@@ -84,19 +85,19 @@ public class Fleet{
 		}
 		return toReturn;
 	}
-	public Ship getShip(int index)
+	public Ship getShip(int index)  //Return the ship object in the array of the given index.
+	//Given the index of the ship which is an int
 	{
-	//Return the ship object in the array of the given index.
 		return ships[index];
 	}
 	
-	public Ship[] getShips()
+	public Ship[] getShips()  //Return the array of the ships.
 	{
-	//Return the array of the ships.
 		return ships;
 	}	
 	
 	public boolean isEmpty(int index)   //Indicate if the ship by the given index is Empty
+	//Given the index of the ship which is an int
 	{
 		return ships[index].equals(null);
 	}
@@ -132,6 +133,7 @@ public class Fleet{
         }
 	
 	public void setShip(int id, Ship ship)   //Mutator method for the num of ship in the ship list of this Fleet
+	//Given the index of the ship which is an int and a ship object
 	{
    		ships[id] = ship;
    	}
