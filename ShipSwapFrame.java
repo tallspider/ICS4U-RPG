@@ -223,9 +223,9 @@ class HangarShipsPanel extends JPanel{
                } else if(frame.getShip2ID() == -1 && (frame.getShip1ID() != AT || frame.getShipHold1() == Player.FLEET)){
                   frame.setShip2All(Player.HANGAR, AT);
                } else if(frame.getShip1ID() == AT){
-                  
+                  frame.emptyShip1();
                } else if(frame.getShip2ID() == AT){
-               
+                  frame.emptyShip2();
                } else {
                   frame.showErrorMessage("You may only choose 2 ships to swap. Click on a ship again to deselect", "Too many!");
                }
@@ -235,6 +235,7 @@ class HangarShipsPanel extends JPanel{
    }
 }
 
+//class that represents the panel containing all the ships in Fleet
 class FleetShipsPanel extends JPanel{
    private int length;
    private int height;
@@ -244,11 +245,13 @@ class FleetShipsPanel extends JPanel{
    
    private Fleet fleet;
    
+   //constructor of the class
    public FleetShipsPanel(ShipSwapFrame f){
       frame = f;
       init();
    }
    
+   //initializes the object(the panel containing all the ships in Fleet)
    public void init(){
       
       player = frame.getPlayer();
@@ -271,10 +274,14 @@ class FleetShipsPanel extends JPanel{
          
          button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-               if(frame.getShip1ID() == -1){
+               if(frame.getShip1ID() == -1 && (frame.getShip2ID() != AT || frame.getShipHold2() == Player.HANGAR)){
                   frame.setShip1All(Player.FLEET, AT);
-               } else if(frame.getShip2ID() == -1){
+               } else if(frame.getShip2ID() == -1 && (frame.getShip1ID() != AT || frame.getShipHold1() == Player.HANGAR)){
                   frame.setShip2All(Player.FLEET, AT);
+               } else if(frame.getShip1ID() == AT){
+                  frame.emptyShip1();
+               } else if(frame.getShip2ID() == AT){
+                  frame.emptyShip2();
                } else {
                   frame.showErrorMessage("You may only choose 2 ships to swap. Click on a ship again to deselect", "Too many!");
                }
@@ -284,6 +291,7 @@ class FleetShipsPanel extends JPanel{
    }
 }
 
+//class that represents the whole panel for displaying information of the ship
 class InfoContainerPanel extends JPanel{
    
    private ShipSwapFrame frame;
@@ -293,6 +301,7 @@ class InfoContainerPanel extends JPanel{
    private TopInfoPanel topInfoPanel;
    private BotInfoPanel botInfoPanel;
    
+   //constructor for the class
    public InfoContainerPanel(ShipSwapFrame f){
       frame = f;
       length = f.WINDOW_LENGTH / 2;
@@ -300,6 +309,7 @@ class InfoContainerPanel extends JPanel{
       init();
    }
    
+   //initializes the class (the whole panel for displaying information of the ship)
    public void init(){
       setPreferredSize(new Dimension(length, height));
       setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -311,27 +321,33 @@ class InfoContainerPanel extends JPanel{
       add(botInfoPanel);
    }
    
+   //intializes the top section of the info panel (ship 1)
    public void initTopInfoPanel(){
       topInfoPanel = new TopInfoPanel(this);
    }
    
+   //initializes the bottom section of the info panel (ship 2)
    public void initBotInfoPanel(){
       botInfoPanel = new BotInfoPanel(this);
    }
    
+   //accessor for the length of this component
    public int getLength(){
       return length;
    }
    
+   //accessor for the height of this component
    public int getHeight(){
       return height;
    }
    
+   //accessor for the ShipSwapFrame this panel belongs to
    public ShipSwapFrame getFrame(){
       return frame;
    }
 }
 
+//class that represents the top half of the info panel (ship 1)
 class TopInfoPanel extends JPanel{
    
    private InfoContainerPanel upPanel;
@@ -343,11 +359,13 @@ class TopInfoPanel extends JPanel{
    private int shipID;
    private Ship ship;
    
+   //constructor for the class
    public TopInfoPanel(InfoContainerPanel p){
       upPanel = p;
       init();
    }
    
+   //initializes the object (the top half of the info panel)
    public void init(){
       frame = upPanel.getFrame();
       length = upPanel.getLength();
@@ -363,10 +381,12 @@ class TopInfoPanel extends JPanel{
       else displayShip();
    }
    
+   //what happens if no ship is selected as ship 1
    public void displayEmpty(){
       addLine("Choose a Ship");
    }
    
+   //what happens is a slot is selected for ship 1
    public void displayShip(){
       if(ship == null){
          addLine("Empty Spot");
@@ -399,11 +419,13 @@ class TopInfoPanel extends JPanel{
       }
    }
    
+   //utility method for adding a line of text
    public void addLine(String s){
       add(new JLabel(s));
    }
 }
 
+//class that represents the bottom half of the info panel (ship 2)
 class BotInfoPanel extends JPanel{
    private InfoContainerPanel upPanel;
    private int length;
