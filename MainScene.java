@@ -83,7 +83,8 @@
          
          if(e.getSource()==b3)
          {
-            Save=true;      
+            Save=true;   
+            Game.save();
       
          }
          else if(e.getSource()==b4)
