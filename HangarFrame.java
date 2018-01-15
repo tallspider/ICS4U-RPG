@@ -475,12 +475,13 @@ class HangarInfoTopMid extends JPanel{
       if(ship.getOwnedByPlayer()){
          entry = new JTextField(10); 
          button = new JButton("Change Ship Name");
-      
+      	
+			final JTextField ENTRY = entry;
          button.addActionListener(
             new ActionListener(){
-               public void actionPerformed(ActionEvent e){
+					public void actionPerformed(ActionEvent e){
                   System.out.println("Change Ship Name button clicked");
-                  ship.setName(entry.getText());
+                  ship.setName(ENTRY.getText());
                }
             });
       
