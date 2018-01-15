@@ -10,28 +10,35 @@ public class Fleet{
 	final static public int MAX_SHIPS = 10;
 	private Ship[] ships = new Ship [MAX_SHIPS];
 	
-	public boolean addShip(int index,Ship newship){
+	public boolean addShip(int index,Ship newship)
+	{
 	/*add a ship to the array  with the given index
 	If ships[index] already has a object, return false. Otherwise return true.*/
-		if(!ships[index].equals(null)){
+		if(!ships[index].equals(null))
+		{
 			return false;
-		}else{
+		}
+		else
+		{
 			ships[index] = newship;
 			return true;
 		}
 	}
 	
-	public int getShipNum(){
+	public int getShipNum()  //Accessor method for the num of ship in the ship list of this Fleet
+	{
 	      int sum =0;
-	      for(int i = 0; i <MAX_SHIPS;i++){
-		 if(!ships[i].equals(null)){
+	      for(int i = 0; i <MAX_SHIPS;i++)
+	      {
+		 if(!ships[i].equals(null))
+		 {
 		    sum++;
 		 }      
 	      }
 	      return sum;   
 	   }
 	
-	public boolean deleteShip(int index)
+	public boolean deleteShip(int index)  
 	{
 	/*Delete a ship in the given index
 	If the slot has no object, retutn false. Otherwise, return true*/
@@ -46,7 +53,7 @@ public class Fleet{
 		}
 	}
 	
-	public void loadNext(BufferedReader f)
+	public void loadNext(BufferedReader f)  // Loading the ship information from txt file
 	{
            try
 	   {
