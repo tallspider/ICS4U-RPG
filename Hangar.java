@@ -201,11 +201,5 @@ public class Hangar
    	ships[id] = ship;
    }
 	
-   public Ship getShip(int index)  
-   //Return the ship object in the array of the given index.
-   //Given the index of the ship which is an int
-   {
-	return ships[index];
-   }
 
 }
