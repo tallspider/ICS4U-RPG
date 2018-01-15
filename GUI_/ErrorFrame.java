@@ -12,7 +12,7 @@ public class ErrorFrame extends JFrame{
       this.add(error);
       Button confirm = new Button("Confirm");
       this.add(confirm);
-      confirm.addMouseListener(new ConfirmListener());
+      confirm.addMouseListener(new ConfirmListener(this));
    }
    static class ConfirmListener extends MouseAdapter{
       ErrorFrame ef;
