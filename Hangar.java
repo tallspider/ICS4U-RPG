@@ -15,6 +15,7 @@ public class Hangar
    public static final int MIN_SHIPS = 0;
  
    public Hangar(Ship[] ships)  //Constructor of Hangar class，takes in the ship array as the field  of the Hangar
+   //Given the ship array
    {
       this.ships = ships;
       this.shipnum = ships.length;
@@ -26,6 +27,7 @@ public class Hangar
    }
    
    public void loadNext(BufferedReader f)  // Loading the ship information from txt file, takes in the object of BufferedReader
+   //Given the 
    {
      try
      {
@@ -44,6 +46,8 @@ public class Hangar
    }
    
    public void setShips(Ship[] ships)  //Mutator method for the ship list of this Hangar
+   //Given the ship array
+   {
       this.ships = ships;
    }
    
@@ -53,6 +57,7 @@ public class Hangar
    }
    
    public void setShipnum(int num)   //Mutator method for the num of ship in the ship list of this Hangar
+   //Given the num of the ship in the array which is an int
    {
       this.shipnum = num;
    }
@@ -63,6 +68,7 @@ public class Hangar
    }
    
    public boolean deleteShip(int index)  // Delete the chosen ship by given the index of the ship in the list 
+   //Given the index of the ship which is an int
    {
       if (index>=MIN_SHIPS && index<=(ships.length-1))
       {
@@ -76,6 +82,7 @@ public class Hangar
       }
    }
    public boolean addShip(int index ,Ship ship) // Add the another ship by given the wanted index of the ship in the list 
+   //Given the index of the ship which is an int, and a ship object
    {
       if(index>=MIN_SHIPS && index<MAX_SHIPS && ships[index] == null)
       {
