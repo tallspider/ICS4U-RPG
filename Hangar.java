@@ -71,6 +71,7 @@ public class Hangar
             ships[i]= ships[i+1];
          }
          ships[shipnum-1]=null;
+	 shipnum--;
          return true;
       }
       else
@@ -90,6 +91,7 @@ public class Hangar
             ships[i] = ships[i-1];
          }
          ships[index+1] = temp;
+	 shipnum++;
          return true;
       }
       else if (index == shipnum-1)
