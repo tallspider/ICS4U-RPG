@@ -5,6 +5,7 @@
 //Purpose: to represent the character and actions of the user in the game
 
 import java.io.*;
+import java.util.*;
 public class Player{
    private String username;
    private String filename;
@@ -143,7 +144,7 @@ public class Player{
          f.close();
          
          PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(IMAGE_FILE_FILE)));
-         for(int i = 0; i < left.size; i++) out.println(left.get(i));
+         for(int i = 0; i < left.size(); i++) out.println(left.get(i));
          out.close();
          
          return ret;
@@ -151,6 +152,7 @@ public class Player{
       } catch(IOException e){
          System.out.println("Image File Error");
       }
+	   return null;
    }
    
    public void addImageToFile(String imgf){
