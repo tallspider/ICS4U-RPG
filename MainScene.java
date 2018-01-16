@@ -44,7 +44,8 @@ public class MainScene extends JFrame
       panel.add(b3);		 
    
       b4.setBounds(600, 200, 150, 70);
-      panel.add(b4);		 
+      panel.add(b4);
+		b4.addMouseListener(new HangarListener(this, player));		 
    
       b5.setBounds(600, 300, 150, 70);
       panel.add(b5);		 
@@ -76,21 +77,22 @@ public class MainScene extends JFrame
          new FleetFrame(fleet,ms);
       }
    }
-/*
-   private class LeaderBoardListener extends MouseAdapter{
-      private MainScene ms = null;
-     // private Fleet fleet = null;
+
+	private class HangarListener  extends MouseAdapter{
+		MainScene ms = null;
+		Player player = null;
+		public HangarListener(MainScene ms,Player player){
+			this.ms = ms;
+			this.player = player;
+		}
+		
+		public void  mouseClicked(MouseEvent e){
+			ms.setVisible(false);
+			new HangarFrame(player);
+		}
+	}
       
-      public FleetListener(Fleet f, MainScene m){
-         ms = m;
-        // fleet = f;
-      } 
-      
-      public void mouseClicked(MouseEvent e){
-        // ms.setVisible(false);
-         new LeaderBoardFrame(fleet,ms);
-      }
-   }*/
+
 //There still a few more MouseListener needed to add
 
 }  
