@@ -4,12 +4,15 @@ import java.awt.event.*;
 import javax.swing.JComponent;
 public class LeaderBoardFrame extends JFrame{
 
-   private JLabel wayOfSort = new JLabel("rank/nScore\nPlayer");
+   private JLabel wayOfSort = new JLabel("rank   Score   Player", SwingConstants.CENTER);
    private LeaderBoard ranking;
    private int num;
+	private JLabel [] rank;
+	private JLabel [] name;
+	private JLabel [] score;
    private ComparisonPlayer [] nameSort;
    private ComparisonPlayer [] scoreSort;
-   private static JLabel[] rank;
+   //private static JLabel[] rank;
    private static Button change1 = new Button("Switch to sort by name");
    private static Button change2 = new Button("Switch to sort by player"); 
    public LeaderBoardFrame(String name){
@@ -20,27 +23,26 @@ public class LeaderBoardFrame extends JFrame{
       nameSort = ranking.getPlayersByName();
       num = nameSort.length;
       
-      this.setLayout(new FlowLayout());
-      this.add(wayOfSort);
+      this.setLayout(new BorderLayout(200,50));
+      this.add(wayOfSort,BorderLayout.NORTH);
       this.setResizable(false);
-      this.setBounds(500,500,400,num*50+100);
+      this.setBounds(500,500,400,num*100+100);
       this.setVisible(true);
       
-      rank = new JLabel[num];     
-      for (int i = 0;i<num;i++){
-         rank[i] = new JLabel(i + "\n" +scoreSort[i].getScore()+ "\n" + scoreSort[i]. getUsername());
-         this.add(rank[i]);
-      }
+		for(int i = 0;i<num;i++){
+			rank[i] = new JLabel(Integer.toString(i),SwingConstants.CENTER);
+			nameSort[i] = new JLabel(scoreSort[i].getName());
+		}
       
       Button change = new Button("Switch to sort by name");
-      this.add(change);
+      this.add(change,BorderLayout.SOUTH);
       change.addMouseListener(new SortScoreListener(this));
       
       this.addWindowListener(
          new WindowAdapter(){
             public void windowClosing(WindowEvent e){
-               setVisible(false);
-               System.exit(-1);
+               //setVisible(false);
+               dispose();
             }
          });
    }
@@ -56,9 +58,9 @@ public class LeaderBoardFrame extends JFrame{
        lbf.removeAll();
          wayOfSort.setText("rank/nPlayer\nScore");
          
-         for(int i =0; i<num;i++){
-            rank[num] = new JLabel(i + "\n" +nameSort[i].getScore()+ "\n" + nameSort[i]. getUsername());
-            lbf.add(rank[i]);
+         for(int i =0; i<nameSort.length;i++){
+          //  rank[num] = new JLabel(i + "\n" +nameSort[i].getScore()+ "\n" + nameSort[i]. getUsername());
+          //  lbf.add(rank[i]);
          }
          
          Button change = new Button("Switch to sort by name");
@@ -85,11 +87,11 @@ public class LeaderBoardFrame extends JFrame{
       }
       public void mouseClicked(MouseEvent e){
          lbf.removeAll();
-         wayOfSort.setText("rank/nScore\nPlayer");
+         wayOfSort.setText("rank/tScore\tPlayer");
          
          for (int i = 0;i<num;i++){
-            rank[i] = new JLabel(i + "\n" +scoreSort[i].getScore()+ "\n" + scoreSort[i]. getUsername());
-            lbf.add(rank[i]);
+          //  rank[i] = new JLabel(i + "\n" +scoreSort[i].getScore()+ "\n" + scoreSort[i]. getUsername());
+          // lbf.add(rank[i]);
          }
          
          Button change = new Button("Switch to sort by name"); 
@@ -99,7 +101,7 @@ public class LeaderBoardFrame extends JFrame{
          lbf.addWindowListener(
             new WindowAdapter(){
                public void windowClosing(WindowEvent e){
-                  setVisible(false);
+                  dispose();
                }
             });
       }
