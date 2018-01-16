@@ -53,10 +53,9 @@ public class LoginFrame extends JFrame{
          user = new Login(username,password);
          //errorFrame.setVisible(true);
          if(user.checkSuccessful()){
-            System.out.println("1");
+				dispose();
             new MainScene(new Player(username));            
          }else{
-            System.out.println("2");
 				ErrorFrame.error.setText("Wrong username / password");
             new ErrorFrame();
          }
