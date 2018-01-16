@@ -7,7 +7,7 @@ import java.awt.event.*;
 public class FleetFrame extends JFrame{
    private Fleet fleet;
    private int shipNum;
-   private Button buttons;
+   private Button [] buttons;
    private Ship[] ships;
    private MainScene mainscene;
    
@@ -17,7 +17,7 @@ public class FleetFrame extends JFrame{
       ms.setVisible(false);
       this.fleet = fleet;
       this.setBounds(500,500,400,600);
-      this.setVisble(true);
+      this.setVisible(true);
       this.setLayout(new FlowLayout());
       
       shipNum = fleet.getShipNum();
@@ -26,7 +26,7 @@ public class FleetFrame extends JFrame{
       buttons = new Button[shipNum+1];
       for(int i = 0;i<=shipNum;i++){
          buttons[i] = new Button(ships[i].getName());
-         buttons[i].addMouseListener(new ShipListener(button[i], mainscene,this));
+         buttons[i].addMouseListener(new ShipListener(ships[i], mainscene,this));
       }
       
       
@@ -42,7 +42,7 @@ public class FleetFrame extends JFrame{
       private FleetFrame ff = null;
       private Ship ship = null;
       private MainScene mainscene = null;
-      public void ShipListener(Ship ship,MainScene mainscene,FleetFrame ff){
+      public ShipListener(Ship ship,MainScene mainscene,FleetFrame ff){
          this.ff = ff;
          this.mainscene = mainscene;
          this.ship = ship;
@@ -55,15 +55,15 @@ public class FleetFrame extends JFrame{
    
    private class returnListener extends MouseAdapter{
       private FleetFrame ff = null;
-      private MainFrame mf = null;
+      private MainScene mf = null;
       
-      public returnListener(FleetFrame ff, MainFrame mf){
+      public returnListener(FleetFrame ff, MainScene mf){
          this.ff = ff;
          this.mf = mf;
       }
       public void mouseClicked(MouseEvent e){
-         ff.setVisble(false);
-         mf.setVisble(true);
+         ff.setVisible(false);
+         mf.setVisible(true);
       }
    }
 }
