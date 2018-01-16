@@ -76,7 +76,7 @@ public class MainScene extends JFrame
          new FleetFrame(fleet,ms);
       }
    }
-
+/*
    private class LeaderBoardListener extends MouseAdapter{
       private MainScene ms = null;
      // private Fleet fleet = null;
@@ -90,7 +90,7 @@ public class MainScene extends JFrame
         // ms.setVisible(false);
          new LeaderBoardFrame(fleet,ms);
       }
-   }
+   }*/
 //There still a few more MouseListener needed to add
 
 }  
