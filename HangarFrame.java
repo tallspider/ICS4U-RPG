@@ -37,7 +37,7 @@ public class HangarFrame extends JFrame{
    //takes in boolean that dictates whether or not to make this page visible
    public void setVisible(Component c, boolean b){
       lastPage = c;
-      init();
+      setVisible(b);
    }
    
    //initializes the Hangar Page
@@ -55,7 +55,7 @@ public class HangarFrame extends JFrame{
       add(BorderLayout.LINE_START, shipSideBar);
       add(BorderLayout.LINE_END, hangarInfoPanel);
       
-      setVisible(true);
+      //setVisible(true);
    }
    
    //initializes the left side bar, which contains a list of ships for user to click on
