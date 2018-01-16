@@ -63,38 +63,147 @@ public class MainScene extends JFrame
       frame.setVisible(true); 
    }
  
-   private class FleetListener extends MouseAdapter{
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+   private class FleetListener extends MouseAdapter
+   {
       private MainScene ms = null;
       private Fleet fleet = null;
       
-      public FleetListener(Fleet f, MainScene m){
+      public FleetListener(Fleet f, MainScene m)
+      {
          ms = m;
          fleet = f;
       } 
       
-      public void mouseClicked(MouseEvent e){
+
+      public void mouseClicked(MouseEvent e)
+      {
         // ms.setVisible(false);
          new FleetFrame(fleet,ms);
       }
    }
 
-	private class HangarListener  extends MouseAdapter{
+
+
+
+
+
+	private class HangarListener  extends MouseAdapter
+	{
 		MainScene ms = null;
 		Player player = null;
-		public HangarListener(MainScene ms,Player player){
+		public HangarListener(MainScene ms,Player player)
+		{
 			this.ms = ms;
 			this.player = player;
 		}
 		
-		public void  mouseClicked(MouseEvent e){
+		public void  mouseClicked(MouseEvent e)
+		{
 			ms.setVisible(false);
 			new HangarFrame(player);
 		}
 	}
       
-
-//There still a few more MouseListener needed to add
-
+      
+      
+      
+      
+      
+	private class LeaderboardListener  extends MouseAdapter
+	{
+		MainScene ms = null;
+		Leaderboard l = null;
+		public HangarListener(MainScene ms,Leaderboard l)
+		{
+			this.ms = ms;
+			this.l = l;
+		}
+		
+		public void  mouseClicked(MouseEvent e)
+		{
+			ms.setVisible(false);
+			new LeaderboardFrame(l);
+		}
+	}
+            
+	    
+	    
+	    
+	    
+	    
+	private class HangarListener  extends MouseAdapter
+	{
+		MainScene ms = null;
+		Player player = null;
+		public HangarListener(MainScene ms,Player player)
+		{
+			this.ms = ms;
+			this.player = player;
+		}
+		
+		public void  mouseClicked(MouseEvent e)
+		{
+			ms.setVisible(false);
+			new HangarFrame(player);
+		}
+	}
+            
+	    
+	    
+	    
+	    
+	    
+	private class HangarListener  extends MouseAdapter
+	{
+		MainScene ms = null;
+		Player player = null;
+		public HangarListener(MainScene ms,Player player)
+		{
+			this.ms = ms;
+			this.player = player;
+		}
+		
+		public void  mouseClicked(MouseEvent e)
+		{
+			ms.setVisible(false);
+			new HangarFrame(player);
+		}
+	}
+      
+      
+      
+      
+      
+      
+	private class HangarListener  extends MouseAdapter
+	{
+		MainScene ms = null;
+		Player player = null;
+		public HangarListener(MainScene ms,Player player)
+		{
+			this.ms = ms;
+			this.player = player;
+		}
+		
+		public void  mouseClicked(MouseEvent e)
+		{
+			ms.setVisible(false);
+			new HangarFrame(player);
+		}
+	}
+      
+      
+      
+      
+      
+      
 }  
 
 
