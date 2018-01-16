@@ -9,7 +9,8 @@ public class Login{
    private static final File THE_FILE = new File("logins.txt");
    private String username;
    private String password;
-   
+   private int count;
+   private int countMax;
    public Login(String name, String pw ){
    //Constructor
       username = name;
@@ -22,9 +23,9 @@ public class Login{
          BufferedReader in = new BufferedReader(new FileReader(THE_FILE));
          String temp;
          while((temp = in.readLine()) != null){
-            if(temp == username){
+            if(temp.equals(username)){
                temp = in.readLine();
-               if(temp == password){
+               if(temp.equals(password)){
                   in.close();
                   return true;
                }
@@ -76,12 +77,13 @@ public class Login{
       String [] information;
       try{
          BufferedReader check = new BufferedReader(new FileReader(THE_FILE));
-         int count = 0;
+         count = 0;
          while(check.readLine() != null){
             count++;
          }
          check.close();
-         information = new String [count+1];
+         countMax = count+1;
+         information = new String [countMax];
          count = 0;
          BufferedReader read = new BufferedReader(new FileReader(THE_FILE));
          String temp;
@@ -93,7 +95,7 @@ public class Login{
          information[count+1] = password;
          read.close();
          BufferedWriter out = new BufferedWriter(new FileWriter(THE_FILE));
-         for(int i = 0;i<=count+1;i++){
+         for(int i = 0;i<countMax;i++){
 			
             out.write(information[i]);
             out.newLine();
@@ -101,7 +103,7 @@ public class Login{
          out.close();  
       }
       catch(IOException e ){
-         System.out.print("Problem with using file");
+         System.out.print(e);
       }  
    }
    
