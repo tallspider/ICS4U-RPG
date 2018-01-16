@@ -1,75 +1,127 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
-public class LoginFrame extends JFrame{
-      private Player player;
-	 	private static TextField loginField = new TextField(10);
-		private static TextField passwordField = new TextField(10);  		  	
-	 	private static Login user; 
-	//	private static ErrorFrame errorFrame = new ErrorFrame();//make it private and do a accessor later
-
-   public LoginFrame(){
-      super("RPG");
-      this.setResizable(false);
-      this.setBounds(500,500,400,300);
-      this.setVisible(true);
-      this.setLayout(new FlowLayout());
-      JPanel unp = new JPanel();// username Panel
-      unp.setLayout(new FlowLayout());
-      unp.setSize(100,50);
-      unp.add(new JLabel("Username"));
-   			
-      unp.add(loginField);
-      this.add(unp);
-      JPanel pwp = new JPanel();//password Panel
-      pwp.setSize(100,50);
-      pwp.add(new JLabel("Password"));
-      pwp.add(passwordField);
-      this.add(pwp);
-      Button LogInB = new Button("Login"); 
-      this.add(LogInB);
-      Button PSB = new Button("Registe");
-      this.add(PSB);
-      LogInB.addMouseListener(new LoginListener (this));
-      PSB.addMouseListener(new RegisterListenner (this));
-      
-      this.addWindowListener(new WindowAdapter(){
-         public void windowClosing(WindowEvent e){
-            setVisible(false);
-            System.exit(-1);
-         }
-      });
+/*
+Class Name: Fleet
+Author: Chongpu Zhao
+Date: January 8, 2018
+Purpose: Used to load the registered user's information from the text file, save the new user's information into the text file.
+*/
+import java.io.*;
+public class Login{
+   private static final File THE_FILE = new File("logins.txt");
+   private String username;
+   private String password;
+   private int count;
+   private int countMax;
+   public Login(String name, String pw ){
+   //Constructor
+      username = name;
+      password = pw;
    }
    
-   private class LoginListener extends MouseAdapter{
-      LoginFrame mf = null;
-      public LoginListener(LoginFrame mf){
-         this.mf = mf;
-      }
-      
-      public void mouseClicked(MouseEvent e){
-         String username = loginField.getText();
-         String password = passwordField.getText();
-         user = new Login(username,password);
-         //errorFrame.setVisible(true);
-         if(user.checkSuccessful()){
-            new MainScene();            
-         }else{
-				ErrorFrame.error.setText("Wrong username / password");
-            new ErrorFrame();
+   public boolean checkSuccessful(){ 
+   //If the given username and password matches any account saved in the text file, return true. Otherwise return false;
+      try{
+         BufferedReader in = new BufferedReader(new FileReader(THE_FILE));
+         String temp;
+         while((temp = in.readLine()) != null){
+            if(temp == username){
+               temp = in.readLine();
+               if(temp == password){
+                  in.close();
+                  return true;
+               }
+            }else{
+               in.readLine();
+            }
          }
-      }    	
+         in.close();
+      
+      }
+      catch(IOException e ){
+         System.out.print("Problem with using file");
+      }
+      return false;   
    }
    
-  	private class RegisterListenner extends MouseAdapter{
-      LoginFrame mf = null;
+   public void Register(){
+   // Call the createNewAccount method to save the current username and password field into the txt file.
+      if( this.checkRegisterDetails()){
+         this.createNewAccount();
+      }else{
+         System.out.println("Username is already taken");
+      }      
+   }
    
-      public RegisterListenner(LoginFrame mF){
-         this.mf = mF;
+   public boolean checkRegisterDetails(){
+   //Check if the current username field matchs any username which already in the text file. If so return false , otherwise return true.
+      try{
+         BufferedReader in = new BufferedReader(new FileReader(THE_FILE));
+         String temp;
+         while((temp = in.readLine()) != null){
+            if(temp == username){
+               return false;
+            }
+            in.readLine();
+         }
+         in.close();
+              
       }
-      public void mouseClicked(MouseEvent e){
-			mf.setVisible(false);
-			new RegisterFrame(mf);
+      catch(IOException e ){
+         System.out.print("Problem with using file");
       }
+      return true;   
+   }
+   
+  public void createNewAccount(){
+   //Loads all the lines in the txt field into a string array. Add the current username and password field to the end of this array.
+   //And then replace the contents in the text file by the contents in the string array.
+      String [] information;
+      try{
+         BufferedReader check = new BufferedReader(new FileReader(THE_FILE));
+         count = 0;
+         while(check.readLine() != null){
+            count++;
+         }
+         check.close();
+         countMax = count+1;
+         information = new String [countMax];
+         count = 0;
+         BufferedReader read = new BufferedReader(new FileReader(THE_FILE));
+         String temp;
+         while((temp = read.readLine()) != null){
+            information[count] = temp;
+    			count++;    
+		   } 
+         information[count] = username;
+         information[count+1] = password;
+         read.close();
+         BufferedWriter out = new BufferedWriter(new FileWriter(THE_FILE));
+         for(int i = 0;i<countMax;i++){
+			
+            out.write(information[i]);
+            out.newLine();
+         }  
+         out.close();  
+      }
+      catch(IOException e ){
+         System.out.print(e);
+      }  
+   }
+   
+   public String getUsername(){
+   //Return the username field.
+      return username;
+   }
+   public String getPassword(){
+   //Return the password field.
+      return password;
+   }
+   
+   public void setUsername(String s){
+   //Set the username field to the give String.
+      username = s;
+   }
+   public void setPassword(String s){
+   //Set the password field to the give String.
+      password = s;
    }
 }
