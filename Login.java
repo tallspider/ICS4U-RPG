@@ -82,17 +82,17 @@ public class Login{
             count++;
          }
          check.close();
-         countMax = count+1;
-         information = new String [countMax];
-         count = 0;
+         information = new String [count+2];
+         count = -1;
          BufferedReader read = new BufferedReader(new FileReader(THE_FILE));
          String temp;
          while((temp = read.readLine()) != null){
+				count++; 
             information[count] = temp;
-    			count++;    
+    			   
 		   } 
-         information[count] = username;
-         information[count+1] = password;
+         information[count+1] = username;
+         information[count+2] = password;
          read.close();
          BufferedWriter out = new BufferedWriter(new FileWriter(THE_FILE));
          for(int i = 0;i<countMax;i++){
