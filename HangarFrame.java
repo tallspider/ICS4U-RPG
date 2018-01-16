@@ -23,6 +23,7 @@ public class HangarFrame extends JFrame{
    public static final int WINDOW_LENGTH = MainScene.WINDOW_LENGTH;
    public static final int SHIP_SIDEBAR_LENGTH = WINDOW_LENGTH / 5;
    public static final int PAGE_SPLIT_HEIGHT = WINDOW_HEIGHT / 2 + 50;
+   public static final int WIDTH_CORRECTION = 5;
    
    //constructor of the HangarFrame class
    public HangarFrame(Player p){
@@ -44,6 +45,7 @@ public class HangarFrame extends JFrame{
       setSize(WINDOW_LENGTH, WINDOW_HEIGHT);
       setLocationRelativeTo(null);
       setLayout(new BorderLayout(0, 0));
+      setResizable(false);
       
       hangar = player.getHangar();
       
@@ -74,6 +76,7 @@ public class HangarFrame extends JFrame{
       hangarInfoPanel = new HangarInfoPanel(this);
       initHangarInfoPanel();
       add(BorderLayout.LINE_END, hangarInfoPanel);
+      revalidate();
    }
    
    //displays a question pane that asks the user to select yes or no
@@ -120,18 +123,26 @@ class ShipSideBar extends JPanel{
    //attaches an ActionListener to each button that updates the Ship info displayed
    //when the button is clicked
    public void init(){
-      setLayout(new GridLayout(numButtons, 0));
-      setPreferredSize(new Dimension(length, height));
-      
       player = hangarFrame.getPlayer();
       hangar = player.getHangar();
-      length = HangarFrame.SHIP_SIDEBAR_LENGTH;
+      length = HangarFrame.SHIP_SIDEBAR_LENGTH - HangarFrame.WIDTH_CORRECTION;
       height = HangarFrame.WINDOW_HEIGHT;
+      
       numButtons = Hangar.MAX_SHIPS;
+      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+      setPreferredSize(new Dimension(length, height));
       
       for(int at = 0; at < Hangar.MAX_SHIPS; at++){
          final int AT = at;
+         final int LENGTH = length;
+         final int HEIGHT = height;
+         
          JButton button;
+         JPanel buttonPanel;
+         
+         buttonPanel = new JPanel();
+         buttonPanel.setPreferredSize(new Dimension(LENGTH, HEIGHT / numButtons));
+         buttonPanel.setLayout(new BorderLayout(0, 0));
          if(hangar.getShip(at) != null)
             button = new JButton(hangar.getShip(at).getName());
          else
@@ -143,8 +154,11 @@ class ShipSideBar extends JPanel{
                   hangarFrame.updateShipInfoPanel(AT);
                }
             });
-         
-         add(button);
+         button.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
+         buttonPanel.setOpaque(true);
+         buttonPanel.setBackground(Color.LIGHT_GRAY);
+         buttonPanel.add(BorderLayout.CENTER, button);
+         add(buttonPanel);
       }
    }
    
@@ -180,7 +194,8 @@ class HangarInfoPanel extends JPanel{
       player = hangarFrame.getPlayer();
       hangar = player.getHangar();
       shipID = hangarFrame.getCurrentShipID();
-      imageFile = hangar.getShip(shipID).getImageFile();
+      if(hangar.getShip(shipID) == null) imageFile = Player.NO_PIC;
+      else imageFile = hangar.getShip(shipID).getImageFile();
       length = HangarFrame.WINDOW_LENGTH - HangarFrame.SHIP_SIDEBAR_LENGTH;
       height = HangarFrame.WINDOW_HEIGHT;
       pageSplitHeight = HangarFrame.PAGE_SPLIT_HEIGHT;
@@ -227,6 +242,7 @@ class HangarInfoPanel extends JPanel{
 class HangarInfoTop extends JPanel{
    
    private Player player;
+   private Hangar hangar;
    private int shipID;
    private int length;
    private int height;
@@ -249,8 +265,10 @@ class HangarInfoTop extends JPanel{
    public void init(){
       hangarFrame = hangarInfoPanel.getHangarFrame();
       player = hangarFrame.getPlayer();
+      hangar = player.getHangar();
       shipID = hangarFrame.getCurrentShipID();
-      imageFile = player.getHangar().getShip(shipID).getImageFile();
+      if(hangar.getShip(shipID) == null) imageFile = Player.NO_PIC;
+      else imageFile = player.getHangar().getShip(shipID).getImageFile();
       length = hangarInfoPanel.getLength();
       height = hangarInfoPanel.getHeight() - HangarFrame.PAGE_SPLIT_HEIGHT;
       
@@ -384,6 +402,8 @@ class HangarInfoTopLeft extends JPanel{
    private int length;
    private int height;
    
+   public static final int NUM_LINES = 4;
+   
    private Hangar hangar;
    private Ship ship;
    
@@ -413,11 +433,17 @@ class HangarInfoTopLeft extends JPanel{
       setOpaque(true);
       setBackground(Color.green);
       
-      addLine("Travel range: " + ship.getTravelRange());
-      addLine("Attack range: " + ship.getAttackRange());
-      addLine("Firing speed: " + ship.getFiringSpeed());
+      if(ship == null){
+         addLine("Travel range: " + Ship.BASIC_STAT);
+         addLine("Attack range: " + Ship.BASIC_STAT);
+         addLine("Firing speed: " + Ship.BASIC_STAT);
+      } else {
+         addLine("Travel range: " + ship.getTravelRange());
+         addLine("Attack range: " + ship.getAttackRange());
+         addLine("Firing speed: " + ship.getFiringSpeed());
+      }
       
-      if(ship.getOwnedByPlayer())
+      if(!(ship == null))
          addLine("Sell for: " + ship.getSellPrice());
       else
          addLine("Cost: " + Ship.BASIC_COST);
@@ -425,7 +451,10 @@ class HangarInfoTopLeft extends JPanel{
    
    //utility method for adding lines of text onto JPanel
    private void addLine(String s){
-      add(new JLabel(s));
+      JLabel label = new JLabel(s);
+      label.setPreferredSize(new Dimension(length, height / NUM_LINES));
+      label.setFont(new Font("Courier", Font.BOLD, 20));
+      add(label);
    }
 }
 
@@ -522,7 +551,8 @@ class HangarInfoTopRight extends JPanel{
       shipID = hangarFrame.getCurrentShipID();
       hangar = player.getHangar();
       ship = hangar.getShip(shipID);
-      imageFile = ship.getImageFile();
+      if(ship == null) imageFile = Player.NO_PIC;
+      else imageFile = ship.getImageFile();
       length = hangarInfoTop.getLength() / 3;
       height = hangarInfoTop.getHeight();
       
