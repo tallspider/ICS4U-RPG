@@ -8,20 +8,21 @@ public class InfoFrame extends JFrame{
    private JLabel info;
    private FleetFrame ff;
    public InfoFrame(Ship userShip,FleetFrame ff){
+      super(userShip.getName());
       this.ff = ff;
       ship = userShip;
-      super(ship.getName());
+      
    
       this.setBounds(600,600,800,300);
       this.setVisible(true);
       
-      info = new JLabel(ship);
+      info = new JLabel(ship.toString());
       this.add(info);
       Button close = new Button("Close");
       this.addMouseListener(new  closeListener(this,ff));  
    }
    
-   private class closeListener extends MouesAdapter{
+   private class closeListener extends MouseAdapter{
       private InfoFrame iF;
       private FleetFrame ff;
       public closeListener(InfoFrame iF, FleetFrame ff){
@@ -29,8 +30,8 @@ public class InfoFrame extends JFrame{
          this.ff = ff;
       }
       public void mouseClicked(MouseEvent e){
-         iF.setVisble(false);
-         ff.setVisble(true);
+         iF.setVisible(false);
+         ff.setVisible(true);
       }
    }
 }
