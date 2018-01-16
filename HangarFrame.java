@@ -23,7 +23,7 @@ public class HangarFrame extends JFrame{
    public static final int WINDOW_LENGTH = MainScene.WINDOW_LENGTH;
    public static final int SHIP_SIDEBAR_LENGTH = WINDOW_LENGTH / 5;
    public static final int PAGE_SPLIT_HEIGHT = WINDOW_HEIGHT / 2 + 50;
-   public static final int WIDTH_CORRECTION = 5;
+   public static final int WIDTH_CORRECTION = 20;
    
    //constructor of the HangarFrame class
    public HangarFrame(Player p){
@@ -45,7 +45,7 @@ public class HangarFrame extends JFrame{
       setSize(WINDOW_LENGTH, WINDOW_HEIGHT);
       setLocationRelativeTo(null);
       setLayout(new BorderLayout(0, 0));
-      setResizable(false);
+      //setResizable(false);
       
       hangar = player.getHangar();
       
@@ -434,27 +434,41 @@ class HangarInfoTopLeft extends JPanel{
       setBackground(Color.green);
       
       if(ship == null){
-         addLine("Travel range: " + Ship.BASIC_STAT);
-         addLine("Attack range: " + Ship.BASIC_STAT);
-         addLine("Firing speed: " + Ship.BASIC_STAT);
+         addLine("Travel range: ", "" + Ship.BASIC_STAT);
+         addLine("Attack range: ", "" + Ship.BASIC_STAT);
+         addLine("Firing speed: ", "" + Ship.BASIC_STAT);
       } else {
-         addLine("Travel range: " + ship.getTravelRange());
-         addLine("Attack range: " + ship.getAttackRange());
-         addLine("Firing speed: " + ship.getFiringSpeed());
+         addLine("Travel range: ", "" + ship.getTravelRange());
+         addLine("Attack range: ", "" + ship.getAttackRange());
+         addLine("Firing speed: ", "" + ship.getFiringSpeed());
       }
       
       if(!(ship == null))
-         addLine("Sell for: " + ship.getSellPrice());
+         addLine("Sell for: ", "" + ship.getSellPrice());
       else
-         addLine("Cost: " + Ship.BASIC_COST);
+         addLine("Cost: ", "" + Ship.BASIC_COST);
    }
    
    //utility method for adding lines of text onto JPanel
-   private void addLine(String s){
-      JLabel label = new JLabel(s);
-      label.setPreferredSize(new Dimension(length, height / NUM_LINES));
-      label.setFont(new Font("Courier", Font.BOLD, 20));
-      add(label);
+   private void addLine(String s1, String s2){
+      JLabel label1 = new JLabel(s1);
+      JLabel label2 = new JLabel(s2);
+      
+      label1.setPreferredSize(new Dimension(length / 4 * 2, height / NUM_LINES));
+      label2.setPreferredSize(new Dimension(length / 4, height / NUM_LINES));
+      
+      label1.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      label2.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      
+      label1.setHorizontalAlignment(JLabel.LEFT);
+      label2.setHorizontalAlignment(JLabel.RIGHT);
+      
+      JPanel panel = new JPanel();
+      panel.setLayout(new FlowLayout());
+      panel.setPreferredSize(new Dimension(length, height / NUM_LINES));
+      panel.add(label1);
+      panel.add(label2);
+      add(panel);
    }
 }
 
