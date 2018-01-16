@@ -27,7 +27,7 @@ public class LeaderBoardFrame extends JFrame{
       this.setVisible(true);
       
       rank = new JLabel[num];     
-      for (int i = 0;i<=num;i++){
+      for (int i = 0;i<num;i++){
          rank[i] = new JLabel(i + "\n" +scoreSort[i].getScore()+ "\n" + scoreSort[i]. getUsername());
          this.add(rank[i]);
       }
@@ -56,7 +56,7 @@ public class LeaderBoardFrame extends JFrame{
        lbf.removeAll();
          wayOfSort.setText("rank/nPlayer\nScore");
          
-         for(int i =0; i<=num;i++){
+         for(int i =0; i<num;i++){
             rank[num] = new JLabel(i + "\n" +nameSort[i].getScore()+ "\n" + nameSort[i]. getUsername());
             lbf.add(rank[i]);
          }
@@ -87,7 +87,7 @@ public class LeaderBoardFrame extends JFrame{
          lbf.removeAll();
          wayOfSort.setText("rank/nScore\nPlayer");
          
-         for (int i = 0;i<=num;i++){
+         for (int i = 0;i<num;i++){
             rank[i] = new JLabel(i + "\n" +scoreSort[i].getScore()+ "\n" + scoreSort[i]. getUsername());
             lbf.add(rank[i]);
          }
