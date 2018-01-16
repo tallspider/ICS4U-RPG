@@ -74,8 +74,14 @@ public class HangarFrame extends JFrame{
       currentShipID = id;
       remove(hangarInfoPanel);
       hangarInfoPanel = new HangarInfoPanel(this);
-      initHangarInfoPanel();
       add(BorderLayout.LINE_END, hangarInfoPanel);
+      revalidate();
+   }
+   
+   public void updateShipSideBar(){
+      remove(shipSideBar);
+      shipSideBar = new ShipSideBar(this);
+      add(BorderLayout.LINE_START, shipSideBar);
       revalidate();
    }
    
@@ -504,32 +510,55 @@ class HangarInfoTopMid extends JPanel{
       hangar = player.getHangar();
       ship = hangar.getShip(shipID);
       
-      if(ship == null) 
-         ship = new Ship("", Player.NO_PIC, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.INIT_UPGRADES, Ship.BASIC_COST, false);
-      
       setPreferredSize(new Dimension(length, height));
       setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
       setOpaque(true);
-      setBackground(Color.gray);
+      setBackground(Color.green);
       
       JTextField entry;
       JButton button;
       
-      if(ship.getOwnedByPlayer()){
-         entry = new JTextField(10); 
+      if(!(ship == null)){
+         entry = new JTextField(15); 
          button = new JButton("Change Ship Name");
       	
 			final JTextField ENTRY = entry;
+         JPanel panel = new JPanel();
+         
          button.addActionListener(
             new ActionListener(){
 					public void actionPerformed(ActionEvent e){
                   System.out.println("Change Ship Name button clicked");
                   ship.setName(ENTRY.getText());
+                  //System.out.println(ENTRY.getText());
+                  hangarFrame.updateShipSideBar();
                }
             });
-      
-         add(entry);
-         add(button);
+         
+         JLabel label = new JLabel("Enter New Ship Name:");
+         JLabel reminder = new JLabel("Click Save in Main");
+         JLabel reminder2 = new JLabel("Screen to save.");
+         JLabel reminder3 = new JLabel("Unsaved changes will");
+         JLabel reminder4 = new JLabel("be discarded.");
+         
+         label.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         entry.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         button.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         reminder.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         reminder2.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         reminder3.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         reminder4.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         
+         panel.add(label);
+         panel.add(entry);
+         panel.add(button);
+         panel.add(reminder);
+         panel.add(reminder2);
+         panel.add(reminder3);
+         panel.add(reminder4);
+         
+         panel.setOpaque(false);
+         add(panel);
       }
       
    }
@@ -592,6 +621,8 @@ class HangarInfoBotLeft extends JPanel{
    private Hangar hangar;
    private Ship ship;
    
+   public static final int RIGID_AREA_LENGTH = 45;
+   
    //constructor of this class
    //takes in the HangarInfoBot object that contains it
    public HangarInfoBotLeft(HangarInfoBot hb){
@@ -618,18 +649,30 @@ class HangarInfoBotLeft extends JPanel{
       hangar = player.getHangar();
       ship = hangar.getShip(shipID);
       
+      JPanel panel = new JPanel();
+      panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+      panel.setPreferredSize(new Dimension(length, height));
+      panel.add(Box.createRigidArea(new Dimension(RIGID_AREA_LENGTH, 0)));
+      panel.setOpaque(false);
+      
       if(ship != null){
-         addLine("\tUpgrade: ");
-         addLine("Travel Range: ");
-         addLine("Attack Range: ");
-         addLine("Firing Speed: ");
+         addLine(panel, "\tUpgrade: ", JLabel.CENTER);
+         addLine(panel, "Travel Range: ", JLabel.LEFT);
+         addLine(panel, "Attack Range: ", JLabel.LEFT);
+         addLine(panel, "Firing Speed: ", JLabel.LEFT);
       }
-      addLine("Player Money: " + player.getNumCoins());
+      addLine(panel, "    Player Money: " + player.getNumCoins(), JLabel.LEFT);
+      add(panel);
    }
    
    //utility method for adding a line of text onto the JPanel
-   private void addLine(String s){
-      add(new JLabel(s));
+   private void addLine(JPanel panel, String s, int align){
+      JLabel label = new JLabel(s);
+      label.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      label.setHorizontalAlignment(align);
+      panel.add(label);
+      panel.add(Box.createVerticalGlue());
+      
    }
 }
 
@@ -668,14 +711,27 @@ class HangarInfoBotMid extends JPanel{
       setOpaque(true);
       setBackground(Color.white);
       
-      JLabel trLabel, arLabel, fsLabel;
+      JLabel costLabel, trLabel, arLabel, fsLabel, sellLabel, buyLabel;
       JButton trButton, arButton, fsButton;
       
       if(ship != null){
-         add(new JLabel("Cost: "));
+         costLabel = new JLabel("     Cost:           ");
+         costLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
       
-         trLabel = new JLabel(ship.calcUpgradeCost(Ship.TR_Upgrade)+ "");
+         trLabel = new JLabel(ship.getTravelRange() + "    ");
+         trLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      
+         arLabel = new JLabel(ship.getAttackRange() + "    ");
+         arLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      
+         fsLabel = new JLabel(ship.getFiringSpeed() + "    ");
+         fsLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         
+         sellLabel = new JLabel("    Money After Sell: " + (player.getNumCoins() - ship.getSellPrice()));
+         sellLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         
          trButton = new JButton("Upgrade");
+         trButton.setFont(new Font("TimesRoman", Font.BOLD, 20));
          trButton.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
@@ -683,8 +739,8 @@ class HangarInfoBotMid extends JPanel{
                }
             });
       
-         arLabel = new JLabel(ship.calcUpgradeCost(Ship.AR_Upgrade)+ "");
          arButton = new JButton("Upgrade");
+         arButton.setFont(new Font("TimesRoman", Font.BOLD, 20));
          arButton.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
@@ -692,21 +748,34 @@ class HangarInfoBotMid extends JPanel{
                }
             });
       
-         fsLabel = new JLabel(ship.calcUpgradeCost(Ship.FS_Upgrade)+ "");
          fsButton = new JButton("Upgrade");
+         fsButton.setFont(new Font("TimesRoman", Font.BOLD, 20));
          fsButton.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
                   player.upgradeShip(shipID, Ship.FS_Upgrade);
                }
             });
-      
+         
+         //add(Box.createRigidArea(new Dimension(100, 0)));
+         
+         costLabel.setPreferredSize(new Dimension(length, height / 6 - 9));
+         costLabel.setVerticalAlignment(JLabel.TOP);
+         add(costLabel);
+         add(Box.createVerticalGlue());
+         
          addLineButton(trLabel, trButton);
          addLineButton(arLabel, arButton);
          addLineButton(fsLabel, fsButton);
-         add(new JLabel("Money After Sell: " + (player.getNumCoins() - ship.getSellPrice())));
+         
+         //sellLabel.setPreferredSize(new Dimension(length, height / 5));
+         add(sellLabel);
+         add(Box.createVerticalGlue());
       } else {
-         add(new JLabel("Money After Pay: " + (player.getNumCoins() - Ship.BASIC_COST)));
+         buyLabel = new JLabel("Money After Pay: " + (player.getNumCoins() - Ship.BASIC_COST));
+         buyLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         
+         add(buyLabel);
       }
    }
    
@@ -714,11 +783,15 @@ class HangarInfoBotMid extends JPanel{
    //takes in the line of text and the button to be added in one line 
    private void addLineButton(JLabel label, JButton button){
       JPanel temp = new JPanel();
+      temp.setLayout(new FlowLayout());
       temp.setPreferredSize(new Dimension(length, height / 5));
-      label.setPreferredSize(new Dimension(length / 2, height / 5));
-      button.setPreferredSize(new Dimension(length / 2, height / 5));
+      
       temp.add(label);
       temp.add(button);
+      temp.setOpaque(false);
+      
+      add(temp);
+      add(Box.createVerticalGlue());
    }
 }
 
