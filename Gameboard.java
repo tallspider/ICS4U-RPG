@@ -212,6 +212,7 @@ Purpose: Cointains the map and combat
    // allows the user to play duing hes / her turn, allows user to select and act on the ships
        private void play(){
       
+         Location testLocation;
          Location shipLocation;
          int shipAction;
          boolean[][] validMap;
@@ -222,6 +223,8 @@ Purpose: Cointains the map and combat
          gui.updatePlayArea(map);
       
          shipLocation = selectLocation();
+         testLocation = new Location();
+         
       
       // someone might press end turn as the first click, giving us null
          if (shipLocation != null){
@@ -238,47 +241,48 @@ Purpose: Cointains the map and combat
                if (map.isShip(shipLocation)){
                   if (map.getShip(shipLocation).getOwnedByPlayer()){
                   
-                  // here we enter the ship action loop, where the player can move and attack the ship untill he/she deselects it (selects cancel)
-                  
                      shipAction = selectAction();
                   
-                     while (shipAction != CANCEL){
-                     
-                        if (shipAction == MOVE){
+                     if (shipAction == MOVE){
                         
-                           validMap = allValidMoves(shipLocation);
-                           displayPossibleMovement(validMap);
-                           moveShip(shipLocation, selectLocation(), validMap);
+                        validMap = allValidMoves(shipLocation);
+                        displayPossibleMovement(validMap);
+                           
+                        testLocation = selectLocation();
+                        	
+                        if (testLocation != null){
+                           moveShip(shipLocation, testLocation, validMap);
                            gui.updatePlayArea(map);
-                        
-                        // to exit the loop as if we move the ship the ship is no longer there 
-                           shipAction = CANCEL;
                         }
-                        else if(shipAction == ATTACK){
                         
-                           validMap = allValidAttack(shipLocation);
-                           displayPossibleAttack(validMap);
-                           attackShip(shipLocation, selectLocation(), validMap);
-                           gui.updatePlayArea(map);
-                        
-                        // to exit the loop as if we move the ship the ship might have attacked itself
-                           shipAction = CANCEL;
-                        }
-                     
-                     // visuals must be updated once player does an action, just like with ai
-                        gui.updatePlayArea(map);
-                     
-                        if (shipAction != CANCEL){
-                           shipAction = selectAction();
-                        }
                      }
+                     else if(shipAction == ATTACK){
+                        
+                        validMap = allValidAttack(shipLocation);
+                        displayPossibleAttack(validMap);
+                           
+                        testLocation = selectLocation();
+                        	
+                        if (testLocation != null){
+                           attackShip(shipLocation, testLocation, validMap);
+                           gui.updatePlayArea(map);
+                        }
+                        
+                     }
+                     // visuals must be updated once player does an action, just like with ai
+                     gui.updatePlayArea(map);
                   
                   }
                }
             }
             
-            shipLocation = selectLocation();
-            
+            if (testLocation == null){
+               shipLocation = null;
+            }
+            else{
+               shipLocation = selectLocation();
+            }
+         	
             if (shipLocation == null){
                System.out.println("end turn");
             }
@@ -435,7 +439,7 @@ Purpose: Cointains the map and combat
       // testLocation and testShip are there to prevent the use of new Location(x,y) and map.getShip(new Location(x.y)) many times 
          Location testLocation;
          Ship testShip;
-      
+         
          for (int i = 0 ; i < 2; i++){
          
          // basically loops throught the entire map and acts on all ai ships
@@ -456,8 +460,9 @@ Purpose: Cointains the map and combat
                
                }
             }
-         }
-      
+         
+         }  
+      	
       }
    
    // allows the ai to act on a ship (use the ship) (no need to worry about ai using the ship twice, as nothing will happen due to gamelogic)
@@ -569,6 +574,9 @@ Purpose: Cointains the map and combat
                if (!(closestValidLocation == null)){
                   moveShip(shipLocation, closestValidLocation,validMap);
                }
+               else{
+            	System.out.println("im blind");
+            	}
             
             }
             else {
