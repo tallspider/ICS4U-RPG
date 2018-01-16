@@ -29,6 +29,7 @@ public class ShipSwapFrame extends JFrame{
    private HangarShipsPanel hangarShipsPanel;
    private FleetShipsPanel fleetShipsPanel;
    private InfoContainerPanel infoContainerPanel;
+   public static final int TITLE_HEIGHT = 40;
    
    public static final int WINDOW_HEIGHT = MainScene.WINDOW_WIDTH;
    public static final int WINDOW_LENGTH = MainScene.WINDOW_LENGTH;
@@ -44,9 +45,8 @@ public class ShipSwapFrame extends JFrame{
    //initializes the object
    //initializes each of the 3 parts: hangar ship list, fleet ship list and info panel
    public void init(){
-      setPreferredSize(new Dimension(WINDOW_LENGTH, WINDOW_HEIGHT));
+      setSize(WINDOW_LENGTH, WINDOW_HEIGHT);
       setLocationRelativeTo(null);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       setLayout(new BorderLayout(0, 0));
       
       hangar = player.getHangar();
@@ -124,6 +124,7 @@ public class ShipSwapFrame extends JFrame{
       remove(infoContainerPanel);
       initInfoContainerPanel();
       add(infoContainerPanel, BorderLayout.LINE_END);
+      revalidate();
    }
    
    //mutator for setting all the details of the second ship
@@ -138,6 +139,7 @@ public class ShipSwapFrame extends JFrame{
       remove(infoContainerPanel);
       initInfoContainerPanel();
       add(infoContainerPanel, BorderLayout.LINE_END);
+      revalidate();
    }
    
    //method that marks the first ship slot as empty
@@ -174,6 +176,11 @@ public class ShipSwapFrame extends JFrame{
    public Fleet getFleet(){
       return fleet;
    }
+   
+   //accessor for the HangarShipsPanel object
+   public HangarShipsPanel getHangarShipsPanel(){
+      return hangarShipsPanel;
+   }
 }
 
 //class that represents the panel containing all the ships from hangar
@@ -183,6 +190,7 @@ class HangarShipsPanel extends JPanel{
    
    private ShipSwapFrame frame;
    private Player player;
+   private int numButtons;
    
    private Hangar hangar;
    
@@ -200,12 +208,21 @@ class HangarShipsPanel extends JPanel{
       
       player = frame.getPlayer();
       hangar = player.getHangar();
-      length = frame.WINDOW_LENGTH / 3;
+      length = frame.WINDOW_LENGTH / 4;
       height = frame.WINDOW_HEIGHT;
+      numButtons = Hangar.MAX_SHIPS;
       
-      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-      setPreferredSize(new Dimension(length, height));
+      setLayout(new GridLayout(numButtons + 1, 0));
+      setPreferredSize(new Dimension(length, height - ShipSwapFrame.TITLE_HEIGHT));
+      //setOpaque(true);
+      //setBackground(Color.GREEN);
       
+      JLabel title = new JLabel("Ships in Hangar");
+      title.setPreferredSize(new Dimension(length, ShipSwapFrame.TITLE_HEIGHT));
+      title.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      
+      add(title);
+         
       for(int i = 0; i < Hangar.MAX_SHIPS; i++){
          final int AT = i;
          JButton button;
@@ -231,7 +248,18 @@ class HangarShipsPanel extends JPanel{
                }
             }
          });
+         
+         JPanel buttonPanel = new JPanel();
+         buttonPanel.setLayout(new BorderLayout(0, 0));
+         //buttonPanel.setPreferredSize(new Dimension(length, (height-ShipSwapFrame.TITLE_HEIGHT) / numButtons));
+         buttonPanel.add(button);
+         add(buttonPanel);
+         
       }
+   }
+   
+   public int getNumButtons(){
+      return numButtons;
    }
 }
 
@@ -242,6 +270,8 @@ class FleetShipsPanel extends JPanel{
    
    private ShipSwapFrame frame;
    private Player player;
+   private int numButtons;
+   private int buttonHeight;
    
    private Fleet fleet;
    
@@ -256,11 +286,19 @@ class FleetShipsPanel extends JPanel{
       
       player = frame.getPlayer();
       fleet = player.getFleet();
-      length = frame.WINDOW_LENGTH / 3;
+      length = frame.WINDOW_LENGTH / 4;
       height = frame.WINDOW_HEIGHT;
+      numButtons = Fleet.MAX_SHIPS;
+      buttonHeight = (height - ShipSwapFrame.TITLE_HEIGHT) / frame.getHangarShipsPanel().getNumButtons();
       
-      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-      setPreferredSize(new Dimension(length, height));
+      setLayout(new GridLayout(frame.getHangarShipsPanel().getNumButtons() + 1, 0));
+      setPreferredSize(new Dimension(length, height - ShipSwapFrame.TITLE_HEIGHT));
+      
+      JLabel title = new JLabel("Ships in Fleet");
+      title.setPreferredSize(new Dimension(length, ShipSwapFrame.TITLE_HEIGHT));
+      title.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      
+      add(title);
       
       for(int i = 0; i < Fleet.MAX_SHIPS; i++){
          final int AT = i;
@@ -287,6 +325,12 @@ class FleetShipsPanel extends JPanel{
                }
             }
          });
+         
+         JPanel buttonPanel = new JPanel();
+         //buttonPanel.setPreferredSize(new Dimension(length - 10, buttonHeight));
+         buttonPanel.setLayout(new BorderLayout(0, 0));
+         buttonPanel.add(button);
+         add(buttonPanel);
       }
    }
 }
@@ -312,7 +356,7 @@ class InfoContainerPanel extends JPanel{
    //initializes the class (the whole panel for displaying information of the ship)
    public void init(){
       setPreferredSize(new Dimension(length, height));
-      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+      setLayout(new GridLayout(2, 0));
       
       initTopInfoPanel();
       initBotInfoPanel();
@@ -383,13 +427,42 @@ class TopInfoPanel extends JPanel{
    
    //what happens if no ship is selected as ship 1
    public void displayEmpty(){
-      addLine("Choose a Ship");
+      JLabel label = new JLabel("Choose a Ship");
+      add(label);
    }
    
    //what happens is a slot is selected for ship 1
    public void displayShip(){
+      JPanel infoSide = new JPanel();
+      infoSide.setPreferredSize(new Dimension(length / 3 * 2, height));
+      /*infoSide.setOpaque(true);
+      infoSide.setBackground(Color.red);
+      add(infoSide,BorderLayout.WEST);*/
+      
+      JPanel picSide = new JPanel();
+      picSide.setPreferredSize(new Dimension(length / 3, height));
+      
       if(ship == null){
-         addLine("Empty Spot");
+         infoSide.setLayout(new BoxLayout(infoSide, BoxLayout.Y_AXIS));
+         
+         JLabel emptyLabel, holdLabel, posLabel;
+         
+         emptyLabel = new JLabel("Empty Slot");
+         
+         if(shipHold == Player.HANGAR)
+            holdLabel = new JLabel("In Hangar");
+         else
+            holdLabel = new JLabel("In Fleet");
+         
+         posLabel = new JLabel("At Position: " + (shipID + 1));
+         
+         emptyLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         holdLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         posLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      
+         infoSide.add(emptyLabel);
+         infoSide.add(holdLabel);
+         infoSide.add(posLabel);
       } else {
          JPanel textPanel = new JPanel();
          textPanel.setPreferredSize(new Dimension(length / 2, height));
@@ -417,6 +490,8 @@ class TopInfoPanel extends JPanel{
          add(textPanel, BorderLayout.LINE_START);
          
       }
+      add(infoSide, BorderLayout.WEST);
+      add(picSide, BorderLayout.EAST);
    }
    
    //utility method for adding a line of text
@@ -435,6 +510,7 @@ class BotInfoPanel extends JPanel{
    private int shipHold;
    private int shipID;
    private Ship ship;
+   private Component lastPage;
    
    public BotInfoPanel(InfoContainerPanel p){
       upPanel = p;
@@ -449,12 +525,24 @@ class BotInfoPanel extends JPanel{
       shipHold = frame.getShip2Hold();
       shipID = frame.getShip2ID();
       ship = frame.getShip2();
+      lastPage = frame.getLastPage();
       
       setPreferredSize(new Dimension(length, height));
       setLayout(new BorderLayout(0, 0));
       
       if(shipID == -1) displayEmpty();
       else displayShip();
+      
+      JButton backButton;
+      backButton = new JButton("Back");
+      backButton.addActionListener(
+         new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+               frame.setVisible(false);
+               lastPage.setVisible(true);
+            }
+         });
+      add(backButton);
    }
    
    //displaying the empty message on the panel, if ship 2 is empty
