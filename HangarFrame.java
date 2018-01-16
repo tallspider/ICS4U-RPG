@@ -829,29 +829,27 @@ class HangarInfoBotRight extends JPanel{
       lastPage = hangarFrame.getLastPage();
       
       setPreferredSize(new Dimension(length, height));
-      setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+      setLayout(new BorderLayout(0, 0));
       setOpaque(true);
       setBackground(Color.yellow);
       
-      JButton sellButton, buyButton, backButton, swapButton;
+      JButton button1, backButton, swapButton;
       
       if(ship != null){
-         sellButton = new JButton("Sell");
-         sellButton.addActionListener(
+         button1 = new JButton(" Sell ");
+         button1.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
                   player.sellShip(shipID);
                }
             });
-         add(sellButton);
       } else {
-         buyButton = new JButton("Buy");
-         buyButton.addActionListener(new ActionListener(){
+         button1 = new JButton(" Buy ");
+         button1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                player.buyShip(shipID);
             }
          });
-         add(buyButton);
       }
       
       backButton = new JButton("Back");
@@ -863,9 +861,6 @@ class HangarInfoBotRight extends JPanel{
             }
          });
       
-      
-      add(backButton);
-      
       swapButton = new JButton("Swap");
       swapButton.addActionListener(
          new ActionListener(){
@@ -875,8 +870,27 @@ class HangarInfoBotRight extends JPanel{
             }
          });
       
+      button1.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      swapButton.setFont(new Font("TimesRoman", Font.BOLD, 20));
+      backButton.setFont(new Font("TimesRoman", Font.BOLD, 20));
       
-      add(swapButton);
+      JPanel panel = new JPanel();
+      panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+      panel.setPreferredSize(new Dimension(length / 4 * 3, height / 4 * 3));
+      
+      panel.add(Box.createRigidArea(new Dimension(100, 0)));
+      panel.add(Box.createVerticalGlue());
+      panel.add(Box.createVerticalGlue());
+      panel.add(Box.createVerticalGlue());
+      panel.add(Box.createVerticalGlue());
+      panel.add(swapButton);
+      panel.add(Box.createVerticalGlue());
+      panel.add(button1);
+      panel.add(Box.createVerticalGlue());
+      panel.add(backButton);
+      panel.add(Box.createVerticalGlue());
+      
+      add(BorderLayout.CENTER, panel);
    }
    
 }
