@@ -27,6 +27,7 @@ public class HangarFrame extends JFrame{
    
    //constructor of the HangarFrame class
    public HangarFrame(Player p){
+      super("The Hangar");
       player = p;
       currentShipID = 0;
       init();
