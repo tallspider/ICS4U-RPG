@@ -434,60 +434,152 @@ class TopInfoPanel extends JPanel{
    //what happens is a slot is selected for ship 1
    public void displayShip(){
       JPanel infoSide = new JPanel();
-      infoSide.setPreferredSize(new Dimension(length / 3 * 2, height));
+      infoSide.setPreferredSize(new Dimension(length / 3, height));
+		infoSide.setLayout(new BoxLayout(infoSide, BoxLayout.Y_AXIS));
+         
       /*infoSide.setOpaque(true);
       infoSide.setBackground(Color.red);
       add(infoSide,BorderLayout.WEST);*/
       
       JPanel picSide = new JPanel();
-      picSide.setPreferredSize(new Dimension(length / 3, height));
+      picSide.setPreferredSize(new Dimension(length / 5 * 3, height));
       
       if(ship == null){
-         infoSide.setLayout(new BoxLayout(infoSide, BoxLayout.Y_AXIS));
-         
          JLabel emptyLabel, holdLabel, posLabel;
          
-         emptyLabel = new JLabel("Empty Slot");
+         emptyLabel = new JLabel("   Empty Slot");
          
          if(shipHold == Player.HANGAR)
-            holdLabel = new JLabel("In Hangar");
+            holdLabel = new JLabel("   In Hangar");
          else
-            holdLabel = new JLabel("In Fleet");
+            holdLabel = new JLabel("   In Fleet");
          
-         posLabel = new JLabel("At Position: " + (shipID + 1));
+         posLabel = new JLabel("   At Position: ");
+			JLabel posNumLabel = new JLabel("" + (shipID+1));
          
          emptyLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
          holdLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
          posLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+			posNumLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+			
+			JPanel emptyPanel = new JPanel();
+			emptyPanel.setLayout(new BorderLayout(0, 0));
+			emptyPanel.add(emptyLabel, BorderLayout.WEST);
+			
+			JPanel holdPanel = new JPanel();
+			holdPanel.setLayout(new BorderLayout(0, 0));
+			holdPanel.add(holdLabel, BorderLayout.WEST);
+			
+			JPanel posPanel = new JPanel();
+			posPanel.setLayout(new BorderLayout(0, 0));
+			posPanel.add(posLabel, BorderLayout.CENTER);
+			posPanel.add(posNumLabel, BorderLayout.EAST);
       
-         infoSide.add(emptyLabel);
-         infoSide.add(holdLabel);
-         infoSide.add(posLabel);
-      } else {
-         JPanel textPanel = new JPanel();
-         textPanel.setPreferredSize(new Dimension(length / 2, height));
-         textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
-         textPanel.add(new JLabel(ship.getName()));
-         
-         if(shipHold == Player.HANGAR)
-            textPanel.add(new JLabel("In Hangar"));
+			infoSide.add(emptyPanel);
+         infoSide.add(holdPanel);
+         infoSide.add(posPanel);
+			
+			JLabel picture = new JLabel(new ImageIcon(Player.NO_PIC));
+         picSide.add(picture, BorderLayout.PAGE_START);
+			
+		} else {
+         // JPanel textPanel = new JPanel();
+//          //textPanel.setPreferredSize(new Dimension(length / 2, height));
+//          textPanel.setLayout(new BoxLayout(textPanel, BoxLayout.Y_AXIS));
+// 			
+			JLabel nameLabel, holdLabel, posLabel, arLabel, trLabel, fsLabel, ugLabel, valueLabel;
+			
+			nameLabel = new JLabel("   " + ship.getName());
+		  
+		   if(shipHold == Player.HANGAR)
+            holdLabel = new JLabel("   In Hangar");
          else
-            textPanel.add(new JLabel("In Fleet"));
+            holdLabel = new JLabel("   In Fleet");
          
-         textPanel.add(new JLabel("At Position: " + (shipID + 1)));
-         textPanel.add(new JLabel("Attack Range: " + ship.getAttackRange()));
-         textPanel.add(new JLabel("Travel Range: " + ship.getTravelRange()));
-         textPanel.add(new JLabel("Firing Speed: " + ship.getFiringSpeed()));
-         textPanel.add(new JLabel("Value: " + ship.getValue()));
+		   posLabel = new JLabel("   At Position: ");
+			JLabel posNumLabel = new JLabel("" + (shipID + 1));
+			
+         arLabel = new JLabel("   Attack Range: ");
+			JLabel arNumLabel = new JLabel("" + ship.getAttackRange());
          
-         JPanel picPanel = new JPanel();
-         picPanel.setPreferredSize(new Dimension(length / 2, height));
-         picPanel.setLayout(new BorderLayout(0, 0));
+         trLabel = new JLabel("   Travel Range: ");
+			JLabel trNumLabel = new JLabel("" + ship.getTravelRange());
+         
+         fsLabel = new JLabel("   Firing Speed: ");
+			JLabel fsNumLabel = new JLabel("" + ship.getFiringSpeed());
+         
+         ugLabel = new JLabel("   Upgrades left: ");
+   		JLabel ugNumLabel = new JLabel("" + ship.getUpgradesLeft());
+               
+			valueLabel = new JLabel("   Value: ");
+         JLabel valueNumLabel = new JLabel("" + ship.getValue());
+         
+			nameLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         holdLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         posLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         arLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         trLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         fsLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+			ugLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         valueLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+			
+		   posNumLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         arNumLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         trNumLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         fsNumLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+			ugNumLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         valueNumLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
+         
+			JPanel namePanel = new JPanel();
+			namePanel.setLayout(new BorderLayout(0, 0));
+			namePanel.add(nameLabel, BorderLayout.WEST);
+			
+			JPanel holdPanel = new JPanel();
+			holdPanel.setLayout(new BorderLayout(0, 0));
+			holdPanel.add(holdLabel, BorderLayout.WEST);
+			
+			JPanel posPanel = new JPanel();
+			posPanel.setLayout(new BorderLayout(0, 0));
+			posPanel.add(posLabel, BorderLayout.WEST);
+			posPanel.add(posNumLabel, BorderLayout.EAST);
+			
+			JPanel arPanel = new JPanel();
+			arPanel.setLayout(new BorderLayout(0, 0));
+			arPanel.add(arLabel, BorderLayout.WEST);
+		   arPanel.add(arNumLabel, BorderLayout.EAST);
+			
+			JPanel trPanel = new JPanel();
+			trPanel.setLayout(new BorderLayout(0, 0));
+			trPanel.add(trLabel, BorderLayout.WEST);
+			trPanel.add(trNumLabel, BorderLayout.EAST);
+			
+			JPanel fsPanel = new JPanel();
+			fsPanel.setLayout(new BorderLayout(0, 0));
+			fsPanel.add(fsLabel, BorderLayout.WEST);
+			fsPanel.add(fsNumLabel, BorderLayout.EAST);
+			
+			JPanel ugPanel = new JPanel();
+			ugPanel.setLayout(new BorderLayout(0, 0));
+			ugPanel.add(ugLabel, BorderLayout.WEST);
+			ugPanel.add(ugNumLabel, BorderLayout.EAST);
+			
+			JPanel valuePanel = new JPanel();
+			valuePanel.setLayout(new BorderLayout(0, 0));
+			valuePanel.add(valueLabel, BorderLayout.WEST);
+			valuePanel.add(valueNumLabel, BorderLayout.EAST);
+			
+			infoSide.add(namePanel);
+         infoSide.add(holdPanel);
+         infoSide.add(posPanel);
+			infoSide.add(arPanel);
+         infoSide.add(trPanel);
+         infoSide.add(fsPanel);
+			infoSide.add(ugPanel);
+         infoSide.add(valuePanel);
+         
          JLabel picture = new JLabel(new ImageIcon(ship.getImageFile()));
-         picture.setPreferredSize(new Dimension(length / 2, height / 2));
-         picPanel.add(picture, BorderLayout.PAGE_START);
+         picSide.add(picture, BorderLayout.PAGE_START);
          
-         add(textPanel, BorderLayout.LINE_START);
          
       }
       add(infoSide, BorderLayout.WEST);
