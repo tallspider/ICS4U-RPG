@@ -27,8 +27,10 @@
          
             buttons = new Button[shipNum];
             for(int i = 0;i<shipNum;i++){
-               buttons[i] = new Button(ships[i].getName());
-               buttons[i].addMouseListener(new ShipListener(ships[i], mainscene,this));
+               if(ships[i] != null){
+                  buttons[i] = new Button(ships[i].getName());
+                  buttons[i].addMouseListener(new ShipListener(ships[i], mainscene,this));
+               }
             }
          
             for(int i = 0; i <= shipNum +1;i++){
