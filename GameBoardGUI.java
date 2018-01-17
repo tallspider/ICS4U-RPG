@@ -228,10 +228,10 @@ Purpose: input / output GUI for gameboard (combat)
             label = new JLabel("Ship Name: " + ship.getName());
             label.setFont(font);
             infoArea.add(label); 
-            label = new JLabel("Attack Range: " + ship.getAttackRange());
+            label = new JLabel("Attack Range: " + ship.getAttackRange() + "     Attacks Left: " + (ship.getFiringSpeed() - ship.getTimesAttacked()));
             label.setFont(font);
             infoArea.add(label); 
-            label = new JLabel("Travel Range: " + ship.getTravelRange());
+            label = new JLabel("Travel Range: " + ship.getTravelRange() + "     Can Move: " + !ship.getMovedAlready());
             label.setFont(font);
             infoArea.add(label); 
             label = new JLabel("Firing Speed: " + ship.getFiringSpeed());
@@ -278,9 +278,12 @@ Purpose: input / output GUI for gameboard (combat)
        public void displayDefeat(int reward){
          JOptionPane.showMessageDialog(null, "You have lost! Defeat!", "Defeat", JOptionPane.PLAIN_MESSAGE);
          JOptionPane.showMessageDialog(null, "You are rewarded " + reward + " coins", "Defeat", JOptionPane.PLAIN_MESSAGE);
-      
       }
    
+       public void displayTie(int reward){
+         JOptionPane.showMessageDialog(null, "You have defeated the enemy, but were defeated aswell (did you shoot your own ship??)", "Tie", JOptionPane.PLAIN_MESSAGE);
+         JOptionPane.showMessageDialog(null, "You are rewarded " + reward + " coins", "Tie", JOptionPane.PLAIN_MESSAGE);
+      }
        public void close(){
          mainFrame.dispose();
       }

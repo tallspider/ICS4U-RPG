@@ -23,16 +23,21 @@ Purpose: Cointains the map and combat
       private static final int CANCEL = 0;
       private static final int ATTACK = 1;
       private static final int MOVE = 2;
+      
+   	//to determine outcome of the game
+      private static final int GAME_TIED = 0;
+      private static final int GAME_WON = 1;
+      private static final int GAME_LOST = 2;
    
    // ammount of coins rewarded after a player finishes a game (depending on if the player won or not)
-      public static final int WIN_REWARD = 500;
+      public static final int WIN_REWARD = 250;
       public static final int LOSE_REWARD = 50;
    
    // the maxinum and mininum of ai ships generated
       public static final int MAX_AI_SHIPS = 10;
       public static final int MIN_AI_SHIPS = 5;
    
-   // ammount of delay between ai doing things (so user can see what the ai did)
+   // ammount of delay between ai doing things (so user can see what the ai did)(in ms)
       private static final int DELAY_BETWEEN_AI_ACTIONS = 250;
    
    // to get input from the gui
@@ -147,30 +152,34 @@ Purpose: Cointains the map and combat
       
       // ends game once a team is defeated (no more ships left)
          if (userHasShips && !aiHasShips){
-            endGame(true);
+            endGame(GAME_WON);
             return true;
          }
          else if (!userHasShips && aiHasShips){
-            endGame(false);
+            endGame(GAME_LOST);
             return true;
          }
          else if (!userHasShips && !aiHasShips){
-            System.out.println("Error: Both teams defeated");
+            endGame(GAME_TIED);
             return true;
          }
          return false;
       }
    
    // end the game and reward the player with money accordingly
-       private void endGame(boolean playerWin){
+       private void endGame(int gameResult){
        
-         if(playerWin){
+         if (gameResult == GAME_WON){
             player.setNumCoins(player.getNumCoins() + WIN_REWARD);
             displayVictory();
          }
-         else{
+         else if (gameResult == GAME_LOST){
             player.setNumCoins(player.getNumCoins() + LOSE_REWARD);
             displayDeafeat();
+         }
+         else if (gameResult == GAME_TIED){
+            player.setNumCoins(player.getNumCoins() + LOSE_REWARD);
+            displayTie();
          }
       }
    
@@ -182,6 +191,10 @@ Purpose: Cointains the map and combat
    // displays that the player has lost
        private void displayDeafeat(){
          gui.displayDefeat(LOSE_REWARD); 
+      }
+   
+       private void displayTie(){
+         gui.displayTie(LOSE_REWARD);
       }
    
    // get the user to select his/her ship during his/her turn, returns location of selected ship
@@ -252,6 +265,7 @@ Purpose: Cointains the map and combat
                         	
                         if (testLocation != null){
                            moveShip(shipLocation, testLocation, validMap);
+                           gui.updateInfoArea(map,shipLocation);
                            gui.updatePlayArea(map);
                         }
                         
@@ -265,6 +279,7 @@ Purpose: Cointains the map and combat
                         	
                         if (testLocation != null){
                            attackShip(shipLocation, testLocation, validMap);
+                           gui.updateInfoArea(map,shipLocation);
                            gui.updatePlayArea(map);
                         }
                         
@@ -476,18 +491,10 @@ Purpose: Cointains the map and combat
          validMap = allValidAttack(shipLocation);
          aiAttack(shipLocation, validMap);
          gui.updatePlayArea(map);
-         try{
-            Thread.sleep(DELAY_BETWEEN_AI_ACTIONS);
-         }
-             catch (InterruptedException ie){}
       
          validMap = allValidMoves(shipLocation);
          aiMove (shipLocation, validMap);
          gui.updatePlayArea(map);
-         try{
-            Thread.sleep(DELAY_BETWEEN_AI_ACTIONS);
-         }
-             catch (InterruptedException ie){}
       }
    
    // attacks any and all possible play ships in range of the ship given in location (pew pew pew)
@@ -505,6 +512,10 @@ Purpose: Cointains the map and combat
                   if(validMap[x][y] && map.isShip(testLocation)){
                      if (map.getShip(testLocation).getOwnedByPlayer()){
                         attackShip(shipLocation, testLocation, validMap);
+                        try{
+                           Thread.sleep(DELAY_BETWEEN_AI_ACTIONS);
+                        }
+                            catch(InterruptedException ie){}
                      }
                   }
                }
@@ -522,6 +533,9 @@ Purpose: Cointains the map and combat
       
       // test location is used for finding closest player location
          Location closestPlayerLocation = new Location();
+         // initializes as 0,0 which is bad
+         closestPlayerLocation = null;
+         
          Location testLocation;
       
       // only go throught all this logic if the ship has not moved yet
@@ -529,6 +543,7 @@ Purpose: Cointains the map and combat
          
             for (int x = 0 ; x < Map.WIDTH_OF_MAP ; x++){
                for (int y = 0 ; y < Map.LENGTH_OF_MAP ; y++){
+               
                   testLocation = new Location(x,y);
                
                   if (!map.isEmpty(testLocation)){
@@ -547,17 +562,19 @@ Purpose: Cointains the map and combat
                }
             }
          
-            if (ship.getTimesAttacked()< ship.getFiringSpeed()){
+            if (ship.getTimesAttacked() < ship.getFiringSpeed()){
             // move towards closest player ship
             
                Location closestValidLocation = new Location();
-            
+               // have make null, as it becomes 0,0 and dosent get caught to be initialized properly
+               closestValidLocation = null;
+               
                for (int x = 0 ; x < Map.WIDTH_OF_MAP ; x++){
                   for (int y = 0 ; y < Map.LENGTH_OF_MAP ; y++){
-                  
-                  // we are reusing the testlocation from finding the closest ship, because it is no longer being used                                                       (we are being very eco-friendly)
-                     testLocation = new Location(x,y);
-                  
+                   
+                   // we are reusing the testlocation from finding the closest ship, because it is no longer being used                                                       (we are being very eco-friendly)
+                     testLocation = new Location(x,y);						  
+                  								        
                      if (validMap[x][y]){
                         if (closestValidLocation == null){
                            closestValidLocation = testLocation;
@@ -571,12 +588,13 @@ Purpose: Cointains the map and combat
                }
             
             // only move if theres a valid location to move to
-               if (!(closestValidLocation == null)){
+               if (closestValidLocation != null){
                   moveShip(shipLocation, closestValidLocation,validMap);
+                  try{
+                     Thread.sleep(DELAY_BETWEEN_AI_ACTIONS);
+                  }
+                      catch(InterruptedException ie){}
                }
-               else{
-            	System.out.println("im blind");
-            	}
             
             }
             else {
@@ -605,6 +623,10 @@ Purpose: Cointains the map and combat
             // only move if theres a valid location to move to
                if (!(farthestValidLocation == null)){
                   moveShip(shipLocation, farthestValidLocation,validMap);
+                  try{
+                     Thread.sleep(DELAY_BETWEEN_AI_ACTIONS);
+                  }
+                      catch(InterruptedException ie){}
                }
             }
          
