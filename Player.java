@@ -20,6 +20,7 @@ public class Player{
    public static final String NO_PIC = "nopic.jpg";
    public static final String AI_SHIP_IMAGE = "aishipimage.jpg";
    public static final String WALL_IMAGE = "wall.jpg";
+	public static final int BASIC_COINS = 1000;
    
    
    //Constructor of the Player class
@@ -289,6 +290,22 @@ public class Player{
 		}
    }
    
+	public static void createFirstFile(String un){
+		try{
+			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(un + ".txt")));
+			
+			out.println(un);
+			out.println(0);
+			out.println(BASIC_COINS);
+			out.println("");
+			out.println("");
+			out.close();
+			
+		} catch(IOException e){
+			System.out.println("File error in making new player file");
+		}
+	}
+	
 	//contains the code to be run when the player clicks the button to switch the contents of two Ship-containing slots
 	//takes in the storage holding the first Ship (hangar or fleet) as an int
 	//takes in the id of the first Ship in its storage as an int
