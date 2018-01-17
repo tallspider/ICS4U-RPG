@@ -10,7 +10,6 @@ public class Login{
    private String username;
    private String password;
    private int count;
-   private int countMax;
    public Login(String name, String pw ){
    //Constructor
       username = name;
@@ -78,7 +77,7 @@ public class Login{
       try{
          BufferedReader check = new BufferedReader(new FileReader(THE_FILE));
          count = 0;
-         while(check.readLine() != null){
+         while(check.readLine() != null){			
             count++;
          }
          check.close();
@@ -89,19 +88,19 @@ public class Login{
          while((temp = read.readLine()) != null){
 				count++; 
             information[count] = temp;
-    			   
 		   } 
          information[count+1] = username;
          information[count+2] = password;
          read.close();
          BufferedWriter out = new BufferedWriter(new FileWriter(THE_FILE));
-         for(int i = 0;i<countMax;i++){
-			
+         for(int i = 0;i<=count+2;i++){
+				
             out.write(information[i]);
             out.newLine();
          }  
          out.close();  
-	 Player.createFirstFile(username);
+			
+		 Player.createFirstFile(username);
       }
       catch(IOException e ){
          System.out.print(e);
