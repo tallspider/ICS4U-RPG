@@ -186,7 +186,7 @@ public class Player{
       boolean buy;
       
       //checks if the player has enough money to buy this Ship
-      if(numCoins > Ship.BASIC_COST){
+      if(numCoins >= Ship.BASIC_COST){
          //confirm with player
          buy = hangarFrame.askQuestion("Are you sure you would like to buy this ship?", "Sure?");
          //checks if the player wishes to continue with the transaction
