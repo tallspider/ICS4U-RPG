@@ -9,7 +9,6 @@
       private static TextField rpasswordField = new TextField(10);		
        public RegisterFrame(LoginFrame lf){
          super("Register");
-         System.out.println("1");
       
          lF = lf;
          this.setResizable(false);
@@ -18,25 +17,29 @@
          this.setLayout(new FlowLayout());
          JPanel unp = new JPanel();// username Panel
          unp.setLayout(new FlowLayout());
-         unp.setSize(100,50);
-         unp.add(new JLabel("Username"));
+         unp.setPreferredSize(new Dimension(400,65));
+         unp.setFont(new Font("TimesRoman", Font.BOLD, 15));
+         unp.add(new JLabel("Username         "));
       		
          unp.add(loginField);
          this.add(unp);
          JPanel pwp = new JPanel();//password Panel
-         pwp.setSize(100,50);
-         pwp.add(new JLabel("Password"));
+         pwp.setPreferredSize(new Dimension(400,65));
+         pwp.setFont(new Font("TimesRoman", Font.BOLD, 15));
+         pwp.add(new JLabel("Password         "));
          pwp.add(passwordField);
          this.add(pwp);
       
          JPanel rpn = new JPanel();//Re-enter password
-         rpn.setSize(100,50);
+         rpn.setPreferredSize(new Dimension(400,65));
          rpn.add(new JLabel("Re-enter password"));
          rpn.add(rpasswordField);
          this.add(rpn);
          Button rB = new Button("Register"); 
+         rB.setFont(new Font("TimesRoman", Font.BOLD, 15)); 
          this.add(rB);
          Button reB = new Button("Return");
+         reB.setFont(new Font("TimesRoman", Font.BOLD, 15)); 
          this.add(reB);
          rB.addMouseListener(new RegisterListener (this));
          reB.addMouseListener(new ReturnListener (this));
