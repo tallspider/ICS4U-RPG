@@ -101,6 +101,7 @@ public class Login{
             out.newLine();
          }  
          out.close();  
+	 Player.createFirstFile(username);
       }
       catch(IOException e ){
          System.out.print(e);
