@@ -533,6 +533,7 @@ class HangarInfoTopMid extends JPanel{
                   ship.setName(ENTRY.getText());
                   //System.out.println(ENTRY.getText());
                   hangarFrame.updateShipSideBar();
+						ENTRY.setText("");
                }
             });
          
@@ -606,7 +607,14 @@ class HangarInfoTopRight extends JPanel{
       setLayout(new BorderLayout());
       setOpaque(true);
       setBackground(Color.pink);
-      add(new JLabel(image), BorderLayout.CENTER);
+      //add(new JLabel(image), BorderLayout.CENTER);*/
+		
+		PicSidePanel picSide = new PicSidePanel(imageFile, length, height);
+      picSide.setPreferredSize(new Dimension(length, height));
+		picSide.setOpaque(true);
+		//picSide.add(new JPanel());
+      add(picSide, BorderLayout.CENTER);   
+		
    }
 }
 
@@ -894,4 +902,24 @@ class HangarInfoBotRight extends JPanel{
       add(BorderLayout.CENTER, panel);
    }
    
+}
+
+class PicSidePanel extends JPanel{
+
+   Image bgImage;
+   int length;
+   int height;
+   
+   public PicSidePanel(String imageFile, int len, int hei){
+      bgImage = new ImageIcon(imageFile).getImage();
+      height = hei;
+      length = len;
+   }
+
+   @Override
+   protected void paintComponent(Graphics g) {
+   
+      super.paintComponent(g);
+      g.drawImage(bgImage, 0, 0, length, height, this);
+   }
 }
