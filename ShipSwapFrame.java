@@ -535,10 +535,9 @@ class TopInfoPanel extends JPanel{
          infoSide.add(holdPanel);
          infoSide.add(posPanel);
       
-         JLabel picture = new JLabel(new ImageIcon(Player.NO_PIC));
-         picSide.add(picture, BorderLayout.PAGE_START);
-      
-      } 
+         picSide = new PicSidePanel(Player.NO_PIC, length / 5 * 3, height);
+         picSide.setPreferredSize(new Dimension(length / 5 * 3, height));
+     } 
       else {
       // JPanel textPanel = new JPanel();
       //          //textPanel.setPreferredSize(new Dimension(length / 2, height));
@@ -634,10 +633,9 @@ class TopInfoPanel extends JPanel{
          infoSide.add(ugPanel);
          infoSide.add(valuePanel);
       
-         JLabel picture = new JLabel(new ImageIcon(ship.getImageFile()));
-         picSide.add(picture, BorderLayout.PAGE_START);
-      
-      
+         picSide = new PicSidePanel(ship.getImageFile(), length / 5 * 3, height);
+         picSide.setPreferredSize(new Dimension(length / 5 * 3, height));
+               
       }
       add(infoSide, BorderLayout.WEST);
       add(picSide, BorderLayout.EAST);
