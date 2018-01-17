@@ -1,69 +1,90 @@
-import javax.swing.*;
-import javax.swing.border.*;
-import java.awt.*;
-import java.awt.event.*;
+   import javax.swing.*;
+   import javax.swing.border.*;
+   import java.awt.*;
+   import java.awt.event.*;
 
 
-public class FleetFrame extends JFrame{
-   private Fleet fleet;
-   private int shipNum;
-   private Button [] buttons;
-   private Ship[] ships;
-   private MainScene mainscene;
+    public class FleetFrame extends JFrame{
+      private Fleet fleet;
+      private int shipNum;
+      private Button [] buttons;
+      private Ship[] ships;
+      private MainScene mainscene;
    
-   public FleetFrame(Fleet fleet,   MainScene ms){
-      super("Fleet");
-      mainscene = ms;
-      ms.setVisible(false);
-      this.fleet = fleet;
-      this.setBounds(500,500,400,600);
-      this.setVisible(true);
-      this.setLayout(new FlowLayout());
+       public FleetFrame(Fleet fleet,   MainScene ms){
+         super("Fleet");
+         mainscene = ms;
+         ms.setVisible(false);
+         this.fleet = fleet;
       
-      shipNum = fleet.getShipNum();
-      ships = new Ship [shipNum];
+         this.setVisible(true);
+         this.setLayout(new FlowLayout());
       
-      buttons = new Button[shipNum+1];
-      for(int i = 0;i<=shipNum;i++){
-         buttons[i] = new Button(ships[i].getName());
-         buttons[i].addMouseListener(new ShipListener(ships[i], mainscene,this));
+         shipNum = fleet.getShipNum();
+         this.setBounds(500,500,400,shipNum*65+300);	
+         if(shipNum != 0){
+            ships = new Ship [shipNum];
+         
+            buttons = new Button[shipNum];
+            for(int i = 0;i<shipNum;i++){
+               buttons[i] = new Button(ships[i].getName());
+               buttons[i].addMouseListener(new ShipListener(ships[i], mainscene,this));
+            }
+         
+            for(int i = 0; i <= shipNum +1;i++){
+               this.add(buttons[i]);
+            }
+         }
+         else{
+            JLabel noship = new JLabel("Currrently no ship in your fleet",SwingConstants.CENTER);
+            noship.setFont(new Font("TimesRoman", Font.BOLD, 25));
+            noship.setPreferredSize(new Dimension(400,150));
+            add(noship);
+         }
+      	
+      	
+      	
+         Button returnB = new Button("Return");
+         returnB.addMouseListener(new returnListener (this, mainscene));
+         returnB.setFont(new Font("TimesRoman", Font.BOLD, 15));
+         returnB.setPreferredSize(new Dimension(100,50));
+         add(returnB);
+      	
+         this.addWindowListener(
+                new WindowAdapter(){
+                   public void windowClosing(WindowEvent e){
+                     dispose();
+                  }
+               });    
       }
+   
+   
+       private class ShipListener extends MouseAdapter{
+         private FleetFrame ff = null;
+         private Ship ship = null;
+         private MainScene mainscene = null;
+          public ShipListener(Ship ship,MainScene mainscene,FleetFrame ff){
+            this.ff = ff;
+            this.mainscene = mainscene;
+            this.ship = ship;
+         }
       
+          public void mouseClicked(MouseEvent e){
+            new InfoFrame(ship,ff);
+         }
+      }
+   
+       private class returnListener extends MouseAdapter{
+         private FleetFrame ff = null;
+         private MainScene mf = null;
       
-      buttons[shipNum+1] = new Button("Return to main scene");
-      buttons[shipNum+1].addMouseListener(new returnListener (this, mainscene));
-      for(int i = 0; i <= shipNum +1;i++){
-         this.add(buttons[i]);
+          public returnListener(FleetFrame ff, MainScene mf){
+            this.ff = ff;
+            this.mf = mf;
+         }
+          public void mouseClicked(MouseEvent e){
+            ff.dispose();
+            mf.setVisible(true);
+         }
       }
    }
-   
-   
-   private class ShipListener extends MouseAdapter{
-      private FleetFrame ff = null;
-      private Ship ship = null;
-      private MainScene mainscene = null;
-      public ShipListener(Ship ship,MainScene mainscene,FleetFrame ff){
-         this.ff = ff;
-         this.mainscene = mainscene;
-         this.ship = ship;
-      }
-      
-      public void mouseClicked(MouseEvent e){
-         new InfoFrame(ship,ff);
-      }
-   }
-   
-   private class returnListener extends MouseAdapter{
-      private FleetFrame ff = null;
-      private MainScene mf = null;
-      
-      public returnListener(FleetFrame ff, MainScene mf){
-         this.ff = ff;
-         this.mf = mf;
-      }
-      public void mouseClicked(MouseEvent e){
-         ff.setVisible(false);
-         mf.setVisible(true);
-      }
-   }
-}
