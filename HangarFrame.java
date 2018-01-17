@@ -727,13 +727,13 @@ class HangarInfoBotMid extends JPanel{
          costLabel = new JLabel("     Cost:           ");
          costLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
       
-         trLabel = new JLabel(ship.getTravelRange() + "    ");
+         trLabel = new JLabel(ship.calcUpgradeCost(Ship.TR_Upgrade) + "    ");
          trLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
       
-         arLabel = new JLabel(ship.getAttackRange() + "    ");
+         arLabel = new JLabel(ship.calcUpgradeCost(Ship.AR_Upgrade) + "    ");
          arLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
       
-         fsLabel = new JLabel(ship.getFiringSpeed() + "    ");
+         fsLabel = new JLabel(ship.calcUpgradeCost(Ship.FS_Upgrade) + "    ");
          fsLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
          
          sellLabel = new JLabel("    Money After Sell: " + (player.getNumCoins() - ship.getSellPrice()));
