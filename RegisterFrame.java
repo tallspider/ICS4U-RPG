@@ -32,6 +32,7 @@
       
          JPanel rpn = new JPanel();//Re-enter password
          rpn.setPreferredSize(new Dimension(400,65));
+			rpn.setFont(new Font("TimesRoman", Font.BOLD, 15));
          rpn.add(new JLabel("Re-enter password"));
          rpn.add(rpasswordField);
          this.add(rpn);
@@ -64,24 +65,29 @@
          }
       
           public void mouseClicked(MouseEvent e){
+			 	if(passwordField.getText().equals("") ||loginField.getText().equals("")){
+					ErrorFrame.setText("Username / password can't be null");
+					new ErrorFrame(); 
+				}else{
             if( !passwordField.getText().equals(rpasswordField.getText())){
-               ErrorFrame.error.setText("password does not match re-enter password");
+               ErrorFrame.setText("password does not match re-enter password");
                new ErrorFrame();
             }
             else{
                user = new Login( loginField.getText(), passwordField.getText());
                if(user.checkRegisterDetails()){
                   user.createNewAccount();
-                  ErrorFrame.error.setText("Register sucess");
+                  ErrorFrame.setText("Register sucess");
 						new ErrorFrame();
                   rf.setVisible(false);
                   lF.setVisible(true);
                }
                else{
-                  ErrorFrame.error.setText("Username alrady exist");
+                  ErrorFrame.setText("Username alrady exist");
                   new ErrorFrame();
                }
             }
+				}
          }
       }
    
