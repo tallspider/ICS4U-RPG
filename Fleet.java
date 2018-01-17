@@ -57,6 +57,7 @@ public class Fleet
 		    // get the number of the ships in the array
 		 }      
 	      }  */
+		
 	      return shipnum;   
 	   }
 	
