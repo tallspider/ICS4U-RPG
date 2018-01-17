@@ -70,6 +70,11 @@ public class HangarFrame extends JFrame{
       hangarInfoPanel = new HangarInfoPanel(this);
    }
    
+	public void updateAll(){
+		updateShipSideBar();
+		updateShipInfoPanel(currentShipID);
+	}
+	
    //updates the right (Ship information) side of the page when a new ship has been selected
    public void updateShipInfoPanel(int id){
       currentShipID = id;
@@ -850,6 +855,7 @@ class HangarInfoBotRight extends JPanel{
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
                   player.sellShip(shipID);
+						hangarFrame.updateAll();
                }
             });
       } else {
@@ -857,6 +863,7 @@ class HangarInfoBotRight extends JPanel{
          button1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                player.buyShip(shipID);
+					hangarFrame.updateAll();
             }
          });
       }
