@@ -52,7 +52,7 @@ public class MainScene extends JFrame
    
       b6.setBounds(600, 400, 150, 70);
       panel.add(b6);		 
-     
+      b6.addMouseListener(new QuitListener(this));
      
       
    
@@ -65,7 +65,20 @@ public class MainScene extends JFrame
  
  
  
- 
+ private class QuitListener  extends MouseAdapter
+{
+	MainScene ms = null;
+	public QuitListener(MainScene ms)
+	{
+		this.ms = ms;
+	}
+		
+	public void  mouseClicked(MouseEvent e)
+	{
+		ms.setVisible(false);
+		System.exit(-1);
+	}
+}
  
  
  
