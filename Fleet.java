@@ -91,6 +91,7 @@ public class Fleet
               int ID = Integer.parseInt(s);
               ships[ID] = new Ship();
               ships[ID].loadNext(f);
+	      shipnum++;
               }
            } 
            catch (IOException e)
