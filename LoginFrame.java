@@ -11,24 +11,33 @@ public class LoginFrame extends JFrame{
    public LoginFrame(){
       super("RPG");
       this.setResizable(false);
-      this.setBounds(500,500,400,300);
+      this.setBounds(500,500,400,400);
       this.setVisible(true);
       this.setLayout(new FlowLayout());
       JPanel unp = new JPanel();// username Panel
       unp.setLayout(new FlowLayout());
-      unp.setSize(100,50);
-      unp.add(new JLabel("Username"));
-   			
+      JLabel un = new JLabel("Username");
+      unp.add(un);     
       unp.add(loginField);
+      unp.setPreferredSize(new Dimension(400,75));
+      unp.setFont(new Font("TimesRoman", Font.BOLD, 30));
       this.add(unp);
+      
       JPanel pwp = new JPanel();//password Panel
-      pwp.setSize(100,50);
-      pwp.add(new JLabel("Password"));
+      JLabel ps = new JLabel("Password");
+      pwp.add(ps);
       pwp.add(passwordField);
+      pwp.setPreferredSize(new Dimension(400,75));
+      pwp.setFont(new Font("TimesRoman", Font.BOLD, 30));
       this.add(pwp);
+      
       Button LogInB = new Button("Login"); 
+      LogInB.setFont(new Font("TimesRoman", Font.BOLD, 15));
+      LogInB.setPreferredSize(new Dimension(100,50));
       this.add(LogInB);
       Button PSB = new Button("Registe");
+      PSB.setFont(new Font("TimesRoman", Font.BOLD, 15));
+      PSB.setPreferredSize(new Dimension(100,50));
       this.add(PSB);
       LogInB.addMouseListener(new LoginListener (this));
       PSB.addMouseListener(new RegisterListenner (this));
@@ -56,7 +65,7 @@ public class LoginFrame extends JFrame{
 				dispose();
             new MainScene(new Player(username));            
          }else{
-				ErrorFrame.error.setText("Wrong username / password");
+				ErrorFrame.setText("Wrong username / password");
             new ErrorFrame();
          }
       }    	
