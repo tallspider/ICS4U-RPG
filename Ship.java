@@ -23,6 +23,7 @@ public class Ship extends Entity
    private boolean movedAlready; 
    private int timesAttacked;
    public static final int BASIC_COST = 500;
+	public static final int UPGRADE_MULTIPLE = 50;
    private int value;
       
    public void loadNext(BufferedReader f)  
@@ -38,6 +39,7 @@ public class Ship extends Entity
          firingSpeed = Integer.parseInt(f.readLine());
          upgradesLeft = Integer.parseInt(f.readLine());
          ownedByPlayer = true;
+			updateValue();
       } 
       catch (IOException e)
       {
@@ -45,8 +47,7 @@ public class Ship extends Entity
       }
    }
    
-   public Ship(String name, String imageFile, int attackRange, int travelRange , 
-   int firingSpeed ,int upgradesLeft , int value, boolean ownedByPlayer)
+   public Ship(String name, String imageFile, int attackRange, int travelRange , int firingSpeed ,int upgradesLeft , int value, boolean ownedByPlayer)
    // Constructor of ship class, take in the fields of Ship class
    {
       this.name = name;
@@ -57,6 +58,7 @@ public class Ship extends Entity
       this.upgradesLeft = upgradesLeft;
       this.value = value;
       this.ownedByPlayer = ownedByPlayer;
+		updateValue();
    }
    	
    public Ship(String name) 
@@ -77,7 +79,11 @@ public class Ship extends Entity
       this.upgradesLeft = 10;
       this.ownedByPlayer = false;
    }
-      
+   
+	private void updateValue(){
+		value = (attackRange * (attackRange - 1) + travelRange * (travelRange - 1) + firingSpeed * (firingSpeed - 1) ) * UPGRADE_MULTIPLE / 2 + BASIC_COST;
+	}
+	
    public void upgrade(int num)  
    // Upgrade the ship by given the wanted upgrade type as a int
    // Given upgrade type as a int
@@ -108,27 +114,27 @@ public class Ship extends Entity
       if(upgrade == AR_Upgrade)
       {
       //update the cost of attackRange
-	return (attackRange + 1) * 100;		
+			return attackRange * UPGRADE_MULTIPLE;		
       } 
       else if (upgrade == TR_Upgrade)
       {
       //update the cost of travelRange
-      	return (travelRange + 1) * 100;		
+      	return travelRange * UPGRADE_MULTIPLE;		
       } 
       else if (upgrade == FS_Upgrade)
       //update the cost of firingSpeed
       {	
-      	return (firingSpeed + 1) * 100;
+      	return firingSpeed * UPGRADE_MULTIPLE;
       }
       //return a negative intager if the update is not success
       return -1;
    }
    
-   public int getSellPrice()  
+ 	public int getSellPrice()  
    //A method for the sell price of this ship
    {
       return value /2;
-      //The selling price of the ship is the hlaf of the ship
+      //The selling price of the ship is the half of the ship
    }
    
    public String getPrintString()  
