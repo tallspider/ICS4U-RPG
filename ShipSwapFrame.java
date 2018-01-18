@@ -732,8 +732,8 @@ class BotInfoPanel extends JPanel{
       backButton.addActionListener(
                 new ActionListener(){
                    public void actionPerformed(ActionEvent e){
+                      ((HangarFrame)lastPage).setVisible(true, true);
                       frame.setVisible(false);
-                      lastPage.setVisible(true);
                    }
                 });
       
@@ -814,8 +814,8 @@ class BotInfoPanel extends JPanel{
          backButton.addActionListener(
                 new ActionListener(){
                    public void actionPerformed(ActionEvent e){
+                      ((HangarFrame)lastPage).setVisible(true, true); System.out.println("check 1");
                       frame.setVisible(false);
-                      lastPage.setVisible(true);
                    }
                 });
       
@@ -942,8 +942,8 @@ class BotInfoPanel extends JPanel{
          backButton.addActionListener(
                 new ActionListener(){
                    public void actionPerformed(ActionEvent e){
+                      ((HangarFrame)lastPage).setVisible(true, true);
                       frame.setVisible(false);
-                      lastPage.setVisible(true);
                    }
                 });
       
@@ -958,7 +958,7 @@ class BotInfoPanel extends JPanel{
       
       
    }
-
+   
 }
 
 class PicSidePanel extends JPanel{
@@ -980,3 +980,4 @@ class PicSidePanel extends JPanel{
       g.drawImage(bgImage, 0, 0, length, height, this);
    }
 }
+
