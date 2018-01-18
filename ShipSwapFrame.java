@@ -725,7 +725,8 @@ class BotInfoPanel extends JPanel{
                       }
                    }
                 });
-      
+      if(frame.getShip1ID() == -1 || frame.getShip2ID() == -1) swapButton.setEnabled(false);
+         
       
       JButton backButton;
       backButton = new JButton("Back");
@@ -806,7 +807,8 @@ class BotInfoPanel extends JPanel{
                       }
                    }
                 });
-      
+         if(frame.getShip1ID() == -1 || frame.getShip2ID() == -1) swapButton.setEnabled(false);
+         
          picSide.add(swapButton);
       
          JButton backButton;
@@ -934,9 +936,10 @@ class BotInfoPanel extends JPanel{
                       }
                    }
                 });
-      
+         
+         if(frame.getShip1ID() == -1 || frame.getShip2ID() == -1) swapButton.setEnabled(false);
          picSide.add(swapButton);
-      
+         
          JButton backButton;
          backButton = new JButton("Back");
          backButton.addActionListener(
