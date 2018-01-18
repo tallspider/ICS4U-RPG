@@ -48,15 +48,15 @@ public class Fleet
 	public int getShipNum()  
 	//Accessor method for the num of ship in the ship list of this Fleet
 	{
-	   /*   int sum =0;
+	      int sum =0;
 	      for(int i = 0; i <MAX_SHIPS;i++)
 	      {
-		 if(!ships[i].equals(null))
+		 if(!ships[i] == null)
 		 {
 		    sum++;
 		    // get the number of the ships in the array
 		 }      
-	      }  */
+	      } 
 		
 	      return shipnum;   
 	   }
