@@ -51,7 +51,7 @@ public class Fleet
 	      int sum =0;
 	      for(int i = 0; i <MAX_SHIPS;i++)
 	      {
-		 if(!ships[i] == null)
+		 if(!(ships[i] == null))
 		 {
 		    sum++;
 		    // get the number of the ships in the array
