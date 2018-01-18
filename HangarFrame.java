@@ -7,6 +7,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.border.EtchedBorder;
 
 public class HangarFrame extends JFrame{
    
@@ -177,6 +178,7 @@ class ShipSideBar extends JPanel{
          buttonPanel.setBackground(Color.LIGHT_GRAY);
          buttonPanel.add(BorderLayout.CENTER, button);
          add(buttonPanel);
+         setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
       }
    }
    
@@ -228,6 +230,7 @@ class HangarInfoPanel extends JPanel{
       
       add(hangarInfoTop, BorderLayout.PAGE_START);
       add(hangarInfoBot, BorderLayout.PAGE_END);
+      //setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
    }
    
    //initializes the top half of this panel
@@ -465,6 +468,8 @@ class HangarInfoTopLeft extends JPanel{
          addLine("Sell for: ", "" + ship.getSellPrice());
       else
          addLine("Cost: ", "" + Ship.BASIC_COST);
+         
+      setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
    }
    
    //utility method for adding lines of text onto JPanel
@@ -572,6 +577,8 @@ class HangarInfoTopMid extends JPanel{
          
          panel.setOpaque(false);
          add(panel);
+         setOpaque(true);
+         setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
       }
       
    }
@@ -626,6 +633,7 @@ class HangarInfoTopRight extends JPanel{
 		//picSide.add(new JPanel());
       add(picSide, BorderLayout.CENTER);   
 		
+      setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
    }
 }
 
@@ -683,6 +691,8 @@ class HangarInfoBotLeft extends JPanel{
       }
       addLine(panel, "    Player Money: " + player.getNumCoins(), JLabel.LEFT);
       add(panel);
+      
+      setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
    }
    
    //utility method for adding a line of text onto the JPanel
@@ -804,6 +814,8 @@ class HangarInfoBotMid extends JPanel{
          
          add(buyLabel);
       }
+      
+      setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
    }
    
    //utility method that adds a line of text and a button in one line
@@ -922,6 +934,8 @@ class HangarInfoBotRight extends JPanel{
       panel.add(Box.createVerticalGlue());
       
       add(BorderLayout.CENTER, panel);
+      
+      setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
    }
    
 }
