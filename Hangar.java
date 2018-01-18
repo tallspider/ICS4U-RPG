@@ -15,7 +15,7 @@ public class Hangar
    public static final int MIN_SHIPS = 0;
  
    public Hangar(Ship[] ships)  
-   //Constructor of Hangar class，takes in the ship array as the field  of the Hangar
+   //Constructor of Hangar classï¼Œtakes in the ship array as the field  of the Hangar
    //Given the ship array
    {
       this.ships = ships;
