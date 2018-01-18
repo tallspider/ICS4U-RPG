@@ -45,7 +45,7 @@ public class MainScene extends JFrame
    
       b4.setBounds(600, 200, 150, 70);
       panel.add(b4);
-		b4.addMouseListener(new HangarListener(this, player));		 
+      b4.addMouseListener(new HangarListener(this, player));		 
    
       b5.setBounds(600, 300, 150, 70);
       panel.add(b5);		 
@@ -68,6 +68,7 @@ public class MainScene extends JFrame
  private class QuitListener  extends MouseAdapter
 {
 	MainScene ms = null;
+	
 	public QuitListener(MainScene ms)
 	{
 		this.ms = ms;
@@ -111,6 +112,7 @@ public class MainScene extends JFrame
 	{
 		MainScene ms = null;
 		Player player = null;
+		
 		public HangarListener(MainScene ms,Player player)
 		{
 			this.ms = ms;
@@ -133,6 +135,7 @@ public class MainScene extends JFrame
 	{
 		MainScene ms = null;
 		Leaderboard l = null;
+		
 		public HangarListener(MainScene ms,Leaderboard l)
 		{
 			this.ms = ms;
@@ -155,6 +158,7 @@ public class MainScene extends JFrame
 	{
 		MainScene ms = null;
 		Game game = null;
+		
 		public HangarListener(MainScene ms,Game game)
 		{
 			this.ms = ms;
@@ -177,6 +181,7 @@ public class MainScene extends JFrame
 	{
 		MainScene ms = null;
 		Player player = null;
+		
 		public HangarListener(MainScene ms,Player player)
 		{
 			this.ms = ms;
@@ -199,6 +204,7 @@ public class MainScene extends JFrame
 	{
 		MainScene ms = null;
 		Player player = null;
+		
 		public HangarListener(MainScene ms,Player player)
 		{
 			this.ms = ms;
