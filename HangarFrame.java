@@ -38,8 +38,9 @@ public class HangarFrame extends JFrame{
    //takes in the last page to potentially go back to
    //takes in boolean that dictates whether or not to make this page visible
    public void setVisible(Component c, boolean b){
-      lastPage = c;
-      setVisible(b);
+  		lastPage = c; 
+  		updateAll();    
+		setVisible(b);
    }
    
    public void setVisible(boolean visible, boolean update){
@@ -865,7 +866,7 @@ class HangarInfoBotRight extends JPanel{
       ship = hangar.getShip(shipID);
       length = hangarInfoBot.getLength() / 3;
       height = hangarInfoBot.getHeight();
-      lastPage = hangarFrame.getLastPage();
+      lastPage = hangarFrame.getLastPage();// if(lastPage == null) System.out.println("last page null!");
       
       setPreferredSize(new Dimension(length, height));
       setLayout(new BorderLayout(0, 0));
