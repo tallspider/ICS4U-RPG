@@ -747,7 +747,7 @@ class HangarInfoBotMid extends JPanel{
          fsLabel = new JLabel(ship.calcUpgradeCost(Ship.FS_Upgrade) + "    ");
          fsLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
          
-         sellLabel = new JLabel("    Money After Sell: " + (player.getNumCoins() - ship.getSellPrice()));
+         sellLabel = new JLabel("    Money After Sell: " + (player.getNumCoins() + ship.getSellPrice()));
          sellLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
          
          trButton = new JButton("Upgrade");
@@ -795,7 +795,11 @@ class HangarInfoBotMid extends JPanel{
          add(sellLabel);
          add(Box.createVerticalGlue());
       } else {
-         buyLabel = new JLabel("Money After Pay: " + (player.getNumCoins() - Ship.BASIC_COST));
+         int moneyAfter = player.getNumCoins() - Ship.BASIC_COST;
+         if(moneyAfter >= 0)
+            buyLabel = new JLabel("Money After Pay: " + (player.getNumCoins() - Ship.BASIC_COST));
+         else
+            buyLabel = new JLabel("Not Enough Money to Buy");
          buyLabel.setFont(new Font("TimesRoman", Font.BOLD, 20));
          
          add(buyLabel);
@@ -875,6 +879,7 @@ class HangarInfoBotRight extends JPanel{
 					hangarFrame.updateAll();
             }
          });
+         if(player.getNumCoins() - Ship.BASIC_COST < 0) button1.setEnabled(false);
       }
       
       backButton = new JButton("Back");
