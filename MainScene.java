@@ -151,20 +151,20 @@ public class MainScene extends JFrame
 	    
 	    
 	    
-	private class HangarListener  extends MouseAdapter
+	private class SaveListener  extends MouseAdapter
 	{
 		MainScene ms = null;
-		Player player = null;
-		public HangarListener(MainScene ms,Player player)
+		Game game = null;
+		public HangarListener(MainScene ms,Game game)
 		{
 			this.ms = ms;
-			this.player = player;
+			this.game = game;
 		}
 		
 		public void  mouseClicked(MouseEvent e)
 		{
 			ms.setVisible(false);
-			new HangarFrame(player);
+			new SaveFrame(game);
 		}
 	}
             
