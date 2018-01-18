@@ -3,7 +3,7 @@
 //Date: Jan. 8, 2018
 //School: A.Y.Jackson S.S.
 //Purpose: To represent the player's actions of the combat fleet in the game
-// Needed no more - 18/Jan
+
 
 import java.io.*;
 public class Fleet
