@@ -121,7 +121,7 @@ public class MainScene extends JFrame
 		{
 			ms.setVisible(false);
 			HangarFrame hf = new HangarFrame(player);
-			hf.setVisible(this, true);
+			hf.setVisible(ms, true);
 		}
 	}
       
