@@ -14,6 +14,7 @@ public class Player{
    private HangarFrame hangarFrame;
    private int score;
    private int numCoins;
+   private int shipsBoughtThisTime;
    public static final int HANGAR = 0;
    public static final int FLEET = 1;
    public static final String IMAGE_FILE_FILE = "images.txt";
@@ -137,45 +138,33 @@ public class Player{
 		}
    }
    
-   public String getNewImageFile(){
+   public String getNewShipImage(){
       try{
+         
          BufferedReader f = new BufferedReader(new FileReader(IMAGE_FILE_FILE));
-         String ret = f.readLine();
          
-         ArrayList<String> left = new ArrayList<String>();
          String s;
-         while( (s = f.readLine()) != null) left.add(s);
+         while( (s = f.readLine()) != null){
+            boolean taken = false;
+            for(int i = 0; i < Hangar.MAX_SHIPS && !taken; i++){
+               if(hangar.getShip(i) != null && hangar.getShip(i).getImageFile().equals(s)){
+                  taken = true;
+               }
+            }
+            for(int i = 0; i < Fleet.MAX_SHIPS && !taken; i++){
+               if(fleet.getShip(i) != null && fleet.getShip(i).getImageFile().equals(s)){
+                  taken = true;
+               }
+            }
+            if(!taken) return s;
+         }
          
-         f.close();
-         
-         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(IMAGE_FILE_FILE)));
-         for(int i = 0; i < left.size(); i++) out.println(left.get(i));
-         out.close();
-         
-         return ret;
+         return null;
          
       } catch(IOException e){
          System.out.println("Image File Error");
       }
-	   return null;
-   }
-   
-   public void addImageToFile(String imgf){
-      try{
-         BufferedReader f = new BufferedReader(new FileReader(IMAGE_FILE_FILE));
-         ArrayList<String> imageFiles = new ArrayList<String>();
-         String s;
-         while( (s = f.readLine()) != null) imageFiles.add(s);
-         f.close();
-         
-         PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(IMAGE_FILE_FILE)));
-         for(int i = 0; i < imageFiles.size(); i++) out.println(imageFiles.get(i));
-         out.println(imgf);
-         out.close();
-         
-      } catch(IOException e){
-         System.out.println("Error writing to image file");
-      }
+      return null;
    }
    
    //contains the code to be run when the player clicks the button to buy a Ship
@@ -194,7 +183,7 @@ public class Player{
             //decrease the number of coins the player owns by the amount required to buy this Ship
             numCoins -= Ship.BASIC_COST;
             //add the newly-acquired Ship to hangar
-            return hangar.addNewShip(id, getNewImageFile());
+            return hangar.addNewShip(id, getNewShipImage());
          } 
       }
       //return false to signify that the transaction did not go through
@@ -216,7 +205,6 @@ public class Player{
          //increase the number of coins the player has by half the value of the ship they wish to sell
          numCoins += hangar.getShipSellPrice(id);
          //remove the newly-sold ship from hangar
-         addImageToFile(hangar.getShip(id).getImageFile());
          hangar.deleteShip(id);
          //return true to signify that the transaction is complete
          return true;
@@ -237,19 +225,17 @@ public class Player{
 		
 		
 		//if the player does have enough money
-		if(numCoins >= hangar.getShipSellPrice(id)){
+		if(numCoins >= hangar.getShipUpgradeCost(id, upgrade)){
 			//confirm with player that they wish to proceed with the transaction
 		   boolean cont;
          cont = hangarFrame.askQuestion("Are you sure you would like to upgrade this ship?", "Sure?");
          
 			//upgrade the ship through hangar
 			if(cont){
+            numCoins -= hangar.getShipUpgradeCost(id, upgrade);
             hangar.upgradeShip(id, upgrade);
             return true;
-         }else{
-         
          }
-			
 			
 		} else {
 			//output error message
@@ -284,8 +270,8 @@ public class Player{
 			
 			//close PrintWriter and flush stream
 			out.close();
-			
-		} catch(IOException e){
+         
+     } catch(IOException e){
 			System.out.println("File error");
 		}
    }
