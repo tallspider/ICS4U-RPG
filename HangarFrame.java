@@ -41,6 +41,11 @@ public class HangarFrame extends JFrame{
       setVisible(b);
    }
    
+   public void setVisible(boolean visible, boolean update){
+      updateAll();
+      setVisible(visible);
+   }
+   
    //initializes the Hangar Page
    public void init(){
       setSize(WINDOW_LENGTH, WINDOW_HEIGHT);
@@ -89,6 +94,7 @@ public class HangarFrame extends JFrame{
       shipSideBar = new ShipSideBar(this);
       add(BorderLayout.LINE_START, shipSideBar);
       revalidate();
+      repaint();
    }
    
    //displays a question pane that asks the user to select yes or no
@@ -750,6 +756,7 @@ class HangarInfoBotMid extends JPanel{
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
                   player.upgradeShip(shipID, Ship.TR_Upgrade);
+                  hangarFrame.updateAll();
                }
             });
       
@@ -759,6 +766,7 @@ class HangarInfoBotMid extends JPanel{
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
                   player.upgradeShip(shipID, Ship.AR_Upgrade);
+                  hangarFrame.updateAll();
                }
             });
       
@@ -768,6 +776,7 @@ class HangarInfoBotMid extends JPanel{
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
                   player.upgradeShip(shipID, Ship.FS_Upgrade);
+                  hangarFrame.updateAll();
                }
             });
          
@@ -883,6 +892,7 @@ class HangarInfoBotRight extends JPanel{
             public void actionPerformed(ActionEvent e){
                hangarFrame.setVisible(false);
                ShipSwapFrame ssf = new ShipSwapFrame(player, hangarFrame);
+               ssf.setVisible(true);
             }
          });
       
