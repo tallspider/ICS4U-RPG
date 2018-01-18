@@ -120,7 +120,8 @@ public class MainScene extends JFrame
 		public void  mouseClicked(MouseEvent e)
 		{
 			ms.setVisible(false);
-			new HangarFrame(player);
+			HangarFrame hf = new HangarFrame(player);
+			hf.setVisible(this, true);
 		}
 	}
       
