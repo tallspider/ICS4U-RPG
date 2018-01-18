@@ -33,7 +33,7 @@ public class Ship extends Entity
       try
       {
          name = f.readLine();
-	 imageFile = f.readLine();
+	      imageFile = f.readLine();
          attackRange = Integer.parseInt(f.readLine());
          travelRange = Integer.parseInt(f.readLine());
          firingSpeed = Integer.parseInt(f.readLine());
@@ -104,6 +104,7 @@ public class Ship extends Entity
       //add the firingSpeed
          firingSpeed++;
       }
+      updateValue();
    }
 
    public int calcUpgradeCost(int upgrade)  
