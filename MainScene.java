@@ -49,8 +49,7 @@ public class MainScene extends JFrame
    
       b5.setBounds(600, 300, 150, 70);
       panel.add(b5);		 
-      b5.addMouseListener(new LeaderBoardListener(player.getUsername()));
-   	
+   
       b6.setBounds(600, 400, 150, 70);
       panel.add(b6);		 
       b6.addMouseListener(new QuitListener(this));
@@ -128,45 +127,29 @@ public class MainScene extends JFrame
       
       
       
+   /*
       
-      
-	private class LeaderboardListener  extends MouseAdapter
+	private class LeaderBoardListener  extends MouseAdapter
 	{
-		String un;
-		public HangarListener(String un)
+		MainScene ms = null;
+		LeaderBoard l = null;
+		public LeaderBoardListener(MainScene ms,LeaderBoard l)
 		{
-			this.un = un;		
+			this.ms = ms;
+			this.l = l;
 		}
 		
 		public void  mouseClicked(MouseEvent e)
 		{
-			//ms.setVisible(false);
-			new LeaderboardFrame(un);
+		//	ms.setVisible(false);
+		//	new LeaderBoardFrame(l);
 		}
-	}
+	}*/
             
 	    
 	    
 	    
-	    
-	    
-	private class SaveListener  extends MouseAdapter
-	{
-		MainScene ms = null;
-		Game game = null;
-		public HangarListener(MainScene ms,Game game)
-		{
-			this.ms = ms;
-			this.game = game;
-		}
-		
-		public void  mouseClicked(MouseEvent e)
-		{
-			ms.setVisible(false);
-			new SaveFrame(game);
-		}
-	}
-
+	        
 }  
 
 
