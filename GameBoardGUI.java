@@ -105,6 +105,7 @@ Purpose: input / output GUI for gameboard (combat)
          infoArea = panel;
       }
    
+   // generates the endbutton
        private void createEndButtonArea(){
          JPanel panel = new JPanel();
          panel.setPreferredSize(new Dimension(END_BUTTON_AREA_WIDTH , END_BUTTON_AREA_LENGTH));
@@ -138,6 +139,7 @@ Purpose: input / output GUI for gameboard (combat)
       
       }
    
+   // updates the play area, displays the location from map
        public void updatePlayArea(Map map){
       
       //test location used to check if wall or ship & act accordingly
@@ -147,6 +149,7 @@ Purpose: input / output GUI for gameboard (combat)
          for (int x = 0 ; x < Map.WIDTH_OF_MAP ; x++){
             for (int y = 0 ; y < Map.LENGTH_OF_MAP ; y++){
             
+            // resets the background so that the background from displayPossibleMove and displayPossibleAttack don't stay
                slots[x][y].setOpaque(false);
                slots[x][y].setBackground(Color.black);
             
@@ -167,6 +170,7 @@ Purpose: input / output GUI for gameboard (combat)
          infoArea.repaint();
       }
    
+   // shows the valid moves on map given a 2d validmap array 
        public void displayPossibleMove(Map map, boolean[][] validMap){
       
          Location testLocation;
@@ -185,6 +189,7 @@ Purpose: input / output GUI for gameboard (combat)
       
       }
    
+   // shows the valid attacks on map given a 2d validmap array
        public void displayPossibleAttack(Map map, boolean[][] validMap){
       
          Location testLocation;
@@ -205,11 +210,13 @@ Purpose: input / output GUI for gameboard (combat)
    // updates the info area, gives revelent info on what user clicked
        public void updateInfoArea(Map map, Location location){
       
+      // clear everything in the info area
          infoArea.removeAll();
       
          JLabel label = new JLabel();
          Font font = new Font("SansSerif", Font.BOLD, 18);
       
+      // adds the revelent information depending on what the spot is
          if (map.isEmpty(location)){
          
             label = new JLabel("This is a Empty Spot");
@@ -246,9 +253,10 @@ Purpose: input / output GUI for gameboard (combat)
          infoArea.repaint();
       }
    
-   // gets where the player clicked
+   // gets where the player clicked given the label clicked
        public Location getLocation(JLabel label){
       
+      // loop through the entire map and check if the source of the click is the same as that slot, if so return that slot's location
          for (int x = 0 ; x < Map.WIDTH_OF_MAP ; x++){
             for (int y = 0 ; y < Map.LENGTH_OF_MAP ; y++){
                if (slots[x][y] == label){
@@ -261,29 +269,33 @@ Purpose: input / output GUI for gameboard (combat)
          return null;
       }
    
-   // asks user for what action he/she wants to do for the ship
+   // asks user for what action he/she wants to do with the ship
        public int getAction(){
       
          String[] options = new String[] {"Cancel", "Attack", "Move"};
       
          return JOptionPane.showOptionDialog(null, "Please select action for the ship", "Ship Action", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[2]);
-      
       }
    
+   // displays player victory
        public void displayVictory(int reward){
          JOptionPane.showMessageDialog(null, "You have won! Victory!", "Victory", JOptionPane.PLAIN_MESSAGE);
          JOptionPane.showMessageDialog(null, "You are rewarded " + reward + " coins", "Victory", JOptionPane.PLAIN_MESSAGE);
       }
    
+   // displays player defeat
        public void displayDefeat(int reward){
          JOptionPane.showMessageDialog(null, "You have lost! Defeat!", "Defeat", JOptionPane.PLAIN_MESSAGE);
          JOptionPane.showMessageDialog(null, "You are rewarded " + reward + " coins", "Defeat", JOptionPane.PLAIN_MESSAGE);
       }
    
+   // displays tie
        public void displayTie(int reward){
          JOptionPane.showMessageDialog(null, "You have defeated the enemy, but were defeated aswell (did you shoot your own ship??)", "Tie", JOptionPane.PLAIN_MESSAGE);
          JOptionPane.showMessageDialog(null, "You are rewarded " + reward + " coins", "Tie", JOptionPane.PLAIN_MESSAGE);
       }
+      
+   // closes the gui
        public void close(){
          mainFrame.dispose();
       }
@@ -291,18 +303,21 @@ Purpose: input / output GUI for gameboard (combat)
    //gets where the mouse clicked and outputs it to stream
        public void mouseClicked(MouseEvent e) {  
       
-         JLabel label = (JLabel) e.getComponent ();
+      // gets the source or where the user clicked
+         JLabel label = (JLabel) e.getComponent();
       
+      // calls the get location, which gives the location belong to the label
          Location location = getLocation(label);
+         
          try{
             output.write(location.getX());
             output.write(location.getY());
          }
              catch (IOException iox){
-            
             }
       }
    
+   // @overide
        public void mousePressed(MouseEvent e){
       }
        public void mouseEntered(MouseEvent e){
@@ -312,15 +327,16 @@ Purpose: input / output GUI for gameboard (combat)
        public void mouseReleased(MouseEvent e){
       }
    
-   // action event for button(s)
+   // action event for end turn button
        public void actionPerformed(ActionEvent e) {
       
          Button button = (Button)e.getSource();
       
+      // if the end button is pressed write the end location
          if (button == endButton){
             try{
-               output.write(255);
-               output.write(255);
+               output.write(Gameboard.END_TURN_lOCATION);
+               output.write(Gameboard.END_TURN_lOCATION);
             }
                 catch(IOException iox){
                }
