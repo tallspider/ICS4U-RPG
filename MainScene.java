@@ -42,6 +42,7 @@ public class MainScene extends JFrame
       
       b3.setBounds(250, 400, 150, 70);
       panel.add(b3);		 
+      b3.addMouseListener(new SaveListener(player.getUsername());
    
       b4.setBounds(600, 200, 150, 70);
       panel.add(b4);
@@ -80,7 +81,17 @@ public class MainScene extends JFrame
 	}
 }
  
- 
+ private class SaveListener extends MouseAdapter{
+ 	Player player;
+	public SaveListener(Player player){
+		this.player = player;
+	}
+	
+	public void  mouseClicked(MouseEvent e){
+		ErrorFrame.setText("Save success");
+		new ErrorFrame();
+	}
+ }
  
  
    private class FleetListener extends MouseAdapter
