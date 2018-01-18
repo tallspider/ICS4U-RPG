@@ -45,11 +45,12 @@ public class MainScene extends JFrame
    
       b4.setBounds(600, 200, 150, 70);
       panel.add(b4);
-      b4.addMouseListener(new HangarListener(this, player));		 
+		b4.addMouseListener(new HangarListener(this, player));		 
    
       b5.setBounds(600, 300, 150, 70);
       panel.add(b5);		 
-   
+      b5.addMouseListener(new LeaderBoardListener(player.getUsername()));
+   	
       b6.setBounds(600, 400, 150, 70);
       panel.add(b6);		 
       b6.addMouseListener(new QuitListener(this));
@@ -68,7 +69,6 @@ public class MainScene extends JFrame
  private class QuitListener  extends MouseAdapter
 {
 	MainScene ms = null;
-	
 	public QuitListener(MainScene ms)
 	{
 		this.ms = ms;
@@ -112,7 +112,6 @@ public class MainScene extends JFrame
 	{
 		MainScene ms = null;
 		Player player = null;
-		
 		public HangarListener(MainScene ms,Player player)
 		{
 			this.ms = ms;
@@ -133,19 +132,16 @@ public class MainScene extends JFrame
       
 	private class LeaderboardListener  extends MouseAdapter
 	{
-		MainScene ms = null;
-		Leaderboard l = null;
-		
-		public HangarListener(MainScene ms,Leaderboard l)
+		String un;
+		public HangarListener(String un)
 		{
-			this.ms = ms;
-			this.l = l;
+			this.un = un;		
 		}
 		
 		public void  mouseClicked(MouseEvent e)
 		{
-			ms.setVisible(false);
-			new LeaderboardFrame(l);
+			//ms.setVisible(false);
+			new LeaderboardFrame(un);
 		}
 	}
             
@@ -158,7 +154,6 @@ public class MainScene extends JFrame
 	{
 		MainScene ms = null;
 		Game game = null;
-		
 		public HangarListener(MainScene ms,Game game)
 		{
 			this.ms = ms;
@@ -171,58 +166,7 @@ public class MainScene extends JFrame
 			new SaveFrame(game);
 		}
 	}
-            
-	    
-	    
-	    
-	    
-	    
-	private class HangarListener  extends MouseAdapter
-	{
-		MainScene ms = null;
-		Player player = null;
-		
-		public HangarListener(MainScene ms,Player player)
-		{
-			this.ms = ms;
-			this.player = player;
-		}
-		
-		public void  mouseClicked(MouseEvent e)
-		{
-			ms.setVisible(false);
-			new HangarFrame(player);
-		}
-	}
-      
-      
-      
-      
-      
-      
-	private class HangarListener  extends MouseAdapter
-	{
-		MainScene ms = null;
-		Player player = null;
-		
-		public HangarListener(MainScene ms,Player player)
-		{
-			this.ms = ms;
-			this.player = player;
-		}
-		
-		public void  mouseClicked(MouseEvent e)
-		{
-			ms.setVisible(false);
-			new HangarFrame(player);
-		}
-	}
-      
-      
-      
-      
-      
-      
+
 }  
 
 
