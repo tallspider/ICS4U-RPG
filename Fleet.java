@@ -161,7 +161,7 @@ public class Fleet
            String ret = "";
            for(int at = 0; at < MAX_SHIPS; at++)
            {
-		if(! (ships[i] == null))
+		if(! (ships[at] == null))
               		ret += at + "\n" + ships[at].getPrintString();
            }
            return ret;
