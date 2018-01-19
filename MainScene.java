@@ -50,6 +50,7 @@ public class MainScene extends JFrame
    
       b5.setBounds(600, 300, 150, 70);
       panel.add(b5);		 
+      
       b5.addMouseListener(new LeaderBoardListener(player.getUsername()));
       
       b6.setBounds(600, 400, 150, 70);
