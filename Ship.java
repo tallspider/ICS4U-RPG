@@ -54,7 +54,7 @@ public class Ship extends Entity
    // Constructor of ship class, take in the fields of Ship class
    {
       this.name = name;
-      this.imageFile = imageFile;
+      this.imageShort = imageFile;
       this.attackRange = attackRange;
       this.travelRange = travelRange;
       this.firingSpeed = firingSpeed;
