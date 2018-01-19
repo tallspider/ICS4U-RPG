@@ -7,11 +7,11 @@ public class LeaderBoardFrame extends JFrame{
    private JLabel wayOfSort = new JLabel("rank   Score   Player", SwingConstants.CENTER);
    private LeaderBoard ranking;
    private int num;
-   private JLabel [] rank;
-   private JLabel [] name;
-   private JLabel [] score;
-   private ComparisonPlayer [] nameSort;
-   private ComparisonPlayer [] scoreSort;
+   private static JLabel [] rank;
+   private static JLabel [] name;
+   private static JLabel [] score;
+   private static ComparisonPlayer [] nameSort;
+   private static ComparisonPlayer [] scoreSort;
    private static Button change1 = new Button("Switch to sort by name");
    private static Button change2 = new Button("Switch to sort by player"); 
    public LeaderBoardFrame(String un)
@@ -74,8 +74,8 @@ public class LeaderBoardFrame extends JFrame{
          
          for(int i =0; i<nameSort.length;i++)
          {
-          //  rank[num] = new JLabel(i + "\n" +nameSort[i].getScore()+ "\n" + nameSort[i]. getUsername());
-          //  lbf.add(rank[i]);
+             name[i] = new JLabel(nameSort[i].getUsername());
+             score[i] = new JLabel(Integer.toString(nameSort[i].getScore())); 
          }
          
          Button change = new Button("Switch to sort by name");
@@ -112,8 +112,8 @@ public class LeaderBoardFrame extends JFrame{
          
          for (int i = 0;i<num;i++)
          {
-          //  rank[i] = new JLabel(i + "\n" +scoreSort[i].getScore()+ "\n" + scoreSort[i]. getUsername());
-          // lbf.add(rank[i]);
+             name[i] = new JLabel(scoreSort[i].getUsername());
+             score[i] = new JLabel(Integer.toString(scoreSort[i].getScore())); 
          }
          
          Button change = new Button("Switch to sort by name"); 
