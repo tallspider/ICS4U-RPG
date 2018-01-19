@@ -42,7 +42,7 @@ public class MainScene extends JFrame
       
       b3.setBounds(250, 400, 150, 70);
       panel.add(b3);		 
-      b3.addMouseListener(new SaveListener(player.getUsername());
+      b3.addMouseListener(new SaveListener(player));
    
       b4.setBounds(600, 200, 150, 70);
       panel.add(b4);
@@ -90,7 +90,6 @@ public class MainScene extends JFrame
 	public void  mouseClicked(MouseEvent e){
 		ErrorFrame.setText("Save success");
 		new ErrorFrame();
-		player.save();
 	}
  }
  
