@@ -4,12 +4,13 @@ import java.awt.event.*;
 import javax.swing.JComponent;
 public class LeaderBoardFrame extends JFrame{
 
-   private JLabel wayOfSort = new JLabel("rank   Score   Player", SwingConstants.CENTER);
+   private JLabel wayOfSort = new JLabel("Rank   Score   Player", SwingConstants.CENTER);
    private LeaderBoard ranking;
-   private int num;
-   private static JLabel [] rank;
-   private static JLabel [] name;
-   private static JLabel [] score;
+   private static int num;
+   private static JLabel[] rank;
+   private static JLabel[] name;
+   private static JLabel[] score;
+   private static JPanel[] sortByName;
    private static ComparisonPlayer [] nameSort;
    private static ComparisonPlayer [] scoreSort;
    private static Button change1 = new Button("Switch to sort by name");
@@ -23,7 +24,7 @@ public class LeaderBoardFrame extends JFrame{
       nameSort = ranking.getPlayersByName();
       num = nameSort.length;
       
-      this.setLayout(new BorderLayout(200,50));
+      // this.setLayout(new BorderLayout(200,50));
       this.add(wayOfSort,BorderLayout.NORTH);
       this.setResizable(false);
       this.setBounds(500,500,400,num*100+100);
@@ -40,17 +41,36 @@ public class LeaderBoardFrame extends JFrame{
          name[i] = new JLabel(scoreSort[i].getUsername());
          score[i] = new JLabel(Integer.toString(scoreSort[i].getScore())); 
       }
+      sortByName = new JPanel[num];
+      
+      for(int i = 0; i<num; i++)
+      {      
+            sortByName[i] = new JPanel();
+            sortByName[i].add(rank[i]); 
+            sortByName[i].add(name[i]); 
+            sortByName[i].add(score[i]); 
+            sortByName[i].setLayout(new FlowLayout());
+      }
+      
+      
+      for(int i = 0; i<num; i++)
+      {
+            System.out.println(i);
+            sortByName[i].setBounds(400,60+i*60,100,num*100+100);
+            this.add(sortByName[i]);
+      }
       
       Button change = new Button("Switch to sort by name");
       this.add(change,BorderLayout.SOUTH);
       change.addMouseListener(new SortScoreListener(this));
       
       this.addWindowListener
-         (
+      (
          new WindowAdapter()
          {
             public void windowClosing(WindowEvent e)
             {
+               
                //setVisible(false);
                dispose();
             }
