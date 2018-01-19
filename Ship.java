@@ -42,6 +42,7 @@ public class Ship extends Entity
          upgradesLeft = Integer.parseInt(f.readLine());
          ownedByPlayer = true;
 			updateValue();
+			updateImageFiles();
       } 
       catch (IOException e)
       {
