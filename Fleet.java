@@ -161,7 +161,7 @@ public class Fleet
            String ret = "";
            for(int at = 0; at < MAX_SHIPS; at++)
            {
-		if(ships[i] != null)
+		if(! (ships[i] == null))
               		ret += at + "\n" + ships[at].getPrintString();
            }
            return ret;
@@ -173,7 +173,7 @@ public class Fleet
           int ret = 0;
           for(int at = 0; at < MAX_SHIPS; at++)
           {
-            if(ships[at] != null)
+            if(!(ships[at] == null))
             {
                ret += ships[at].getScoreTotal();
             }
