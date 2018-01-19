@@ -138,7 +138,7 @@ public class Player{
 		}
    }
    
-   public String getNewShipImage(){
+   public String getNewShipImageShort(){
       try{
          
          BufferedReader f = new BufferedReader(new FileReader(IMAGE_FILE_FILE));
@@ -147,12 +147,12 @@ public class Player{
          while( (s = f.readLine()) != null){
             boolean taken = false;
             for(int i = 0; i < Hangar.MAX_SHIPS && !taken; i++){
-               if(hangar.getShip(i) != null && hangar.getShip(i).getImageFile().equals(s)){
+               if(hangar.getShip(i) != null && hangar.getShip(i).getImageShort().equals(s)){
                   taken = true;
                }
             }
             for(int i = 0; i < Fleet.MAX_SHIPS && !taken; i++){
-               if(fleet.getShip(i) != null && fleet.getShip(i).getImageFile().equals(s)){
+               if(fleet.getShip(i) != null && fleet.getShip(i).getImageShort().equals(s)){
                   taken = true;
                }
             }
@@ -183,7 +183,7 @@ public class Player{
             //decrease the number of coins the player owns by the amount required to buy this Ship
             numCoins -= Ship.BASIC_COST;
             //add the newly-acquired Ship to hangar
-            return hangar.addNewShip(id, getNewShipImage());
+            return hangar.addNewShip(id, getNewShipImageShort());
          } 
       }
       //return false to signify that the transaction did not go through
