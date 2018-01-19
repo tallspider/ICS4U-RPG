@@ -2,7 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JComponent;
-public class LeaderBoardFrame extends JFrame{
+public class LeaderBoardFrame extends JFrame
+{
 
    private JLabel wayOfSort = new JLabel("rank   Score   Player", SwingConstants.CENTER);
    private LeaderBoard ranking;
@@ -14,6 +15,9 @@ public class LeaderBoardFrame extends JFrame{
    private ComparisonPlayer [] scoreSort;
    private static Button change1 = new Button("Switch to sort by name");
    private static Button change2 = new Button("Switch to sort by player"); 
+   
+   
+   
    public LeaderBoardFrame(String name)
    {
       super("LeaderBoard");
@@ -22,6 +26,7 @@ public class LeaderBoardFrame extends JFrame{
       scoreSort = ranking.getPlayersByScore();
       nameSort = ranking.getPlayersByName();
       num = nameSort.length;
+      
       
       this.setLayout(new BorderLayout(200,50));
       this.add(wayOfSort,BorderLayout.NORTH);
@@ -32,7 +37,7 @@ public class LeaderBoardFrame extends JFrame{
       for(int i = 0;i<num;i++)
       {
          rank[i] = new JLabel(Integer.toString(i),SwingConstants.CENTER);
-         nameSort[i] = new JLabel(scoreSort[i].getUsername());
+         nameSort[i] = new JLabel(scoreSort[i].getUsername(),SwingConstants.CENTER);
       }
       
       Button change = new Button("Switch to sort by name");
@@ -40,16 +45,15 @@ public class LeaderBoardFrame extends JFrame{
       change.addMouseListener(new SortScoreListener(this));
       
       this.addWindowListener
-         (
+      (
          new WindowAdapter()
          {
             public void windowClosing(WindowEvent e)
             {
-               //setVisible(false);
                dispose();
             }
          }
-         );
+      );
    }
    
    class SortScoreListener extends MouseAdapter
