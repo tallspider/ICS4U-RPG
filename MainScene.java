@@ -21,7 +21,7 @@ public class MainScene extends JFrame
       getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
       ((JPanel)this.getContentPane()).setOpaque(false); //make invisible  
      
-   
+      
       JFrame frame = new JFrame("Space RPG");  
       JPanel panel = new JPanel();  
       panel.setLayout(new FlowLayout());  
@@ -33,8 +33,11 @@ public class MainScene extends JFrame
       JButton b6 = new JButton("Quit");  
    
       panel.setLayout(null);
+      
       b1.setBounds(250, 200, 150, 70);
       panel.add(b1);		 
+      PortalListener pl = new PortalListener(this, player);
+      b1.addMouseListener(pl);
    
       b2.setBounds(250, 300, 150, 70);
       panel.add(b2);		 
@@ -46,13 +49,11 @@ public class MainScene extends JFrame
    
       b4.setBounds(600, 200, 150, 70);
       panel.add(b4);
-		b4.addMouseListener(new HangarListener(this, player));		 
+      b4.addMouseListener(new HangarListener(this, player));		 
    
       b5.setBounds(600, 300, 150, 70);
       panel.add(b5);		 
-      
-      b5.addMouseListener(new LeaderBoardListener(player.getUsername()));
-      
+   
       b6.setBounds(600, 400, 150, 70);
       panel.add(b6);		 
       b6.addMouseListener(new QuitListener(this));
@@ -68,32 +69,33 @@ public class MainScene extends JFrame
  
  
  
- private class QuitListener  extends MouseAdapter
-{
-	MainScene ms = null;
-	public QuitListener(MainScene ms)
-	{
-		this.ms = ms;
-	}
-		
-	public void  mouseClicked(MouseEvent e)
-	{
-		ms.setVisible(false);
-		System.exit(-1);
-	}
-}
+   private class QuitListener  extends MouseAdapter
+   {
+      MainScene ms = null;
+      public QuitListener(MainScene ms)
+      {
+         this.ms = ms;
+      }
+   	
+      public void  mouseClicked(MouseEvent e)
+      {
+         ms.setVisible(false);
+         System.exit(-1);
+      }
+   }
  
- private class SaveListener extends MouseAdapter{
- 	Player player;
-	public SaveListener(Player player){
-		this.player = player;
-	}
-	
-	public void  mouseClicked(MouseEvent e){
-		ErrorFrame.setText("Save success");
-		new ErrorFrame();
-	}
- }
+   private class SaveListener extends MouseAdapter{
+      Player player;
+      public SaveListener(Player player){
+         this.player = player;
+      }
+   
+      public void  mouseClicked(MouseEvent e){
+         ErrorFrame.setText("Save success");
+         player.save();
+         new ErrorFrame();
+      }
+   }
  
  
    private class FleetListener extends MouseAdapter
@@ -107,7 +109,7 @@ public class MainScene extends JFrame
          fleet = f;
       } 
       
-
+   
       public void mouseClicked(MouseEvent e)
       {
         // ms.setVisible(false);
@@ -120,45 +122,72 @@ public class MainScene extends JFrame
 
 
 
-	private class HangarListener  extends MouseAdapter
-	{
-		MainScene ms = null;
-		Player player = null;
-		public HangarListener(MainScene ms,Player player)
-		{
-			this.ms = ms;
-			this.player = player;
-		}
-		
-		public void  mouseClicked(MouseEvent e)
-		{
-			ms.setVisible(false);
-			HangarFrame hf = new HangarFrame(player);
-			hf.setVisible(ms, true);
-		}
-	}
-      
-      
-      
-      
+   private class HangarListener  extends MouseAdapter
+   {
+      MainScene ms = null;
+      Player player = null;
+      public HangarListener(MainScene ms,Player player)
+      {
+         this.ms = ms;
+         this.player = player;
+      }
+   	
+      public void  mouseClicked(MouseEvent e)
+      {
+         ms.setVisible(false);
+         HangarFrame hf = new HangarFrame(player);
+         hf.setVisible(ms, true);
+      }
+   }
    
+   private class PortalListener  extends MouseAdapter
+   {
+      MainScene ms;
+      Player player;
+      Gameboard gameBoard;
+      
+      public PortalListener(MainScene ms,Player player)
+      {
+         this.ms = ms;
+      }
+   	
+      public void  mouseClicked(MouseEvent a)
+      {
+      	gameBoard = new Gameboard(); 
+         gameBoard.startCombat(new Player("c"));
+        
+         //ms.dispose(); 
+         
+         
+         //go();
+      }
+   }
+   
+   public void go(){
+      Test test = new Test();
+      test.main(null);
+   }      
+      
+      
+      
+   /*
       
 	private class LeaderBoardListener  extends MouseAdapter
 	{
-		//MainScene ms = null;
-		String un = null;
-		public LeaderBoardListener(String un)
+		MainScene ms = null;
+		LeaderBoard l = null;
+		public LeaderBoardListener(MainScene ms,LeaderBoard l)
 		{
-			//this.ms = ms;
-			this.un = un;
+			this.ms = ms;
+			this.l = l;
 		}
 		
 		public void  mouseClicked(MouseEvent e)
 		{
-			//ms.setVisible(false);
-			new LeaderBoardFrame(un);
+		//	ms.setVisible(false);
+		//	new LeaderBoardFrame(l);
 		}
-	}
+	}*/
             
 	    
 	    
