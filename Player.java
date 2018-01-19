@@ -249,7 +249,10 @@ public class Player{
    
 	//saves player information to the corresponding file
    public void save(){
-   	try{
+   	//update the player score first
+      	score = calcScore();
+      
+	try{
 			//create a PrintWriter object to write to file
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(filename)));
 			
