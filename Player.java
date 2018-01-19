@@ -18,7 +18,7 @@ public class Player{
    public static final int HANGAR = 0;
    public static final int FLEET = 1;
    public static final String IMAGE_FILE_FILE = "images.txt";
-   public static final String NO_PIC = "nopic.jpg";
+   public static final String NO_PIC = "7.jpg";
    public static final String AI_SHIP_IMAGE = "aishipimage.jpg";
    public static final String WALL_IMAGE = "wall.jpg";
 	public static final int BASIC_COINS = 1000;
@@ -147,12 +147,12 @@ public class Player{
          while( (s = f.readLine()) != null){
             boolean taken = false;
             for(int i = 0; i < Hangar.MAX_SHIPS && !taken; i++){
-               if(hangar.getShip(i) != null && hangar.getShip(i).getImageShort().equals(s)){
+               if(hangar.getShip(i) != null && hangar.getShip(i).getImageFile().equals(s)){
                   taken = true;
                }
             }
             for(int i = 0; i < Fleet.MAX_SHIPS && !taken; i++){
-               if(fleet.getShip(i) != null && fleet.getShip(i).getImageShort().equals(s)){
+               if(fleet.getShip(i) != null && fleet.getShip(i).getImageFile().equals(s)){
                   taken = true;
                }
             }
