@@ -90,6 +90,7 @@ public class MainScene extends JFrame
 	public void  mouseClicked(MouseEvent e){
 		ErrorFrame.setText("Save success");
 		new ErrorFrame();
+		player.save();
 	}
  }
  
