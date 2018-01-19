@@ -98,7 +98,7 @@ public class Hangar
       if(index>=MIN_SHIPS && index<MAX_SHIPS && ships[index] == null)
       {
          ships[index] = ship;
-	 shipnum++;
+	      shipnum++;
 	 // add the specific ship and adjust the num of ships in the array
          return true;
       }
@@ -116,10 +116,6 @@ public class Hangar
 				       Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
    }
   
-/*   public void upgrade(int id, int upgrade)  //Upgrade the ship in the Hangar
-   {
-       ships[id].upgrade(upgrade);
-   } */
   
   public String getPrintString()  
   //Return the string which contains the Serial number of the ship information
