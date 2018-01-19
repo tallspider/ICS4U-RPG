@@ -141,7 +141,7 @@ public class Ship extends Entity
    public String getPrintString()  
    //Return the string which contains the ship basic information
    {
-      return "\n" + name + "\n" + imageFile + "\n" + attackRange + "\n" + travelRange + "\n" + firingSpeed + "\n" + upgradesLeft;
+      return  System.lineSeparator() + name + System.lineSeparator() + imageFile + System.lineSeparator() + attackRange + System.lineSeparator() + travelRange + System.lineSeparator() + firingSpeed + System.lineSeparator() + upgradesLeft;
    }
 
    public boolean isUpgradable()  
