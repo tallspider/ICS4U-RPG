@@ -13,9 +13,7 @@ public class Ship extends Entity
    private int travelRange;
    private int firingSpeed;
    private int upgradesLeft;
-   private String imageShort;
    private String imageFile;
-   private String imageIconFile;
    public static final int AR_Upgrade = 1;
    public static final int TR_Upgrade = 2;
    public static final int FS_Upgrade = 3;
@@ -35,14 +33,13 @@ public class Ship extends Entity
       try
       {
          name = f.readLine();
-	      imageShort = f.readLine();
+	      imageFile = f.readLine();
          attackRange = Integer.parseInt(f.readLine());
          travelRange = Integer.parseInt(f.readLine());
          firingSpeed = Integer.parseInt(f.readLine());
          upgradesLeft = Integer.parseInt(f.readLine());
          ownedByPlayer = true;
 			updateValue();
-			updateImageFiles();
       } 
       catch (IOException e)
       {
@@ -54,7 +51,7 @@ public class Ship extends Entity
    // Constructor of ship class, take in the fields of Ship class
    {
       this.name = name;
-      this.imageShort = imageFile;
+      this.imageFile = imageFile;
       this.attackRange = attackRange;
       this.travelRange = travelRange;
       this.firingSpeed = firingSpeed;
@@ -62,7 +59,6 @@ public class Ship extends Entity
       this.value = value;
       this.ownedByPlayer = ownedByPlayer;
 		updateValue();
-      updateImageFiles();
    }
    	
    public Ship(String name) 
@@ -76,7 +72,7 @@ public class Ship extends Entity
    // Constructor of ship class
    {
       this.name = "";
-      this.imageShort = null;
+      this.imageFile = null;
       this.attackRange = 0;
       this.travelRange = 0;
       this.firingSpeed = 0;
@@ -88,11 +84,6 @@ public class Ship extends Entity
 		value = (attackRange * (attackRange - 1) + travelRange * (travelRange - 1) + firingSpeed * (firingSpeed - 1) ) * UPGRADE_MULTIPLE / 2 + BASIC_COST;
 	}
 	
-   public void updateImageFiles(){
-      imageFile = imageShort + ".jpg";
-      imageIconFile = imageShort + "Icon.jpg";
-   }
-   
    public void upgrade(int num)  
    // Upgrade the ship by given the wanted upgrade type as a int
    // Given upgrade type as a int
@@ -150,7 +141,7 @@ public class Ship extends Entity
    public String getPrintString()  
    //Return the string which contains the ship basic information
    {
-      return "\n" + name + "\n" + imageShort + "\n" + attackRange + "\n" + travelRange + "\n" + firingSpeed + "\n" + upgradesLeft;
+      return "\n" + name + "\n" + imageFile + "\n" + attackRange + "\n" + travelRange + "\n" + firingSpeed + "\n" + upgradesLeft;
    }
 
    public boolean isUpgradable()  
@@ -238,14 +229,6 @@ public class Ship extends Entity
       return this.upgradesLeft;
    } 
    
-   public String getImageShort(){
-      return imageShort;
-   }
-   
-   public void setImageShort(String s){
-      imageShort = s;
-   }  
-   
    public String getImageFile()  
    //Accessor method for the ship imageFile of this ship
    {
@@ -257,14 +240,6 @@ public class Ship extends Entity
    //Given the wanted imageFile of the ship as a string
    {
    	imageFile = s;
-   }
-   
-   public String getImageIconFile(){
-      return imageIconFile;
-   }
-   
-   public void setImageIconFile(String s){
-      imageIconFile = s;
    }
    
    public void setOwnedByPlayer(boolean ownedByPlayer)  
