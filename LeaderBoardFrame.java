@@ -23,6 +23,7 @@ public class LeaderBoardFrame extends JFrame{
       this.setTitle("LeaderBoard");
       
       wayOfSort = new JLabel("Rank   Player   Score", SwingConstants.CENTER);
+      wayOfSort.setFont(new Font("TimesRoman", Font.BOLD, 15));
       ranking = new LeaderBoard(un);
       scoreSort = ranking.getPlayersByScore();
       nameSort = ranking.getPlayersByName();
@@ -85,6 +86,7 @@ public class LeaderBoardFrame extends JFrame{
    
        
       Button change = new Button("Switch to sort by name");
+      change.setFont(new Font("TimesRoman", Font.BOLD, 15));
       this.add(change,BorderLayout.SOUTH);
       change.addMouseListener(new SortScoreListener(this));
       
@@ -174,7 +176,7 @@ public class LeaderBoardFrame extends JFrame{
                }
             });
       }
-   }
+   }    
    
    
 }
