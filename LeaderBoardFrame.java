@@ -10,7 +10,7 @@ public class LeaderBoardFrame extends JFrame{
    private static JLabel[] rank;
    private static JLabel[] name;
    private static JLabel[] score;
-   private static JPanel[] sortByName;
+   private static JPanel[] sortByScore;
    // private static JPanel displaypart;
    private static ComparisonPlayer[] nameSort;
    private static ComparisonPlayer[] scoreSort;
@@ -52,32 +52,32 @@ public class LeaderBoardFrame extends JFrame{
          score[i] = new JLabel(Integer.toString(scoreSort[i].getScore())+"        "); 
       }
       
-      sortByName = new JPanel[num];
+      sortByScore = new JPanel[num];
       
       for(int i = 0; i<num; i++)
       {      
-         sortByName[i] = new JPanel();
-         sortByName[i].add(rank[i]);    
-         sortByName[i].add(name[i]);            
-         sortByName[i].add(score[i]); 
-         sortByName[i].setLayout(new FlowLayout());
+         sortByScore[i] = new JPanel();
+         sortByScore[i].add(rank[i]);    
+         sortByScore[i].add(name[i]);            
+         sortByScore[i].add(score[i]); 
+         sortByScore[i].setLayout(new FlowLayout());
       }
       
       
       for(int i = 0; i<num; i++)
       {
          System.out.println(i+1);
-         sortByName[i].setBounds(10,10+i*35,400,30);
+         sortByScore[i].setBounds(10,10+i*35,400,30);
          if (i%2==0)
          {
-            sortByName[i].setBackground(Color.RED);
+            sortByScore[i].setBackground(Color.RED);
          }
          else 
          {
-            sortByName[i].setBackground(Color.BLUE);
+            sortByScore[i].setBackground(Color.BLUE);
          }
          
-         p.add(sortByName[i]); 
+         p.add(sortByScore[i]); 
             
       }
       
