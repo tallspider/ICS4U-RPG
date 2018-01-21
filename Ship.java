@@ -20,11 +20,12 @@ public class Ship extends Entity
    public static final int BASIC_STAT = 1;
    public static final int INIT_UPGRADES = 10;
    private boolean ownedByPlayer; 
+   private int value;
    private boolean movedAlready; 
    private int timesAttacked;
    public static final int BASIC_COST = 500;
 	public static final int UPGRADE_MULTIPLE = 50;
-   private int value;
+   public static final String BASIC_NAME = "A New Ship";
       
    public void loadNext(BufferedReader f)  
    // Loading the ship information from txt file, takes in the object of BufferedReader
@@ -71,7 +72,7 @@ public class Ship extends Entity
    public Ship()   
    // Constructor of ship class
    {
-      this.name = "";
+      this.name = BASIC_NAME;
       this.imageFile = null;
       this.attackRange = 0;
       this.travelRange = 0;
