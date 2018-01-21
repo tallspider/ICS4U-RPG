@@ -42,6 +42,9 @@ public class ComparisonPlayer{
 	
 	//Accessor for the player username
 	public String getUsername(){
+      if(username.length() > 10)
+         return username.substring(0, 10);
+      
 		return username;
 	}
 	
@@ -58,7 +61,7 @@ public class ComparisonPlayer{
 	
 	//Mutator for the player score
 	//takes in an int to which the score of this ComparisonPlayer will be set
-	public void serScore(int sc){
+	public void setScore(int sc){
 		score = sc;
 	}
 }
