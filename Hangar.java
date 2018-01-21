@@ -15,7 +15,7 @@ public class Hangar
    public static final int MIN_SHIPS = 0;
  
    public Hangar(Ship[] ships)  
-   //Constructor of Hangar classï¼Œtakes in the ship array as the field  of the Hangar
+   //Constructor of Hangar classÃ¯Â¼Å’takes in the ship array as the field  of the Hangar
    //Given the ship array
    {
       this.ships = ships;
@@ -112,7 +112,7 @@ public class Hangar
    //Add one new ship by given the wanted index and imageFile of the ship in the list  
    //Given the index of the ship which is an int and ship's image which is string
    {
-   	return addShip(index, new Ship("", imgf, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, 
+   	return addShip(index, new Ship(Ship.BASIC_NAME, imgf, Ship.BASIC_STAT, Ship.BASIC_STAT, Ship.BASIC_STAT, 
 				       Ship.INIT_UPGRADES, Ship.BASIC_COST, true));
    }
   
