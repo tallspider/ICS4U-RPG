@@ -105,6 +105,11 @@ public class HangarFrame extends JFrame{
       return JOptionPane.showConfirmDialog(null, ques, title, JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION;
    }
    
+   //displays a message to inform user of error
+   public void showErrorMessage(String q, String t){
+      JOptionPane.showMessageDialog(null, q, t, JOptionPane.ERROR_MESSAGE);
+   }
+   
    //accessor method for the page to go back to
    public Component getLastPage(){
       return lastPage;
@@ -547,10 +552,15 @@ class HangarInfoTopMid extends JPanel{
             new ActionListener(){
 					public void actionPerformed(ActionEvent e){
                   System.out.println("Change Ship Name button clicked");
+                  
+                  if(ENTRY.getText() == ""){
                   ship.setName(ENTRY.getText());
                   //System.out.println(ENTRY.getText());
                   hangarFrame.updateShipSideBar();
 						ENTRY.setText("");
+                  } else {
+                     hangarFrame.showErrorMessage("You may not call your ship (nothing).", "Empty Ship Name");
+                  }
                }
             });
          
