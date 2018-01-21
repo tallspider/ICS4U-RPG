@@ -37,7 +37,7 @@ public class Hangar
         String s;
         while( (s = f.readLine())!= null && s.length() != 0)
 	{
-            int ID = Integer.parseInt(s);
+            int ID = Integer.parseInt(s); System.out.println("id read " + ID);
             ships[ID] = new Ship();
             ships[ID].loadNext(f);
         }
@@ -125,7 +125,7 @@ public class Hangar
       {
          if(ships[at] != null)
          {
-            ret += at + "\n" + ships[at].getPrintString();
+            ret += at + ships[at].getPrintString() + System.lineSeparator();
          }
 	 //print the ship indormation with the serial number
       }
