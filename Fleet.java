@@ -162,7 +162,7 @@ public class Fleet
            for(int at = 0; at < MAX_SHIPS; at++)
            {
 		if(! (ships[at] == null))
-              		ret += at + "\n" + ships[at].getPrintString();
+              		ret += at + ships[at].getPrintString() + System.lineSeparator();
            }
            return ret;
         }
