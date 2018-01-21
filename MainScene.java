@@ -143,13 +143,11 @@ public class MainScene extends JFrame
    
    private class PortalListener  extends MouseAdapter
    {
-      MainScene ms;
-      Player player;
+
       
       public PortalListener(MainScene ms,Player player)
       {
-         this.ms = ms;
-         this.player = player;
+
       }
    	
       public void  mouseClicked(MouseEvent e)
@@ -164,7 +162,7 @@ public class MainScene extends JFrame
             //it can't be a void method or else it won't override doInBackground
                protected Object doInBackground(){
                // the code to actually start the game
-                  ms.dispose();
+                 // make the hanger frame invisible, not sure how to do it   -David~
                   Gameboard gameBoard = new Gameboard(); 
                   gameBoard.startCombat(player);
                   return null;  
