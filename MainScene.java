@@ -145,22 +145,36 @@ public class MainScene extends JFrame
    {
       MainScene ms;
       Player player;
-      Gameboard gameBoard;
       
       public PortalListener(MainScene ms,Player player)
       {
          this.ms = ms;
+         this.player = player;
       }
    	
-      public void  mouseClicked(MouseEvent a)
+      public void  mouseClicked(MouseEvent e)
       {
-      	gameBoard = new Gameboard(); 
-         gameBoard.startCombat(new Player("c"));
-        
-         //ms.dispose(); 
+      // creates a new swing worker which cointains the code needed to start the game, this code is inside the doInBackground class of the swing worker so that the code is run in a background thread (when the swingworker is executed)
+      // if the code is not run in a bakcground thread, the events from the GameboardGUI will conflict with this (MainScene)'s events causing deadlock and a blank gui, this is because both event handlers are run on the same thread the "Event Dispatch Thread" 
+      // this problem is circumvented by running the Gameboard (and thus the GameboardGUI) in a background thread, keeping the GameboardGUI's event handler out of the same thread as MainScene's event handler
+         SwingWorker startGame = 
+            new SwingWorker() {
+            
+            //overrides the do in background in swing worker (normally when you call it without overriding it it does "nothing" in the background)
+            //it can't be a void method or else it won't override doInBackground
+               protected Object doInBackground(){
+               // the code to actually start the game
+                  ms.dispose();
+                  Gameboard gameBoard = new Gameboard(); 
+                  gameBoard.startCombat(player);
+                  return null;  
+               }
+            };
+            
+      // runs the code in startGame (most importantly the code in doInBackground)
+         startGame.execute();
          
-         
-         //go();
+         // hotfix courtesy of david (and google, and stack overflow, and the internet)
       }
    }
    
@@ -173,22 +187,22 @@ public class MainScene extends JFrame
       
  
       
- 	private class LeaderBoardListener  extends MouseAdapter
- 	{
- 		//MainScene ms = null;
- 		String un = null;
- 		public LeaderBoardListener(String un)
- 		{
- 			//this.ms = ms;
- 			this.un = un;
- 		}
- 		
- 		public void  mouseClicked(MouseEvent e)
- 		{
- 			//ms.setVisible(false);
- 			new LeaderBoardFrame(un);
- 		}
- 	}
+   private class LeaderBoardListener  extends MouseAdapter
+   {
+   	//MainScene ms = null;
+      String un = null;
+      public LeaderBoardListener(String un)
+      {
+      	//this.ms = ms;
+         this.un = un;
+      }
+   	
+      public void  mouseClicked(MouseEvent e)
+      {
+      	//ms.setVisible(false);
+         new LeaderBoardFrame(un);
+      }
+   }
             
 	    
 	    
