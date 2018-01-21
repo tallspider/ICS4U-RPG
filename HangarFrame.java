@@ -38,9 +38,9 @@ public class HangarFrame extends JFrame{
    //takes in the last page to potentially go back to
    //takes in boolean that dictates whether or not to make this page visible
    public void setVisible(Component c, boolean b){
-  		lastPage = c; 
-  		updateAll();    
-		setVisible(b);
+      lastPage = c; 
+      updateAll();    
+      setVisible(b);
    }
    
    public void setVisible(boolean visible, boolean update){
@@ -77,10 +77,10 @@ public class HangarFrame extends JFrame{
       hangarInfoPanel = new HangarInfoPanel(this);
    }
    
-	public void updateAll(){
-		updateShipSideBar();
-		updateShipInfoPanel(currentShipID);
-	}
+   public void updateAll(){
+      updateShipSideBar();
+      updateShipInfoPanel(currentShipID);
+   }
 	
    //updates the right (Ship information) side of the page when a new ship has been selected
    public void updateShipInfoPanel(int id){
@@ -545,19 +545,18 @@ class HangarInfoTopMid extends JPanel{
          entry = new JTextField(15); 
          button = new JButton("Change Ship Name");
       	
-			final JTextField ENTRY = entry;
+         final JTextField ENTRY = entry;
          JPanel panel = new JPanel();
          
          button.addActionListener(
             new ActionListener(){
-					public void actionPerformed(ActionEvent e){
+               public void actionPerformed(ActionEvent e){
                   System.out.println("Change Ship Name button clicked");
                   
-                  if(ENTRY.getText() == ""){
-                  ship.setName(ENTRY.getText());
-                  //System.out.println(ENTRY.getText());
-                  hangarFrame.updateShipSideBar();
-						ENTRY.setText("");
+                  if(!ENTRY.getText().isEmpty()){
+                     ship.setName(ENTRY.getText());
+                     hangarFrame.updateShipSideBar();
+                     ENTRY.setText("");
                   } else {
                      hangarFrame.showErrorMessage("You may not call your ship (nothing).", "Empty Ship Name");
                   }
@@ -637,13 +636,13 @@ class HangarInfoTopRight extends JPanel{
       setOpaque(true);
       setBackground(Color.pink);
       //add(new JLabel(image), BorderLayout.CENTER);*/
-		
-		PicSidePanel picSide = new PicSidePanel(imageFile, length, height);
+   	
+      PicSidePanel picSide = new PicSidePanel(imageFile, length, height);
       picSide.setPreferredSize(new Dimension(length, height));
-		picSide.setOpaque(true);
-		//picSide.add(new JPanel());
+      picSide.setOpaque(true);
+   	//picSide.add(new JPanel());
       add(picSide, BorderLayout.CENTER);   
-		
+   	
       setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
    }
 }
@@ -891,17 +890,18 @@ class HangarInfoBotRight extends JPanel{
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
                   player.sellShip(shipID);
-						hangarFrame.updateAll();
+                  hangarFrame.updateAll();
                }
             });
       } else {
          button1 = new JButton(" Buy ");
-         button1.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-               player.buyShip(shipID);
-					hangarFrame.updateAll();
-            }
-         });
+         button1.addActionListener(
+            new ActionListener(){
+               public void actionPerformed(ActionEvent e){
+                  player.buyShip(shipID);
+                  hangarFrame.updateAll();
+               }
+            });
          if(player.getNumCoins() - Ship.BASIC_COST < 0) button1.setEnabled(false);
       }
       
