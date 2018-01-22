@@ -30,8 +30,10 @@ public class LeaderBoardFrame2 extends JFrame
    private JPanel p2 = new JPanel();
    
    //constructor of the LeaderBoardFrame2 class
-   public LeaderBoardFrame2(LeaderBoardFrame lf,String un2)
-   {
+   public LeaderBoardFrame2(LeaderBoardFrame lf,String un2, MainScene ms)
+   {  
+      ms.addReopenListener(this);
+      
       this.lf = lf;   
       this.setTitle("LeaderBoard");
       //set the handout of the center part
