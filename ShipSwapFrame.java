@@ -753,10 +753,10 @@ class BotInfoPanel extends JPanel{
    /*infoSide.setOpaque(true);
    infoSide.setBackground(Color.red);
    add(infoSide,BorderLayout.WEST);*/
-      PicSidePanel picSide;
+      PicSidePanel1 picSide;
       
       if(ship == null){
-         picSide = new PicSidePanel(Player.NO_PIC, length / 5 * 3, height);
+         picSide = new PicSidePanel1(Player.NO_PIC, length / 5 * 3, height);
          picSide.setPreferredSize(new Dimension(length / 5 * 3, height));
    
          JLabel emptyLabel, holdLabel, posLabel;
@@ -919,7 +919,7 @@ class BotInfoPanel extends JPanel{
          infoSide.add(ugPanel);
          infoSide.add(valuePanel);
       
-         picSide = new PicSidePanel(ship.getImageFile(), length / 5 * 3, height);
+         picSide = new PicSidePanel1(ship.getImageFile(), length / 5 * 3, height);
          picSide.setPreferredSize(new Dimension(length / 5 * 3, height));
          
          JButton swapButton = new JButton("Swap");
@@ -964,13 +964,13 @@ class BotInfoPanel extends JPanel{
    
 }
 
-class PicSidePanel extends JPanel{
+class PicSidePanel1 extends JPanel{
 
    Image bgImage;
    int length;
    int height;
    
-   public PicSidePanel(String imageFile, int len, int hei){
+   public PicSidePanel1(String imageFile, int len, int hei){
       bgImage = new ImageIcon(imageFile).getImage();
       height = hei;
       length = len;
