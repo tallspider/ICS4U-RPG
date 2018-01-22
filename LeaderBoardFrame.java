@@ -102,7 +102,7 @@ public class LeaderBoardFrame extends JFrame
          }
          else 
          {
-            sortByScore[i].setBackground(Color.BLUE);
+            sortByScore[i].setBackground(Color.YELLOW);
          }
          
          p.add(sortByScore[i]); 
