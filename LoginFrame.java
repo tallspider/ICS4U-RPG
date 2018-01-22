@@ -1,3 +1,10 @@
+/*
+Class Name: LoginFrame
+Author: Chongpu Zhao
+Date: January 10, 2018
+Purpose:A graphic class use to present the login window.
+*/
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
