@@ -23,6 +23,7 @@ public class LeaderBoardFrame extends JFrame
    //two different display method
    private static ComparisonPlayer[] nameSort;
    private static ComparisonPlayer[] scoreSort;
+   private MainScene ms;
 	
    //set the panel that contains all player's score informational panels
    private JPanel p = new JPanel();
@@ -33,6 +34,7 @@ public class LeaderBoardFrame extends JFrame
    public LeaderBoardFrame(String un, MainScene ms)
    {
       ms.addReopenListener(this);
+      this.ms = ms;
       this.setTitle("LeaderBoard");
       //set the handout of the center part
       this.leaderBoardname = un;
@@ -124,7 +126,7 @@ public class LeaderBoardFrame extends JFrame
       Monitor mo = new Monitor(this,leaderBoardname);
       change.addActionListener(mo);
       
-          
+      
    }
    
    
@@ -158,7 +160,7 @@ public class LeaderBoardFrame extends JFrame
       public void actionPerformed(ActionEvent e)
       {
          lf.setVisible(false);
-         new LeaderBoardFrame2(lf,un2);
+         new LeaderBoardFrame2(lf,un2, ms);
       }
    }
    
