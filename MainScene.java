@@ -5,8 +5,7 @@ import java.awt.event.*;
 public class MainScene extends JFrame
 {
    private Player player;
-   ImageIcon[] boardPictures = new ImageIcon[10];   
-   static final int WINDOW_WIDTH=700;
+   static final int WINDOW_WIDTH=700;                      //window size
    static final int WINDOW_LENGTH=1000;
    private HangarFrame hangarFrame;
    public JFrame frame;
@@ -26,7 +25,7 @@ public class MainScene extends JFrame
       frame = new JFrame("Space RPG");  
       JPanel panel = new JPanel();  
       panel.setLayout(new FlowLayout());  
-      JButton b5 = new JButton("Portal");  
+      JButton b5 = new JButton("Portal");      //create buttons
       JButton b2 = new JButton("Fleet"); 
       JButton b3 = new JButton("Save");
       JButton b4 = new JButton("Hangar");  
@@ -35,6 +34,7 @@ public class MainScene extends JFrame
    
       panel.setLayout(null);
       
+      //add the button to the panel
       b1.setBounds(250, 200, 150, 70);
       panel.add(b1);		 
       b1.addMouseListener(new LeaderBoardListener(this, player.getUsername()));
