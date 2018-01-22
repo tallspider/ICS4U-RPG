@@ -1,7 +1,14 @@
+//Class name: LeaderBoardFrame2
+//Author: Hans Long
+//Date: Jan. 12, 2018
+//School: A.Y.Jackson S.S.
+//Purpose: the graphical representation of the LeaderBoardFrame class
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.JComponent;
+
 
 public class LeaderBoardFrame2 extends JFrame
 {
@@ -72,6 +79,7 @@ public class LeaderBoardFrame2 extends JFrame
          sortByName2[i].add(score2[i]); 
          sortByName2[i].add(names2[i]);
          sortByName2[i].setLayout(new FlowLayout());
+         
       }
       
       //add all players' information to p2
@@ -138,6 +146,7 @@ public class LeaderBoardFrame2 extends JFrame
       {
          lf2.setVisible(false);
          lf.setVisible(true);
+         
       }
       
    }
