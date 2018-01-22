@@ -97,7 +97,7 @@ public class LeaderBoardFrame2 extends JFrame
          }
          else 
          {
-            sortByName2[i].setBackground(Color.BLUE);
+            sortByName2[i].setBackground(Color.YELLOW);
          }
          
          p2.add(sortByName2[i]);       
