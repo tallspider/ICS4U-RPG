@@ -136,6 +136,7 @@ public class Player{
 		}
    }
    
+   //finds the first ship image that has not been used already, to be assigned to a ship that the player just bought
    public String getNewShipImage(){
       try{
          
@@ -231,6 +232,7 @@ public class Player{
 		}
    }
    
+   //static method for creating a player's first file, when they just registers
 	public static void createFirstFile(String un){
 		try{
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(un + ".txt")));
