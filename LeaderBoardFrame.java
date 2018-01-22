@@ -164,57 +164,67 @@ public class LeaderBoardFrame extends JFrame
       }
    }
    
-   //accessor method for the name ranking array
+   //accessor method for the name wayOfSort array
    public JLabel getWayOfSort()
    {
       return wayOfSort;
    }
    
+   //accessor method for the name ranking array
    public LeaderBoard getRanking()
    {
       return ranking;
    }
    
+   //accessor method for the num
    public int getNum()
    {
       return num;
    }
    
+   //accessor method for the rank
    public JLabel[] getRank()
    {
       return rank;
    }
-
+   
+   //accessor method for the name
    public JLabel[] getNames()
    {
       return names;
    }
    
+   //accessor method for the score
    public JLabel[] getScore()
    {
       return score;
    }
    
+   //accessor method for the sort by score array
    public JPanel[] getSortByScore()
    {
       return sortByScore;
    }
    
+   //accessor method for the sort by name array
    public JPanel[] getSortByName()
    {
       return sortByName;
    }
    
+   //accessor method for the p panel
    public JPanel getP()
    {
       return p;
    }
    
+   //accessor method for the ComparisonPlayer array nameSort
    public ComparisonPlayer[] getNameSort()
    {
       return nameSort;
    }
    
+   //accessor method for the ComparisonPlayer array scoreSort
    public ComparisonPlayer[] getScoreSort()
    {
       return scoreSort;
