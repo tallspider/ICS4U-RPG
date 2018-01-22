@@ -87,7 +87,7 @@ public class LeaderBoardFrame2 extends JFrame
       //add all players' information to p2
       for(int i = 0; i<num2; i++)
       {
-         System.out.println(i+1);
+         
          sortByName2[i].setBounds(10,10+i*35,400,30);
          
          //set the background color of the personal information 
