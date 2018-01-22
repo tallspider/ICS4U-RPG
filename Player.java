@@ -11,7 +11,6 @@ public class Player{
    private String filename;
    private Hangar hangar;
    private Fleet fleet;
-   private HangarFrame hangarFrame;
    private int score;
    private int numCoins;
    private int shipsBoughtThisTime;
@@ -32,7 +31,6 @@ public class Player{
       hangar = new Hangar();
 		fleet = new Fleet();
       load();
-      hangarFrame = new HangarFrame(this);
    }
    
    //Accessor method for the username of this player
@@ -171,20 +169,13 @@ public class Player{
    //takes in the id of the Ship-containing slot in hangar that the player wishes to purchase a Ship into
    public boolean buyShip(int id){
       
-      //create a boolean to hold whether the player wishes to complete this transaction
-      boolean buy;
-      
       //checks if the player has enough money to buy this Ship
       if(numCoins >= Ship.BASIC_COST){
-         //confirm with player
-         buy = hangarFrame.askQuestion("Are you sure you would like to buy this ship?", "Sure?");
-         //checks if the player wishes to continue with the transaction
-         if(buy){
-            //decrease the number of coins the player owns by the amount required to buy this Ship
+           //decrease the number of coins the player owns by the amount required to buy this Ship
             numCoins -= Ship.BASIC_COST;
             //add the newly-acquired Ship to hangar
             return hangar.addNewShip(id, getNewShipImageShort());
-         } 
+        
       }
       //return false to signify that the transaction did not go through
       return false;
@@ -194,57 +185,21 @@ public class Player{
    //takes in the id of the Ship-containing slot that holds the Ship the player has chosen to sell
    public boolean sellShip(int id){
       
-      //create a boolean to hold whether the player wishes to complete the transaction
-      boolean sell;
-      
-      //confirm with player
-      sell = hangarFrame.askQuestion("Are you sure you would like to sell this ship?", "Sure?");
-      
-      //checks if the player wishes to continue with the transaction
-      if(sell){
          //increase the number of coins the player has by half the value of the ship they wish to sell
          numCoins += hangar.getShipSellPrice(id);
          //remove the newly-sold ship from hangar
          hangar.deleteShip(id);
          //return true to signify that the transaction is complete
          return true;
-      }
-      //return false to signify that the transaction did not go through
-      return false;
+      
    }
    
 	public boolean upgradeShip(int id, int upgrade){
       
-  		//check whether upgrades can still be done to this Ship
-		if(!hangar.getShipUpgradable(id)){
-			//output error message
-			
-			
-			return false;
-		}    
-		
-		
-		//if the player does have enough money
-		if(numCoins >= hangar.getShipUpgradeCost(id, upgrade)){
-			//confirm with player that they wish to proceed with the transaction
-		   boolean cont;
-         cont = hangarFrame.askQuestion("Are you sure you would like to upgrade this ship?", "Sure?");
-         
-			//upgrade the ship through hangar
-			if(cont){
-            numCoins -= hangar.getShipUpgradeCost(id, upgrade);
+  		//upgrade the ship through hangar
+			   numCoins -= hangar.getShipUpgradeCost(id, upgrade);
             hangar.upgradeShip(id, upgrade);
             return true;
-         }
-			
-		} else {
-			//output error message
-			
-			
-		}
-		
-		//return false to signify that the transaction did not go through
-		return false;
    }
    
 	//saves player information to the corresponding file
