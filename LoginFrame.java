@@ -42,7 +42,7 @@ public class LoginFrame extends JFrame{
       LogInB.setFont(new Font("TimesRoman", Font.BOLD, 15));
       LogInB.setPreferredSize(new Dimension(100,50));
       this.add(LogInB);
-      Button PSB = new Button("Registe");
+      Button PSB = new Button("Register");
       PSB.setFont(new Font("TimesRoman", Font.BOLD, 15));
       PSB.setPreferredSize(new Dimension(100,50));
       this.add(PSB);
