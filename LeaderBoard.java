@@ -92,7 +92,7 @@ public class LeaderBoard{
       }
    }
 	
-	//sorts the name ranking array by alphabetical order
+	//sorts the name ranking array be lexicographic order
 	private void sortNameOrder(){
 		
 		//setting the endpoint of each pass to one before the previous endpoint
@@ -100,16 +100,19 @@ public class LeaderBoard{
 			
 			//create a temporary variable to hold the lexicographically-last username found
 			String last = playersByName[0].getUsername();
-			//create a temporary variable to hold the id of the player with the alphabetically-last username
+			//create a temporary variable to hold the id of the player with the lexicographically-last username
 			int lastID = 0;
 			
-			//go through the array until the endpoint, find the player with alphabetically-last username
+			//go through the array until the endpoint, find the player with lexicographically-last username
 			//who will be moved to the endpoint
 			for(int at = 1; at <= end; at++){
 				if(playersByName[at].getUsername().toUpperCase().compareTo(last.toUpperCase()) > 0){
 					last = playersByName[at].getUsername();
 					lastID = at;
-				}
+				} else if(playersByName[at].getUsername().toUpperCase().compareTo(last.toUpperCase()) == 0 && playersByName[at].getUsername().compareTo(last) > 0){
+               last = playersByName[at].getUsername();
+					lastID = at;
+            }
 			}
 			
 			//swap the player with lexicographically-last username with the player at the endpoint
