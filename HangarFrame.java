@@ -817,7 +817,7 @@ class HangarInfoBotMid extends JPanel{
                   if(!hangar.getShipUpgradable(shipID)){
                      hangarFrame.showErrorMessage("You cannot upgrade this ship anymore.", "No More Upgrades!");
                   }
-                  else if(player.getNumCoins() < hangar.getShipUpgradeCost(shipID, Ship.TR_Upgrade)){
+                  else if(player.getNumCoins() < hangar.getShipUpgradeCost(shipID, Ship.FS_Upgrade)){
                      hangarFrame.showErrorMessage("Not enough money to upgrade!", "Not Enough Money!");
                   }
                   else if(hangarFrame.askQuestion("Are you sure you would like to upgrade this ship?", "Sure?")){
