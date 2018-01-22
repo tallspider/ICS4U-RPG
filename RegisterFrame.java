@@ -1,9 +1,3 @@
-/*
-Class Name: RegisterFrame
-Author: Chongpu Zhao
-Date: January 10, 2018
-Purpose:A graphic class use to present the register window.
-*/
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -93,7 +87,7 @@ public class RegisterFrame extends JFrame{
                      lF.setVisible(true);
                   }
                   else{
-                     ErrorFrame.setText("Username alrady exist");
+                     ErrorFrame.setText("Username already exists");
                      new ErrorFrame();
                   }
                }
