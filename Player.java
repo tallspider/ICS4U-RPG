@@ -136,7 +136,7 @@ public class Player{
 		}
    }
    
-   public String getNewShipImageShort(){
+   public String getNewShipImage(){
       try{
          
          BufferedReader f = new BufferedReader(new FileReader(IMAGE_FILE_FILE));
@@ -174,7 +174,7 @@ public class Player{
            //decrease the number of coins the player owns by the amount required to buy this Ship
             numCoins -= Ship.BASIC_COST;
             //add the newly-acquired Ship to hangar
-            return hangar.addNewShip(id, getNewShipImageShort());
+            return hangar.addNewShip(id, getNewShipImage());
         
       }
       //return false to signify that the transaction did not go through
