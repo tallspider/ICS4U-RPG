@@ -28,7 +28,7 @@ public class Test {
       
       Gameboard g = new Gameboard();
       
-      g.startCombat(p);
+      g.startCombat(p, new MainScene(p));
    
    
    
