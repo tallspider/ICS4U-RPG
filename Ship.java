@@ -106,6 +106,7 @@ public class Ship extends Entity
          firingSpeed++;
       }
       updateValue();
+      upgradesLeft--;
    }
 
    public int calcUpgradeCost(int upgrade)  
