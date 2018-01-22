@@ -6,7 +6,7 @@ public class ErrorFrame extends JFrame{
    private int length;
    
    public ErrorFrame() {
-	   super("Error");
+	   super("Beep");
 	   length = error.getText().length();
       this.setLayout(new FlowLayout());
       this.setBounds(600,600,length*30,300);
