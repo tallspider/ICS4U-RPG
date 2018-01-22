@@ -56,7 +56,7 @@ public class Login{
          BufferedReader in = new BufferedReader(new FileReader(THE_FILE));
          String temp;
          while((temp = in.readLine()) != null){
-            if(temp == username){
+            if(temp.equals(username)){
                return false;
             }
             in.readLine();
