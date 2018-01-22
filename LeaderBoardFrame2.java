@@ -124,7 +124,6 @@ public class LeaderBoardFrame2 extends JFrame
       public void windowclosing(WindowEvent e)
       {
          setVisible(false);
-         System.exit(0);
       }
    }
    
