@@ -20,7 +20,7 @@ public class MainScene extends JFrame
       JLabel backimg = new JLabel(img); //background 
       backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
       getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
-      ((JPanel)this.getContentPane()).setOpaque(false); //make invisible  
+      ((JPanel)this.getContentPane()).setOpaque(true);   
      
       
       frame = new JFrame("Space RPG");  
