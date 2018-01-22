@@ -779,8 +779,15 @@ class HangarInfoBotMid extends JPanel{
          trButton.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
-                  player.upgradeShip(shipID, Ship.TR_Upgrade);
-                  hangarFrame.updateAll();
+                  if(!hangar.getShipUpgradable(shipID)){
+                     hangarFrame.showErrorMessage("You cannot upgrade this ship anymore.", "No More Upgrades!");
+                  } else if(player.getNumCoins() < hangar.getShipUpgradeCost(shipID, Ship.TR_Upgrade)){
+                     hangarFrame.showErrorMessage("Not enough money to upgrade!", "Not Enough Money!");
+                  }
+                  else if(hangarFrame.askQuestion("Are you sure you would like to upgrade this ship?", "Sure?")){
+                     player.upgradeShip(shipID, Ship.TR_Upgrade);
+                     hangarFrame.updateAll();
+                  }
                }
             });
       
@@ -789,8 +796,16 @@ class HangarInfoBotMid extends JPanel{
          arButton.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
-                  player.upgradeShip(shipID, Ship.AR_Upgrade);
-                  hangarFrame.updateAll();
+                  if(!hangar.getShipUpgradable(shipID)){
+                     hangarFrame.showErrorMessage("You cannot upgrade this ship anymore.", "No More Upgrades!");
+                  }
+                  else if(player.getNumCoins() < hangar.getShipUpgradeCost(shipID, Ship.TR_Upgrade)){
+                     hangarFrame.showErrorMessage("Not enough money to upgrade!", "Not Enough Money!");
+                  }
+                  else if(hangarFrame.askQuestion("Are you sure you would like to upgrade this ship?", "Sure?")){
+                     player.upgradeShip(shipID, Ship.AR_Upgrade);
+                     hangarFrame.updateAll();
+                  }
                }
             });
       
@@ -799,8 +814,16 @@ class HangarInfoBotMid extends JPanel{
          fsButton.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
-                  player.upgradeShip(shipID, Ship.FS_Upgrade);
-                  hangarFrame.updateAll();
+                  if(!hangar.getShipUpgradable(shipID)){
+                     hangarFrame.showErrorMessage("You cannot upgrade this ship anymore.", "No More Upgrades!");
+                  }
+                  else if(player.getNumCoins() < hangar.getShipUpgradeCost(shipID, Ship.TR_Upgrade)){
+                     hangarFrame.showErrorMessage("Not enough money to upgrade!", "Not Enough Money!");
+                  }
+                  else if(hangarFrame.askQuestion("Are you sure you would like to upgrade this ship?", "Sure?")){
+                     player.upgradeShip(shipID, Ship.FS_Upgrade);
+                     hangarFrame.updateAll();
+                  }
                }
             });
          
@@ -894,8 +917,10 @@ class HangarInfoBotRight extends JPanel{
          button1.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
-                  player.sellShip(shipID);
-                  hangarFrame.updateAll();
+                  if(hangarFrame.askQuestion("Are you sure you would like to sell this ship?", "Sure?")){
+                     player.sellShip(shipID);
+                     hangarFrame.updateAll();
+                  }
                }
             });
       } 
@@ -904,8 +929,10 @@ class HangarInfoBotRight extends JPanel{
          button1.addActionListener(
             new ActionListener(){
                public void actionPerformed(ActionEvent e){
-                  player.buyShip(shipID);
-                  hangarFrame.updateAll();
+                  if(hangarFrame.askQuestion("Are you sure you would like to buy this ship?", "Sure?")){
+                     player.buyShip(shipID);
+                     hangarFrame.updateAll();
+                  }
                }
             });
          if(player.getNumCoins() - Ship.BASIC_COST < 0) button1.setEnabled(false);
