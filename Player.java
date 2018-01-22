@@ -266,9 +266,6 @@ public class Player{
 			
 			out.println(hangar.getPrintString());
 			
-			//blank line to separate chunks of information
-			out.println("");
-			
 			out.println(fleet.getPrintString());
 			
 			//close PrintWriter and flush stream
