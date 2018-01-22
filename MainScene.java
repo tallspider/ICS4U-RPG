@@ -9,6 +9,7 @@ public class MainScene extends JFrame
    static final int WINDOW_WIDTH=700;
    static final int WINDOW_LENGTH=1000;
    private HangarFrame hangarFrame;
+   public JFrame frame;
 	//Game game;
 
 
@@ -22,7 +23,7 @@ public class MainScene extends JFrame
       ((JPanel)this.getContentPane()).setOpaque(false); //make invisible  
      
       
-      JFrame frame = new JFrame("Space RPG");  
+      frame = new JFrame("Space RPG");  
       JPanel panel = new JPanel();  
       panel.setLayout(new FlowLayout());  
       JButton b1 = new JButton("Portal");  
@@ -101,27 +102,24 @@ public class MainScene extends JFrame
  
    private class FleetListener extends MouseAdapter
    {
-      private MainScene ms = null;
-      private Fleet fleet = null;
+      MainScene ms = null;
+      Fleet fleet = null;
       
-      public FleetListener(Fleet f, MainScene m)
+      public FleetListener(Fleet f, MainScene ms)
       {
-         ms = m;
-         fleet = f;
+         this.ms = ms;
+         this.fleet = fleet;
       } 
       
    
       public void mouseClicked(MouseEvent e)
       {
-        // ms.setVisible(false);
-         new FleetFrame(fleet,ms);
+         ms.frame.setVisible(false);
+         FleetFrame ff = new FleetFrame(fleet,ms);
+         
+       
       }
    }
-
-
-
-
-
 
    private class HangarListener  extends MouseAdapter
    {
@@ -129,32 +127,37 @@ public class MainScene extends JFrame
       Player player = null;
       public HangarListener(MainScene ms,Player player)
       {
+         frame = ms.frame;
          this.ms = ms;
          this.player = player;
       }
    	
       public void  mouseClicked(MouseEvent e)
       {
-         ms.setVisible(false);
-         HangarFrame hf = new HangarFrame(player);
+      
+         ms.frame.setVisible(false);
+         HangarFrame hf = new HangarFrame(player, ms);
          hf.setVisible(ms, true);
+        
       }
    }
    
    private class PortalListener  extends MouseAdapter
    {
-
+      MainScene ms = null;
       
       public PortalListener(MainScene ms,Player player)
       {
-
+         this.ms = ms;
       }
    	
       public void  mouseClicked(MouseEvent e)
       {
-      // creates a new swing worker which cointains the code needed to start the game, this code is inside the doInBackground class of the swing worker so that the code is run in a background thread (when the swingworker is executed)
+      
+         ms.frame.setVisible(false);
+         // creates a new swing worker which cointains the code needed to start the game, this code is inside the doInBackground class of the swing worker so that the code is run in a background thread (when the swingworker is executed)
       // if the code is not run in a bakcground thread, the events from the GameboardGUI will conflict with this (MainScene)'s events causing deadlock and a blank gui, this is because both event handlers are run on the same thread the "Event Dispatch Thread" 
-      // this problem is circumvented by running the Gameboard (and thus the GameboardGUI) in a background thread, keeping the GameboardGUI's event handler out of the same thread as MainScene's event handler
+      // this problem is circumvented by running the Gameboard (and thus the GameboardGUI) in a background thread, keeping the GameboardGUI's event handler out of the same thread as MainScene's event handler 
          SwingWorker startGame = 
             new SwingWorker() {
             
@@ -162,9 +165,10 @@ public class MainScene extends JFrame
             //it can't be a void method or else it won't override doInBackground
                protected Object doInBackground(){
                // the code to actually start the game
-                 // make the hanger frame invisible, not sure how to do it   -David~
+                  
                   Gameboard gameBoard = new Gameboard(); 
-                  gameBoard.startCombat(player);
+                  gameBoard.startCombat(player, ms);
+                     
                   return null;  
                }
             };
@@ -176,34 +180,40 @@ public class MainScene extends JFrame
       }
    }
    
-   public void go(){
-      Test test = new Test();
-      test.main(null);
-   }      
-      
-      
-      
- 
       
    private class LeaderBoardListener  extends MouseAdapter
    {
-   	//MainScene ms = null;
+      MainScene ms = null;
       String un = null;
       public LeaderBoardListener(String un)
       {
-      	//this.ms = ms;
+         this.ms = ms;
          this.un = un;
       }
    	
       public void  mouseClicked(MouseEvent e)
       {
-      	//ms.setVisible(false);
-         new LeaderBoardFrame(un);
+         ms.frame.setVisible(false);
+         new LeaderBoardFrame(un, ms);
       }
    }
-            
-	    
-	    
+              
+	// adds a listener to the given frame, when that frame is closed make the main scene visible  
+   public void addReopenListener (JFrame f){
+                                    
+      f.addWindowListener(   
+         new WindowAdapter() {
+            public void windowClosing(WindowEvent we) {
+               frame.setVisible(true);
+            }
+         });
+   }
+   
+   public void go(){
+      Test test = new Test();
+      test.main(null);
+   }      
+      
 	    
 	        
 }  

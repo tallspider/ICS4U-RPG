@@ -22,8 +22,9 @@ public class LeaderBoardFrame extends JFrame{
 	
 
    
-   public LeaderBoardFrame(String un)
+   public LeaderBoardFrame(String un, MainScene ms)
    {
+      ms.addReopenListener(this);
       this.setTitle("LeaderBoard");
       this.leaderBoardname = un;
       wayOfSort = new JLabel("Rank   Player   Score", SwingConstants.CENTER);

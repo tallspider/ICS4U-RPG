@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.border.EtchedBorder;
 
+
 public class HangarFrame extends JFrame{
    
    private Component lastPage;
@@ -27,8 +28,9 @@ public class HangarFrame extends JFrame{
    public static final int WIDTH_CORRECTION = 20;
    
    //constructor of the HangarFrame class
-   public HangarFrame(Player p){
+   public HangarFrame(Player p, MainScene ms){
       super("The Hangar");
+      ms.addReopenListener(this);
       player = p;
       currentShipID = 0;
       init();
@@ -464,7 +466,8 @@ class HangarInfoTopLeft extends JPanel{
          addLine("Travel range: ", "" + Ship.BASIC_STAT);
          addLine("Attack range: ", "" + Ship.BASIC_STAT);
          addLine("Firing speed: ", "" + Ship.BASIC_STAT);
-      } else {
+      } 
+      else {
          addLine("Travel range: ", "" + ship.getTravelRange());
          addLine("Attack range: ", "" + ship.getAttackRange());
          addLine("Firing speed: ", "" + ship.getFiringSpeed());
@@ -557,7 +560,8 @@ class HangarInfoTopMid extends JPanel{
                      ship.setName(ENTRY.getText());
                      hangarFrame.updateShipSideBar();
                      ENTRY.setText("");
-                  } else {
+                  } 
+                  else {
                      hangarFrame.showErrorMessage("You may not call your ship (nothing).", "Empty Ship Name");
                   }
                }
@@ -814,7 +818,8 @@ class HangarInfoBotMid extends JPanel{
          //sellLabel.setPreferredSize(new Dimension(length, height / 5));
          add(sellLabel);
          add(Box.createVerticalGlue());
-      } else {
+      } 
+      else {
          int moneyAfter = player.getNumCoins() - Ship.BASIC_COST;
          if(moneyAfter >= 0)
             buyLabel = new JLabel("Money After Pay: " + (player.getNumCoins() - Ship.BASIC_COST));
@@ -893,7 +898,8 @@ class HangarInfoBotRight extends JPanel{
                   hangarFrame.updateAll();
                }
             });
-      } else {
+      } 
+      else {
          button1 = new JButton(" Buy ");
          button1.addActionListener(
             new ActionListener(){
@@ -909,8 +915,10 @@ class HangarInfoBotRight extends JPanel{
       backButton.addActionListener(
          new ActionListener(){
             public void actionPerformed(ActionEvent e){
-               hangarFrame.setVisible(false);
-               lastPage.setVisible(true);
+            // this mess basically finds the window that the button is in, then closes the window, as if the user clicked the X button 
+               Window window = KeyboardFocusManager.getCurrentKeyboardFocusManager().getActiveWindow();
+               WindowEvent windowClosing = new WindowEvent(window, WindowEvent.WINDOW_CLOSING);
+               window.dispatchEvent(windowClosing);
             }
          });
       
