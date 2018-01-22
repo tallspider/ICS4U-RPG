@@ -26,11 +26,11 @@ public class MainScene extends JFrame
       frame = new JFrame("Space RPG");  
       JPanel panel = new JPanel();  
       panel.setLayout(new FlowLayout());  
-      JButton b1 = new JButton("Portal");  
+      JButton b5 = new JButton("Portal");  
       JButton b2 = new JButton("Fleet"); 
       JButton b3 = new JButton("Save");
       JButton b4 = new JButton("Hangar");  
-      JButton b5 = new JButton("Leaderboard"); 
+      JButton b1 = new JButton("Leaderboard"); 
       JButton b6 = new JButton("Quit");  
    
       panel.setLayout(null);
@@ -40,10 +40,6 @@ public class MainScene extends JFrame
       PortalListener pl = new PortalListener(this, player);
       b1.addMouseListener(pl);
    
-      b2.setBounds(250, 300, 150, 70);
-      panel.add(b2);		 
-      b2.addMouseListener(new FleetListener(player.getFleet(),this));
-      
       b3.setBounds(250, 400, 150, 70);
       panel.add(b3);		 
       b3.addMouseListener(new SaveListener(player));
@@ -52,7 +48,7 @@ public class MainScene extends JFrame
       panel.add(b4);
       b4.addMouseListener(new HangarListener(this, player));		 
    
-      b5.setBounds(600, 300, 150, 70);
+      b5.setBounds(425, 300, 150, 70);
       panel.add(b5);		 
       b5.addMouseListener(new LeaderBoardListener(this, player.getUsername()));
       
