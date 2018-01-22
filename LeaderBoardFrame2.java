@@ -153,4 +153,70 @@ public class LeaderBoardFrame2 extends JFrame
    }
    
    
+   //accessor method for the name wayOfSort2 array
+   public JLabel getWayOfSort2()
+   {
+      return wayOfSort2;
+   }
+   
+   //accessor method for the Ranking2 array
+   public LeaderBoard getRanking2()
+   {
+      return ranking2;
+   }
+   
+   //accessor method for the num2
+   public int getNum2()
+   {
+      return num2;
+   }
+   
+   //accessor method for the rank2
+   public JLabel[] getRank2()
+   {
+      return rank2;
+   }
+   
+   //accessor method for the name2
+   public JLabel[] getNames2()
+   {
+      return names2;
+   }
+   
+   //accessor method for the score2
+   public JLabel[] getScore2()
+   {
+      return score2;
+   }
+   
+   //accessor method for the sort by score array
+   public JPanel[] getSortByScore2()
+   {
+      return sortByScore2;
+   }
+   
+   //accessor method for the sort by name array
+   public JPanel[] getSortByName2()
+   {
+      return sortByName2;
+   }
+   
+   //accessor method for the p2 panel
+   public JPanel getP2()
+   {
+      return p2;
+   }
+   
+   //accessor method for the ComparisonPlayer array nameSort2
+   public ComparisonPlayer[] getNameSort2()
+   {
+      return nameSort2;
+   }
+   
+   //accessor method for the ComparisonPlayer array scoreSort2
+   public ComparisonPlayer[] getScoreSort2()
+   {
+      return scoreSort2;
+   }   
+   
 }
