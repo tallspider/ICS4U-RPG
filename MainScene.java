@@ -54,7 +54,7 @@ public class MainScene extends JFrame
    
       b5.setBounds(600, 300, 150, 70);
       panel.add(b5);		 
-      b5.addMouseListener(new LeaderBoardListener(player.getUsername()));
+      b5.addMouseListener(new LeaderBoardListener(this, player.getUsername()));
       
       b6.setBounds(600, 400, 150, 70);
       panel.add(b6);		 
@@ -185,7 +185,7 @@ public class MainScene extends JFrame
    {
       MainScene ms = null;
       String un = null;
-      public LeaderBoardListener(String un)
+      public LeaderBoardListener(MainScene ms, String un)
       {
          this.ms = ms;
          this.un = un;
