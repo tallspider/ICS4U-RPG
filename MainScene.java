@@ -172,8 +172,6 @@ public class MainScene extends JFrame
             
       // runs the code in startGame (most importantly the code in doInBackground)
          startGame.execute();
-         
-         // hotfix courtesy of david (and google, and stack overflow, and the internet)
       }
    }
    
