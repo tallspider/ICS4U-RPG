@@ -16,11 +16,11 @@ public class MainScene extends JFrame
    public MainScene (Player player) 
    {  
       this.player = player;
-      ImageIcon img = new ImageIcon("img1.jpg"); 
+      ImageIcon img = new ImageIcon("bg.jpg"); 
       JLabel backimg = new JLabel(img); //background 
       backimg.setBounds(0, 0, WINDOW_LENGTH, WINDOW_WIDTH);
       getLayeredPane().add(backimg, new Integer(Integer.MIN_VALUE));  
-      ((JPanel)this.getContentPane()).setOpaque(true);   
+      ((JPanel)this.getContentPane()).setOpaque(true);  
      
       
       frame = new JFrame("Space RPG");  
@@ -37,9 +37,8 @@ public class MainScene extends JFrame
       
       b1.setBounds(250, 200, 150, 70);
       panel.add(b1);		 
-      PortalListener pl = new PortalListener(this, player);
-      b1.addMouseListener(pl);
-   
+      b1.addMouseListener(new LeaderBoardListener(this, player.getUsername()));
+      
       b3.setBounds(250, 400, 150, 70);
       panel.add(b3);		 
       b3.addMouseListener(new SaveListener(player));
@@ -50,8 +49,10 @@ public class MainScene extends JFrame
    
       b5.setBounds(425, 300, 150, 70);
       panel.add(b5);		 
-      b5.addMouseListener(new LeaderBoardListener(this, player.getUsername()));
-      
+      PortalListener pl = new PortalListener(this, player);
+      b5.addMouseListener(pl);
+   
+
       b6.setBounds(600, 400, 150, 70);
       panel.add(b6);		 
       b6.addMouseListener(new QuitListener(this));
