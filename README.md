@@ -1,2 +1,2 @@
 # ICS4U-RPG
-Our RPG Game
+Single-player strategy board game with Java GUI
